@@ -1,0 +1,42 @@
+
+
+.wishlistField{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F9E7E7;
+    min-height: 90vh;
+}
+
+.wishlistItem{
+    background-size: cover;
+    cursor: pointer;
+    /*background-position: 0px -300px;*/
+    width: 50vw;
+    height: 400px;
+    margin: 10px;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    position: relative;
+
+}
+
+.wishlistItem:hover{
+    transition: 0.3s ease;
+    width: 55vw;
+    height: 402px;
+}
+
+.wishlistItem h1{
+    position: absolute;
+    bottom: -20px;
+    right: 50px;
+}
+
+.itemPrice{
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}

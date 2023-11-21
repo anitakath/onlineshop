@@ -1,0 +1,127 @@
+
+
+.cartFieldContainer{
+    display: flex;
+    width: 100vw;
+}
+
+
+
+
+.cartField{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F9E7E7;
+    min-height: 90vh;
+}
+
+.cartItemContainer{
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+    width: 50vw;
+    margin: 20px;
+    height: 205px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.emptyCartInfo{
+    position: relative;
+    top: 100px;
+}
+
+.cartItemInfo{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cartItemTitle{
+    display: flex;
+    height: 40%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid grey;
+    margin-bottom: 10px;
+}
+
+.cartItemTitle p{
+    margin: 0px 3px;
+}
+
+.cartItemTotal{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.cartItemEdit{
+    display: flex;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40%;
+    border-top: 1px solid grey;
+    margin-top: 10px;
+}
+
+.counter, .cartItemDelete{
+    display: flex;
+    width: 50%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.counter button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.counter p{
+    margin: 0px 10px;
+}
+
+
+.checkoutField{
+    width: 30%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    position: fixed;
+    right: 60px;
+    height: 80vh;
+    background-color: lightgrey;
+}
+
+.checkoutBtnContainer{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px 0px;
+}
+
+.checkoutBtn{
+    border: none;
+    border-bottom: 1px solid grey;
+    background-color: transparent;
+    width: 100px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: darkblue;
+}
+
+.totalPrice{
+    color: grey;
+}

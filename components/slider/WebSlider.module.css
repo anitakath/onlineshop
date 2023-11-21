@@ -1,0 +1,103 @@
+
+
+
+
+.webSlider{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    left: -5px;
+    /*border: 2px solid lightblue;*/
+}
+
+
+.sliderContainer{
+    width: 100vw;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    overflow: hidden;
+   
+}
+
+
+.slides{
+    width: 100%;
+    height: 100%;
+    /*color: white;*/
+    position: relative; 
+}
+
+.leftSlides, .rightSlides{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    transition: transform 0.5s ease-in-out;
+    position: relative; 
+    
+}
+
+.loadImages{
+    color: white;
+}
+
+
+.sliderImage{
+    width: 50vw;
+}
+
+.Link{
+    color: black;
+    text-decoration: none;
+}
+
+.Link:hover{
+    transition: 0.3s ease;
+    color: darkblue;
+}
+
+.actionBtnContainer{
+    width: 6rem;
+    height: 4rem;
+    position: absolute;
+    display: flex;
+
+}
+
+
+.btnContainer{
+    width: 50%;
+    height: 100%;
+    background-color: transparent;
+    border: none;
+    /* border: 2px solid red; */
+}
+
+
+
+.btnUp, .btnDown{
+    width: 30px;
+    height: 50px;
+}
+.btnUp:hover, .btnDown:hover{
+    cursor: pointer;
+    color: darkblue;
+    transition: 0.4s ease;
+    
+}
+
+.btnDown:hover{
+    transform: translateY(10px)
+}
+
+.btnUp:hover{
+    transform: translateY(-10px)
+}

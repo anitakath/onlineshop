@@ -1,0 +1,101 @@
+
+
+
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+    
+
+.infoContainer{
+    position: relative;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.addBtnContainer{
+    position: absolute;
+    top: 20px;
+    right: 130px;
+    height: 50px;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.addBtn{
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+
+
+.closeBtnContainer{
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+
+}
+
+
+
+.closeBtn{
+    border: none;
+    background-color: transparent;
+    font-size: 2rem;
+    cursor: pointer;
+   
+}
+
+.closeBtn:hover{
+    transition: 0.3s ease;
+    color: lightblue;
+    font-size: 2.2rem;
+}
+
+.addBtn:hover{
+    transition: 0.3s ease;
+    color: darkblue;
+    font-size: 1.2rem;
+
+}
+
+.addToCartContainer{
+    width: 500px;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    border: 20px solid red;
+}
+
+.addToCartBtn, .productInfo{
+    border: none;
+    width: 500px;
+    background-color: grey;
+    height: 70px;
+    cursor: pointer;
+    color: white;
+    font-size: 1.3rem;
+}
+
+.addToCartBtn:hover{
+    transition: 0.3s ease;
+    color: lightblue;
+}
+

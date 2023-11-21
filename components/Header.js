@@ -1,0 +1,77 @@
+import {useState} from 'react'
+import Link from 'next/link'
+
+
+//REDUX
+import {useSelector} from 'react-redux'
+
+//STYLES
+import styles from '../styles/Header.module.css'
+
+
+//FONT AWESOME
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import { faWandMagicSparkles } from "@fortawesome/free-solid-svg-icons";
+
+
+const Header = () =>{
+
+    const [isLoggedIn, setIsLoggedIn] = useState(true)
+
+
+
+    const cartItems = useSelector((state) => state.cart)
+
+    const quantities = cartItems.map((item) => item.quantity)
+
+    const initialValue = 0;
+    
+    const sumQuantities = quantities.reduce(
+      (acc, currVal) => acc + currVal,
+      initialValue
+    )
+
+
+
+    return (
+      <div className={styles.headerContainer}>
+        <h1> SHOPNAME </h1>
+
+        {!isLoggedIn && (
+          <div className={styles.userContainer}>
+            <button className={styles.login}> login </button>
+            <button className={styles.register}> register </button>
+          </div>
+        )}
+
+        {isLoggedIn && (
+          <div className={styles.userContainer}>
+            <Link href="/" className={styles.Link}>
+              <FontAwesomeIcon icon={faHouse} className={styles.icon} />
+            </Link>
+
+            <Link href="/product-roulette" className={styles.Link}>
+              <FontAwesomeIcon
+                icon={faWandMagicSparkles}
+                className={styles.icon}
+              />
+            </Link>
+            
+            <Link href="/wishlist" className={styles.Link}>
+              <FontAwesomeIcon icon={faHeart} className={styles.icon} />
+            </Link>
+
+            <Link href="/cart" className={styles.Link}>
+              <FontAwesomeIcon icon={faCartShopping} className={styles.icon} />
+              {sumQuantities}
+            </Link>
+          </div>
+        )}
+      </div>
+    );
+}
+
+export default Header;

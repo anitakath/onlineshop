@@ -1,0 +1,80 @@
+
+.itemContainer{
+    width: 100vw;
+    display: grid;
+    position: relative;
+    grid-template-columns: repeat(4, 1fr);
+    top: 10px;
+
+}
+
+.item{
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.itemInfo{
+    display: flex;
+    justify-content: space-between;
+}
+
+.wishlistContainer{
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wishlist{
+    border: none;
+    background-color: transparent;
+    position: relative;
+    bottom: 2px;
+    left: 2px;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+.wishlist:hover{
+    transition: 0.3s ease;
+    font-size: 1.6rem;
+}
+
+.itemInfoCounter{
+    display: flex;
+    width: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.itemInfoCounter h2{
+    margin: 0 5px;
+    font-weight: bolder;
+}
+
+.itemInfoCounter button{
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.imageContainer{
+    width: 250px;
+    height: 400px;
+}
+
+.image{
+    width: 100%;
+    height: 100%;
+}
+
+.image:hover{
+    cursor: pointer;
+    transition: 0.3s ease;
+    border-radius: 3px;
+    box-shadow: 1px 1px 10px black;
+    
+}

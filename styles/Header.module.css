@@ -1,0 +1,76 @@
+
+.headerContainer{
+    width: 100vw;
+    height: 11vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+
+}
+
+.headerContainer h1{
+    margin: 20px;
+    letter-spacing: 1px;
+}
+
+.userContainer{
+    display: flex;
+    height: 40px;
+    position: absolute;
+    right: 50px;
+    top: 30px;
+}
+
+.userContainer button{
+    margin: 0px 2px;
+    padding: 2px;
+    min-width: 100px;
+}
+
+.userContainer button:hover{
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.login{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: lightblue;
+}
+
+.login:hover{
+    color: white;
+    background-color: darkblue;
+    
+
+}
+
+.register{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: darkblue;
+    color: white;
+}
+
+.register:hover{
+    color: black;
+    background-color: lightblue
+}
+
+.Link{
+    color: black;
+    text-decoration: none;
+    margin: 0px 20px;
+    font-size: 1.2rem;
+}
+
+.icon{
+    margin: 0px 5px 0px 8px;
+    position: relative;
+    top: 3px;
+    font-size: 1.3rem;
+}
+.icon:hover{
+    transition: 0.4s ease;
+    color: darkblue;
+}
