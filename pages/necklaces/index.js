@@ -17,7 +17,7 @@ import { decrement, increment } from "@/store/counterSlice";
 const Necklaces = () => {
 
   const [necklacesData, setNecklacesData] = useState([]);
-
+ 
   
   useEffect(()=>{
     const fetchData = async() =>{
@@ -100,7 +100,7 @@ const Necklaces = () => {
                 <div className={styles.itemInfo}>
                   <p> {necklace.name}</p>
                   <p> {necklace.price} $</p>
-                  <p>{necklace.img}</p>
+                  
                 </div>
                 <div className={styles.itemInfo}>
                   <div className={styles.wishlistContainer}>

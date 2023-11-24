@@ -15,13 +15,16 @@ import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import { faWandMagicSparkles } from "@fortawesome/free-solid-svg-icons";
+import { faUser} from "@fortawesome/free-solid-svg-icons";
+
+//STORE
+
 
 
 const Header = () =>{
 
-    const [isLoggedIn, setIsLoggedIn] = useState(true)
 
-
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
     const cartItems = useSelector((state) => state.cart)
 
@@ -34,42 +37,41 @@ const Header = () =>{
       initialValue
     )
 
+    let userGreeting = isLoggedIn ? 'ANNE' : ''
+    let loginPath = isLoggedIn ? '/user-profile' : '/logon'
 
 
     return (
       <div className={styles.headerContainer}>
         <h1> SHOPNAME </h1>
 
-        {!isLoggedIn && (
-          <div className={styles.userContainer}>
-            <button className={styles.login}> login </button>
-            <button className={styles.register}> register </button>
-          </div>
-        )}
+        <p> HELLO {userGreeting} ❤️ </p>
 
-        {isLoggedIn && (
-          <div className={styles.userContainer}>
-            <Link href="/" className={styles.Link}>
-              <FontAwesomeIcon icon={faHouse} className={styles.icon} />
-            </Link>
+        <div className={styles.userContainer}>
+          <Link href="/" className={styles.Link}>
+            <FontAwesomeIcon icon={faHouse} className={styles.icon} />
+          </Link>
 
-            <Link href="/product-roulette" className={styles.Link}>
-              <FontAwesomeIcon
-                icon={faWandMagicSparkles}
-                className={styles.icon}
-              />
-            </Link>
-            
-            <Link href="/wishlist" className={styles.Link}>
-              <FontAwesomeIcon icon={faHeart} className={styles.icon} />
-            </Link>
+          <Link href="/product-roulette" className={styles.Link}>
+            <FontAwesomeIcon
+              icon={faWandMagicSparkles}
+              className={styles.icon}
+            />
+          </Link>
 
-            <Link href="/cart" className={styles.Link}>
-              <FontAwesomeIcon icon={faCartShopping} className={styles.icon} />
-              {sumQuantities}
-            </Link>
-          </div>
-        )}
+          <Link href="/wishlist" className={styles.Link}>
+            <FontAwesomeIcon icon={faHeart} className={styles.icon} />
+          </Link>
+
+          <Link href="/cart" className={styles.Link}>
+            <FontAwesomeIcon icon={faCartShopping} className={styles.icon} />
+            {sumQuantities}
+          </Link>
+
+          <Link href={loginPath} className={styles.Link}>
+            <FontAwesomeIcon icon={faUser} className={styles.icon} />
+          </Link>
+        </div>
       </div>
     );
 }

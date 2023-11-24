@@ -8,10 +8,15 @@ import Image from "next/image";
 //STORE
 import { useSelector, useDispatch } from 'react-redux';
 import { incrementItem, decrementItem } from "@/store/cartSlice";
-
+import { setSelectedProductt, setFilterProductArray, setUpdatedRandomProducts, setNewProduct } from '@/store/productSlice.js'
+import {setProducts, setRandomProductss, setShowProductts} from '@/store/productSlice.js'
 
 //STYLES
 import styles from './exampleProducts.module.css'
+
+//FONT AWESOME
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faSpinner} from '@fortawesome/free-solid-svg-icons'
 
 
 const ExampleProducts = () =>{
@@ -49,6 +54,7 @@ const ExampleProducts = () =>{
                  }
 
 
+                dispatch(setRandomProductss(randomArray));
                setRandomProducts(randomArray);
                setShowProducts(true)
 
@@ -83,6 +89,7 @@ const ExampleProducts = () =>{
 
         //füge dem Produkt den auserwählten Zustand zu, um es optisch verändert anzeigen zu lassen.
         
+        dispatch(setSelectedProductt(product));
         setSelectedProduct(product);
 
         
@@ -97,6 +104,8 @@ const ExampleProducts = () =>{
           const updatedRandomProducts = randomProducts.filter(
             (p) => p.id !== product.id
           );
+          dispatch(setUpdatedRandomProducts(product));
+          console.log(updatedRandomProducts)
           setRandomProducts(updatedRandomProducts);
 
 
@@ -133,22 +142,7 @@ const ExampleProducts = () =>{
 
     }
 
-    const [noProducts, setNoProducts] = useState(true)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    const [noProducts, setNoProducts] = useState(false)
 
 
 
@@ -162,15 +156,7 @@ const ExampleProducts = () =>{
 
     useEffect(()=>{
 
-      //wenn randomProducts.length zwischen 1-5 liegt, dann bitte fülle randomProducts mit 
-      // so vielen Objekten aus dem products array auf, bis wieder genau 5 objekte in randomProducts vorhanden sind
-
-
-
-      setTimeout(() =>{
-     
-
-       
+   
 
         if (randomProducts.length === 0) {
           setNoProducts(true);
@@ -178,14 +164,26 @@ const ExampleProducts = () =>{
           setNoProducts(false);
         }
 
-      }, 2000)
-      
-      
-
     }, [randomProducts])
 
 
 
+    const reloadrandomProductsHandler = () =>{
+
+        const randomArray = [];
+        while (randomArray.length < 5) {
+          const randomIndex = Math.floor(
+            Math.random() * products.length
+          );
+          if (!randomArray.includes(products[randomIndex])) {
+            randomArray.push(products[randomIndex]);
+            console.log(products[randomIndex]);
+          }
+        }
+
+        setRandomProducts(randomArray);
+    
+    }
    
 
 
@@ -194,7 +192,13 @@ const ExampleProducts = () =>{
 
     return (
       <div>
-        <h2>you might like these products.</h2>
+        <div className={styles.headerContainer}>
+          <h2>you might like these products.</h2>
+          <h2>
+            <FontAwesomeIcon icon={faSpinner}  className={styles.headerReloadIcon} onClick={ reloadrandomProductsHandler }/>
+          </h2>
+        </div>
+
         <div className={styles.productsContainer}>
           {!showProducts && <h1> loading products ... </h1>}
           {noProducts && <p> you have added all prodcuts to your cart ❤️ </p>}
@@ -205,6 +209,7 @@ const ExampleProducts = () =>{
                   selectedProduct === product ? styles.selectedProduct : ""
                 }`}
               >
+              
                 <Image
                   src={product.img}
                   alt="jajja"
@@ -219,8 +224,8 @@ const ExampleProducts = () =>{
                   onClick={() => addProductHandler(product)}
                 >
                   +
+
                 </button>
-              
               </div>
             ))}
         </div>

@@ -6,21 +6,36 @@ import {useState, useEffect} from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { incrementItem, decrementItem, deleteAllItems} from "@/store/cartSlice";
 import { incrementWishlist } from '@/store/wishlistSlice'
+import { login, logout } from '@/store/authSlice'
+import { useRouter } from 'next/router';
 
 import Layout from "@/components/Layout";
+
+//COMPONENTS
+import Login from '@/components/logon/Login';
+import Register from '@/components/logon/Register';
+import Newsletter from '@/components/logon/Newsletter';
 
 
 //STYLES
 import styles from '../styles/Cart.module.css'
 import Image from "next/image";
+import Link from 'next/link';
 
 
 const Cart = () => {
 
 
+  const router = useRouter()
   const [ isEmpty, setIsEmpty ] = useState(true)
+  const [loginInfo, setLoginInfo] = useState(false)
+
 
   const dispatch = useDispatch()
+
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+  console.log(isLoggedIn)
+
 
   const cartItems = useSelector((state) => state.cart);
   console.log(cartItems)
@@ -78,13 +93,72 @@ const Cart = () => {
 
   }
 
+  let userName = isLoggedIn  ? 'ANNE, YOUR' : 'YOUR'
+
+
+
+  const checkoutHandler = (e) =>{
+    e.preventDefault();
+    if(isLoggedIn === true){
+      router.push('/checkout')
+    } else if(isLoggedIn === false){
+      setLoginInfo(true);
+      
+     
+    }
+    
+  }
+
+
+useEffect(() => {
+  const checkoutField = document.querySelector("." + styles.checkoutField);
+  const logonWrapper = document.querySelector("." + styles.logonWrapper);
+
+  function handleScroll() {
+
+    if(checkoutField){
+      if (window.pageYOffset > (logonWrapper.offsetTop -420)) {
+        checkoutField.style.position = "relative";
+        checkoutField.style.top = "120px";
+      } else {
+        checkoutField.style.position = "fixed";
+      }
+    }
+    
+  }
+
+  window.addEventListener("scroll", handleScroll);
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, [isEmpty]);
+
+
+
+  /*
+  const [cartFieldHeight, setCartFieldHeight] = useState('')
+
+  const cartFieldContainer = document.querySelector('.cartFieldContainer')
+
+  console.log(cartFieldContainer)*/
 
 
   return (
     <Layout>
       <div className={styles.cartFieldContainer}>
+
         <div className={styles.cartField}>
-          {isEmpty && <h3 className={styles.emptyCartInfo}> You don't have any items in your shopping basket yet 🥺 </h3>}
+          <div className={styles.emptyCartInfoContainer}>
+            {isLoggedIn && <p> ja {isLoggedIn} </p>}
+
+            {isEmpty && (
+              <h3 className={styles.emptyCartInfo}>
+                {userName} SHOPPING CART IS EMPTY 😔
+              </h3>
+            )}
+          </div>
+
           {cartItems.map((item) => {
             return (
               <div className={styles.cartItemContainer}>
@@ -117,10 +191,12 @@ const Cart = () => {
                       <p> {item.quantity} </p>
                       <button onClick={() => increment(item)}> + </button>
                     </div>
-                    <div 
-                    className={styles.cartItemDelete}
-                    onClick={()=> deleteItemHandler(item)}
-                    >delete</div>
+                    <div
+                      className={styles.cartItemDelete}
+                      onClick={() => deleteItemHandler(item)}
+                    >
+                      delete
+                    </div>
                   </div>
                 </div>
               </div>
@@ -128,15 +204,50 @@ const Cart = () => {
           })}
         </div>
 
-        <div className={styles.checkoutField}>
-          <div className={styles.checkoutBtnContainer}>
-            <p className={styles.totalPrice}> {fixedTotalPrice}$ </p>
-            <button className={styles.checkoutBtn}> checkout </button>
+        {!isEmpty && (
+          <div className={styles.checkoutField}>
+            <div className={styles.checkoutBtnContainer}>
+              <p className={styles.totalPrice}> {fixedTotalPrice}$ </p>
+              <button className={styles.checkoutBtn} onClick={checkoutHandler}>
+                checkout
+              </button>
+            </div>
+            <div className={styles.loginInfoContainer}>
+              {loginInfo && 
+              <p> please log in first. 
+                <Link href="/logon" className={styles.link}> Click here</Link>
+                </p>}
+              <p>{loginInfo}</p>
+            </div>
+          </div>
+        )}
+
+
+        
+      </div>
+
+
+
+
+
+
+      {!isLoggedIn && (
+        <div className={styles.logonWrapper}>
+          <div className={styles.logonContainer}>
+            <Login />
+            <Register />
+          </div>
+          <div className={styles.newsletterContainer}>
+            <Newsletter />
           </div>
         </div>
-      </div>
+      )}
     </Layout>
   );
 };
+
+
+
+
 
 export default Cart;

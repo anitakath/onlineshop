@@ -1,0 +1,76 @@
+
+
+.logonField{
+    display: flex;
+}
+
+
+
+
+.loginContainer{
+    height: 50vh;
+    margin-right: 10px;
+}
+
+.loginForm, .newsletterForm{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.loginForm label, .newsletterForm label{
+    display: none;
+}
+
+.loginForm input, .newsletterForm input {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid black;
+    margin: 20px 10px 10px 10px;
+}
+
+.loginForm button, .newsletterForm button{
+    margin: 10px;
+    padding: 5px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.forgotPasswordLink{
+    margin: 11px;
+}
+
+
+
+
+.registerContainer{
+    margin: 0px 20px;
+}
+
+.registerContainer button{
+    width: 100%;
+     margin: 10px;
+    padding: 5px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.loginForm button:hover, .newsletterForm button:hover, .registerContainer button:hover{
+    transition: 0.4s ease;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid grey;
+}
+
+
+
+
+
+
+.newsletterContainer{
+    margin: 0px 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+

@@ -9,6 +9,8 @@ const cartSlice = createSlice({
         incrementItem: (state, action) => {
             const {name, id, price, desc, img} = action.payload
 
+            console.log(action.payload)
+
             let quantity = 0;
             
             const product = {

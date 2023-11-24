@@ -13,8 +13,8 @@ import ExampleProducts from "@/components/exampleProducts/exampleProducts";
 import {useSelector, useDispatch} from 'react-redux'
 
 //STYLES
-import styles from '../styles/Wishlist.module.css'
-import styless from '../styles/Modal.module.css'
+import styles from '../../styles/Wishlist.module.css'
+import styless from '../../styles/Modal.module.css'
 
 import Image from "next/image";
 
@@ -57,7 +57,7 @@ const Wishlist = () =>{
       } else{
         setIsEmpty(false)
       }
-    }, [])
+    }, []);
 
 
 

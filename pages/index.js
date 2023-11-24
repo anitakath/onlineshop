@@ -5,8 +5,7 @@ import styles from '@/styles/Home.module.css'
 import { useState } from 'react';
 
 import { useSelector, useDispatch } from "react-redux";
-import { increment, decrement } from "../store/counterSlice";
-import { addPerson, removePerson} from '../store/peopleSlice';
+
 
 import Layout from '@/components/Layout';
 

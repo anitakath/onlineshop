@@ -32,30 +32,22 @@
     cursor: pointer;
 }
 
+
+.btnContainer{
+    border: 2px solid red;
+    margin: 0px 40px;
+}
+
+
 .login{
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    background-color: lightblue;
+    margin: 0px 40px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    position: relative;
+    top: 1px;
 }
 
-.login:hover{
-    color: white;
-    background-color: darkblue;
-    
 
-}
-
-.register{
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    background-color: darkblue;
-    color: white;
-}
-
-.register:hover{
-    color: black;
-    background-color: lightblue
-}
 
 .Link{
     color: black;

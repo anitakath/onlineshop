@@ -1,17 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterSliceReducer from "./counterSlice";
-import peopleSliceReducer from './peopleSlice'
+
+
+import authSliceReducer from './authSlice'
 import cartSliceReducer from "./cartSlice";
 import wishlistSlice from "./wishlistSlice";
+import productSlice from "./productSlice";
 
 const store = configureStore({
   reducer: {
-    counter: counterSliceReducer,
-    adressBook: peopleSliceReducer,
-
-    
+    auth: authSliceReducer,
     cart: cartSliceReducer,
     wishlist: wishlistSlice,
+    products: productSlice, // products && randomProducts
   },
 });
 
