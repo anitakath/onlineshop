@@ -1,11 +1,11 @@
 
 .headerContainer{
     width: 100vw;
-    height: 11vh;
+    min-height: 11vh;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     position: relative;
-
 }
 
 .headerContainer h1{
@@ -16,15 +16,30 @@
 .userContainer{
     display: flex;
     height: 40px;
-    position: absolute;
+    position: relative;
     right: 50px;
-    top: 30px;
+    height: 11vh;
+    display: flex;
+    align-items: center;
+   
+
 }
+
+
+.user_p{
+    position: absolute;
+    right: 25px;
+    top: 0px;
+    font-size: 0.8rem;
+    margin: 10px;
+}
+
 
 .userContainer button{
     margin: 0px 2px;
     padding: 2px;
     min-width: 100px;
+
 }
 
 .userContainer button:hover{
@@ -34,7 +49,6 @@
 
 
 .btnContainer{
-    border: 2px solid red;
     margin: 0px 40px;
 }
 
@@ -56,6 +70,13 @@
     font-size: 1.2rem;
 }
 
+
+.link{
+    margin: 0px 5px;
+    color: grey;
+    text-decoration: none;
+}
+
 .icon{
     margin: 0px 5px 0px 8px;
     position: relative;
@@ -65,4 +86,42 @@
 .icon:hover{
     transition: 0.4s ease;
     color: darkblue;
+}
+
+
+@media screen and (max-width: 1000px){
+    
+
+}
+
+@media screen and (max-width: 800px){
+     .userContainer{
+        right: 5px;
+    }
+}
+
+@media screen and (max-width: 600px){
+
+
+    .headerContainer{
+        flex-direction: column;
+        height: 10vh;
+    }
+    .headerContainer h1{
+        margin: 10px 0px;
+        font-size: 1.3rem;
+        position: relative;
+        top: 30px;
+    }
+
+    .userContainer{
+        right: 0;
+        top: 25px;
+    }
+
+    .user_p{
+        position: absolute;
+        left: 5px;
+        top: 0px;
+    }
 }

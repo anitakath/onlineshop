@@ -10,9 +10,18 @@ const Custom404 = () =>{
 
     return (
       <div className={styles.container}>
-        <h1> diese Seite befindet sich im Aufbau 💕 </h1>
+        <h1> this page is under construction 💕 </h1>
+        <p>
+          have a look at the
+          <Link href="/necklaces" className={styles.link}>
+            necklace page
+          </Link>
+          you will already find a few products there
+        </p>
         <Image src="/404/potato.gif" width={300} height={300}></Image>
-        <Link href="/" className={styles.link}> zurürck zur Startseite</Link>
+        <Link href="/" className={styles.link}>
+          back to the homepage
+        </Link>
       </div>
     );
 }

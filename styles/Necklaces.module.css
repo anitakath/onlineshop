@@ -1,10 +1,12 @@
 
 .itemContainer{
-    width: 100vw;
+    width: 100%;
     display: grid;
     position: relative;
     grid-template-columns: repeat(4, 1fr);
     top: 10px;
+    margin: 0;
+    padding: 0,
 
 }
 
@@ -52,6 +54,7 @@
 .itemInfoCounter h2{
     margin: 0 5px;
     font-weight: bolder;
+  
 }
 
 .itemInfoCounter button{
@@ -77,4 +80,27 @@
     border-radius: 3px;
     box-shadow: 1px 1px 10px black;
     
+}
+
+
+@media screen and (max-width: 1400px){
+    .itemContainer{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+
+
+
+@media screen and (max-width: 900px){
+    .itemContainer{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media screen and (max-width: 600px){
+    .itemContainer{
+        grid-template-columns: repeat(1, 1fr);
+    }
 }

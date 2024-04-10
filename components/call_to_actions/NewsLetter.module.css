@@ -1,0 +1,66 @@
+
+
+.container{
+    margin: 30px;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+
+.email_input{
+    outline: none;
+    border: none;
+    border-bottom: 2px solid silver;
+    background: transparent;
+    margin: 10px 0px;
+    width: 50vw;
+    font-size: 1.2rem;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+
+.email_input:hover{
+    background: rgba(255,255,255, 0.5);
+    border-bottom: 2px solid rgba(0,0,0, 0.3)
+}
+
+.signUp_btn{
+    margin: 0px 10px;
+    width: 100px;
+    background: rgba(255,255,255, 0.5);
+    border: none;
+    padding: 6px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    cursor: pointer;
+}
+
+.signUp_btn:hover{
+    background: white;
+}
+
+
+@media screen and (max-width: 800px){
+
+    .container{
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+    }
+    .input_form{
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .signUp_btn{
+        width: 130px;
+        padding: 10px;
+    }
+}

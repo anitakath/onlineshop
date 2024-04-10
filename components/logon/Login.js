@@ -75,7 +75,7 @@ const Login = () =>{
   
     return (
       <div className={styles.loginContainer}>
-        <h1> LOG IN WITH YOUR ACCOUNT</h1>
+        <h1> LOG IN </h1>
 
 
 
@@ -95,7 +95,7 @@ const Login = () =>{
             onChange={passwordChangeHandler}
             ></input>
 
-          <button type="submit"> MY ACCOUNT </button>
+          <button type="submit"> LOG IN </button>
         </form>
         <p className={styles.forgotPasswordLink}> Forgot your password? </p>
       </div>

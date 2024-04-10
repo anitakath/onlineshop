@@ -14,7 +14,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
-import { faWandMagicSparkles } from "@fortawesome/free-solid-svg-icons";
 import { faUser} from "@fortawesome/free-solid-svg-icons";
 
 //STORE
@@ -37,7 +36,7 @@ const Header = () =>{
       initialValue
     )
 
-    let userGreeting = isLoggedIn ? 'ANNE' : ''
+    let userGreeting = isLoggedIn ? 'ANNE' : 'USER'
     let loginPath = isLoggedIn ? '/user-profile' : '/logon'
 
 
@@ -45,18 +44,14 @@ const Header = () =>{
       <div className={styles.headerContainer}>
         <h1> SHOPNAME </h1>
 
-        <p> HELLO {userGreeting} ❤️ </p>
+        <p className={styles.user_p}> HELLO 
+          <Link href="/profile" className={styles.link}>{userGreeting}</Link> 
+          ❤️ 
+        </p>
 
         <div className={styles.userContainer}>
           <Link href="/" className={styles.Link}>
             <FontAwesomeIcon icon={faHouse} className={styles.icon} />
-          </Link>
-
-          <Link href="/product-roulette" className={styles.Link}>
-            <FontAwesomeIcon
-              icon={faWandMagicSparkles}
-              className={styles.icon}
-            />
           </Link>
 
           <Link href="/wishlist" className={styles.Link}>
