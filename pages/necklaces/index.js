@@ -45,7 +45,6 @@ const Necklaces = () => {
 
   const dispatch = useDispatch()
   const cartItems = useSelector((state) => state.cart)
-
   console.log(cartItems)
 
   const counter = () =>{

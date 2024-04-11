@@ -5,6 +5,7 @@ import authSliceReducer from './authSlice'
 import cartSliceReducer from "./cartSlice";
 import wishlistSlice from "./wishlistSlice";
 import productSlice from "./productSlice";
+import usersSlice from "./usersSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     cart: cartSliceReducer,
     wishlist: wishlistSlice,
     products: productSlice, // products && randomProducts
+    users: usersSlice,
   },
 });
 

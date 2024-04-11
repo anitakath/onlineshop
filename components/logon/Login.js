@@ -11,8 +11,13 @@ import { login, logout } from '@/store/authSlice';
 //STYLES
 import styles from '../../styles/Logon.module.css'
 
-const Login = () =>{
+const Login = (props) =>{
 
+
+  const formData = props.formData
+  const onChangeHandler = props.onChangeHandler;
+  const submitHandler = props.submitHandler;
+ 
   const dispatch = useDispatch();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -21,79 +26,41 @@ const Login = () =>{
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
+
+
   const emailChangeHandler = (e) =>{
     setEmail(e.target.value)
+    onChangeHandler({ type: "email", value: e.target.value, action: "login" });
   }
+
+
   const passwordChangeHandler = (e) =>{
     setPassword(e.target.value)
+    onChangeHandler({ type: "password", value: e.target.value, action: "login" });
   }
 
- 
 
-  const loginHandler = async (e) =>{
-    e.preventDefault();
-
-    if(email && password){
-      try{
-        const response = await fetch("/api/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        });
-
-        const data = await response.json();
-
-        if(response.ok){
-
-          dispatch(login());
-          console.log(response)
-          console.log(data)
-
-
-          const router = useRouter();
-          router.push("/user-profile");
-
-
-        } else{
-          console.log('Fehler beim Einloggen')
-        }
-
-
-      } catch(error){
-         console.log("Fehler beim Einloggen", error);
-      }
-      
-    } else{
-      console.log('enter email and password!')
-    }
-    
-
-  }
 
   
     return (
       <div className={styles.loginContainer}>
         <h1> LOG IN </h1>
 
-
-
-        <form className={styles.loginForm} onSubmit={loginHandler}>
+        <form className={styles.loginForm} onSubmit={submitHandler}>
           <label> E-MAIL </label>
-          <input 
-            type="email" 
+          <input
+            type="email"
             placeholder="E-MAIL"
             onChange={emailChangeHandler}
-
-            ></input>
+            value={email}
+          ></input>
 
           <label> PASSWORD </label>
-          <input 
-            type="password" 
+          <input
+            type="password"
             placeholder="PASSWORD"
             onChange={passwordChangeHandler}
-            ></input>
+          ></input>
 
           <button type="submit"> LOG IN </button>
         </form>

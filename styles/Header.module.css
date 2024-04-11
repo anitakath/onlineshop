@@ -32,7 +32,9 @@
     top: 0px;
     font-size: 0.8rem;
     margin: 10px;
+    z-index: 100;
 }
+
 
 
 .userContainer button{
@@ -75,6 +77,13 @@
     margin: 0px 5px;
     color: grey;
     text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.link:hover{
+    color: darkgreen;
+    cursor: pointer;
 }
 
 .icon{

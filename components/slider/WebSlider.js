@@ -70,7 +70,6 @@ const WebSlider = () =>{
         const response = await fetch('/api/webSliderData')
         const data = await response.json()
 
-        console.log(data)
         setImages(data)
         setData(true)
         setLoadImages(false)
@@ -85,10 +84,6 @@ const WebSlider = () =>{
 
       
   }, [])
-
-  console.log(images)
-  console.log(currIdx)
-
 
 
 

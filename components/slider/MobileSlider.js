@@ -28,6 +28,7 @@ const MobileSlider = () => {
               width={500}
               height={500}
               className={styles.imgs}
+              alt="product images"
             />
           </div>
         ))}
