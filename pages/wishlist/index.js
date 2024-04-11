@@ -1,6 +1,6 @@
 //REACT
 import { useState, useEffect} from "react";
-
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 //COMPONENTS
@@ -75,6 +75,15 @@ const Wishlist = () =>{
     console.log(wishlist)
     console.log(selectedItem)
 
+    useEffect(()=>{
+
+      if(wishlistItems.length > 0){
+        setIsEmpty(false)
+
+      }
+
+    }, [wishlistItems])
+
 
 
     const router = useRouter();
@@ -116,10 +125,12 @@ const Wishlist = () =>{
                   {addedItem && (
                     <button
                       className={styless.productInfo}
-                      onClick={navigateToCartHandler}
+                      
                     >
-                      the product has been successfully added to your shopping
-                      cart. click here to go to your shopping cart
+                      product has been successfully added to your shopping cart.{" "}
+                      <br />
+                      <button onClick={navigateToCartHandler} className={styless.btn_toBasket}> click here to go to your shopping basket</button>
+                 
                     </button>
                   )}
                 </div>
@@ -129,12 +140,9 @@ const Wishlist = () =>{
         )}
 
         {isEmpty && (
-          <div className={styles.wishlistField}>
-            <h3> no products on your wishlist </h3>
-            < ExampleProducts />
-
-
-          </div>
+          <h3 className={styles.noProducts_title}>
+            no products on your wishlist
+          </h3>
         )}
 
         {!isEmpty && (
@@ -154,6 +162,12 @@ const Wishlist = () =>{
             })}
           </div>
         )}
+
+        <div className={styles.wrapper}>
+          <div className={styles.examples_div}>
+            <ExampleProducts />
+          </div>
+        </div>
       </Layout>
     );
 }

@@ -33,8 +33,7 @@ const Necklaces = () => {
     }
     
     fetchData();
-   
-
+  
   
   }, [])
   
@@ -47,13 +46,15 @@ const Necklaces = () => {
   const cartItems = useSelector((state) => state.cart)
   console.log(cartItems)
 
+
+/*
   const counter = () =>{
     cartItems.map((item) => {
      return item.quantity
     })
   }
  
-
+*/
 
 
   const increment = (item) =>{

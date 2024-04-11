@@ -61,7 +61,7 @@ export default function handler (req, res){
             name: " VASE 'LUIS'",
             price: " 95",
             desc: "a nice vase ",
-            img: "/randomProducts/mainVase.jpg",
+            img: "/randomProducts/vase4.jpg",
           },
           {
             id: "vase_jona",
@@ -75,21 +75,21 @@ export default function handler (req, res){
             name: " VASE 'LUIGI' ",
             price: " 115",
             desc: "a nice vase",
-            img: "/randomProducts/vase9.jpg",
+            img: "/randomProducts/vase1.jpg",
           },
           {
             id: "vase_max ",
             name: " VASE 'MAX' ",
             price: " 215",
             desc: "a nice vase",
-            img: "/randomProducts/vase10.jpg",
+            img: "/randomProducts/vase2.jpg",
           },
           {
             id: "vase_fynn",
             name: " VASE 'FYNN' ",
             price: " 60",
             desc: "a nice vase",
-            img: "/randomProducts/vase11.jpg",
+            img: "/randomProducts/vase3.jpg",
           },
           
         ];

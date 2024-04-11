@@ -6,6 +6,7 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
+    background-color: var(--white_opaque);
 }
 
 .headerContainer h1{

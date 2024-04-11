@@ -48,25 +48,33 @@
     width: 40px;
     height: 40px;
     display: flex;
-    justify-content: center;
+    justify-content: end;
+    width: 180px;
 
 }
-
-
 
 .closeBtn{
     border: none;
+    width: 70px;
     background-color: transparent;
-    font-size: 2rem;
+    transition: 0.2s ease;
+    font-size: 2.2rem;
     cursor: pointer;
-   
+    
 }
 
+ .closeBtn{
+    width: 40px;
+ }
+
+
+
+
 .closeBtn:hover{
-    transition: 0.3s ease;
-    color: lightblue;
-    font-size: 2.2rem;
+    color: purple;
 }
+
+
 
 .addBtn:hover{
     transition: 0.3s ease;
@@ -87,12 +95,33 @@
 .addToCartBtn, .productInfo{
     border: none;
     width: 500px;
-    background-color: grey;
+    background-color: rgba(0,0,0, 0.5);
     height: 70px;
     cursor: pointer;
     color: white;
     font-size: 1.3rem;
 }
+
+.productInfo{
+    transition:0.2s ease;
+    font-size: 1rem;
+    color: beige;
+    margin: 0;
+    padding: 0;
+}
+
+
+.btn_toBasket{
+    color: purple;
+    text-decoration: none;
+    margin: 10px 0px;
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
 
 .addToCartBtn:hover{
     transition: 0.3s ease;

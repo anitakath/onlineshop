@@ -66,16 +66,17 @@
 
 
     .nav_title{
-        font-size: 0.9rem;
+        font-size: 1.3rem;
     }
 
     .nav_table{
         width: 60%;
         position: relative;
-        left: -20px;
+        left: -40px;
+        margin: 0;
     }
 
     .nav_table li{
-        font-size: 0.7rem;
+        font-size: 1rem;
     }
 }

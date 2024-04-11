@@ -10,14 +10,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { incrementItem, decrementItem } from "@/store/cartSlice";
 import { setSelectedProductt, setFilterProductArray, setUpdatedRandomProducts, setNewProduct } from '@/store/productSlice.js'
 import {setProducts, setRandomProductss, setShowProductts} from '@/store/productSlice.js'
+import { incrementWishlist } from '@/store/wishlistSlice';
 
 //STYLES
 import styles from './exampleProducts.module.css'
 
 //FONT AWESOME
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faSpinner} from '@fortawesome/free-solid-svg-icons'
-
+import {faSpinner, faCartPlus, faHeart,faXmark} from '@fortawesome/free-solid-svg-icons'
 
 const ExampleProducts = () =>{
 
@@ -43,7 +43,7 @@ const ExampleProducts = () =>{
                 setProducts(products)
 
                 const randomArray = [];
-                 while (randomArray.length < 5) {
+                 while (randomArray.length < 6) {
                    const randomIndex = Math.floor(
                      Math.random() * products.length
                    );
@@ -65,8 +65,6 @@ const ExampleProducts = () =>{
 
         fetchData()
 
-       
-
     }, [])
 
     
@@ -74,8 +72,6 @@ const ExampleProducts = () =>{
 
     const cartItems = useSelector( (state) => state.cart)
     const dispatch = useDispatch()
-
-    
 
     
       
@@ -146,23 +142,22 @@ const ExampleProducts = () =>{
 
 
 
+    const likeProductHandler = (product) =>{
 
-
-
-
-
+      console.log('adding to wishlist ...')
+      console.log(product)
+      dispatch(incrementWishlist(product));
+    }
 
 
 
     useEffect(()=>{
 
-   
-
-        if (randomProducts.length === 0) {
-          setNoProducts(true);
-        } else {
-          setNoProducts(false);
-        }
+      if (randomProducts.length === 0) {
+        setNoProducts(true);
+      } else {
+        setNoProducts(false);
+      }
 
     }, [randomProducts])
 
@@ -187,16 +182,27 @@ const ExampleProducts = () =>{
    
 
 
+    console.log(products)
+
 
  
 
     return (
-      <div>
+      <div className={styles.wrapper}>
         <div className={styles.headerContainer}>
           <h2>you might like these products.</h2>
-          <h2>
-            <FontAwesomeIcon icon={faSpinner}  className={styles.headerReloadIcon} onClick={ reloadrandomProductsHandler }/>
-          </h2>
+          <div className={styles.btn_div}>
+            <button className={styles.close_btn}>
+              <FontAwesomeIcon icon={faXmark} />
+            </button>
+            <button className={styles.reload_btn}>
+              <FontAwesomeIcon
+                icon={faSpinner}
+                className={styles.headerReloadIcon}
+                onClick={reloadrandomProductsHandler}
+              />
+            </button>
+          </div>
         </div>
 
         <div className={styles.productsContainer}>
@@ -209,7 +215,6 @@ const ExampleProducts = () =>{
                   selectedProduct === product ? styles.selectedProduct : ""
                 }`}
               >
-              
                 <Image
                   src={product.img}
                   alt="jajja"
@@ -218,13 +223,18 @@ const ExampleProducts = () =>{
                   height={300}
                   priority={true}
                 />
+                <button
+                  className={styles.likeProductsBtn}
+                  onClick={() => likeProductHandler(product)}
+                >
+                  <FontAwesomeIcon icon={faHeart} className={styles.heart} />
+                </button>
 
                 <button
                   className={styles.addProductBtn}
                   onClick={() => addProductHandler(product)}
                 >
-                  +
-
+                  <FontAwesomeIcon icon={faCartPlus} className={styles.icon} />
                 </button>
               </div>
             ))}

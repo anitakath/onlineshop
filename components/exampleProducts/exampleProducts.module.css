@@ -4,29 +4,45 @@
     display: flex;
     justify-content: space-between;
     position: relative;
+    width: 90vw;
 }
 
-.headerReloadIcon{
-    position: absolute;
-    right: 15px;
-    font-size: 1.8rem;
+.btn_div{
+    display: flex;
+    width: 200px;
+    justify-content: center;
+}
+
+.close_btn, .reload_btn{
+    border: none;
+    margin: 0px 3px;
+    width: 80px;
     cursor: pointer;
+    font-size: 1.4rem;
+    background-color: transparent;
+    transition: 0.2s ease;
 }
 
-.headerReloadIcon:hover{
-    transition: 0.4s ease;
-    color: darkblue;
+
+.close_btn:hover, .reload_btn:hover{
+    color: purple;
 }
 
-.headerReloadIcon:active{
-    transform: scale(0.9)
+.close_btn:active, .reload_btn:active{
+   transform: scale(0.9)
+}
+
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .productsContainer{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
     justify-content: space-between;
-    flex-wrap: wrap;
-    
 }
 
 .productContainer{
@@ -35,6 +51,7 @@
     height: 200px;
     margin: 0px 10px;
     border: 2px solid transparent;
+    
 }
 
 .selectedProduct{
@@ -43,6 +60,7 @@
     height: 200px;
     margin: 0px 10px;
     border: 2px solid rgba(11, 156, 49, 0.3);
+    
 }
 
 .selectedProduct::after{
@@ -72,7 +90,7 @@
     height: 200px;
 }
 
-.addProductBtn{
+.addProductBtn, .likeProductsBtn{
     border: none;
     width: 30px;
     height: 30px;
@@ -81,6 +99,8 @@
     position: absolute;
     right: 5px;
     bottom: 5px;
+    padding: 0;
+    margin: 0;
 }
 
 .removeProductBtn{
@@ -94,16 +114,62 @@
     right: 5px;
     top: 5px;
     cursor: pointer;
-
 }
 
 .removeProductBtn:hover{
-    transition: 0.4s ease;
+    transition: 0.2s ease;
     color: lightblue;
 }
 
 .addProductBtn:hover{
-    transition: 0.4s ease;
-    color: lightblue;
+    transition: 0.2s ease;
+    color: purple;
     cursor: pointer;
+}
+
+
+
+.likeProductsBtn{
+    right: 43px;
+    bottom: 5px;
+    background-color: transparent;
+    margin: 0 5px;
+    cursor: pointer;
+    
+}
+
+.icon{
+    font-size: 1.2rem;
+}
+
+.heart{
+    font-size: 1.4rem;
+    transition: 0.2s ease;
+}
+
+.heart:hover{
+    color: purple;
+}
+
+
+@media screen and (max-width: 1330px){
+    .productsContainer{
+        grid-template-columns: repeat(3, 0.5fr);
+        width: 80vw;
+    }
+
+    .productContainer{
+        margin: 10px 5px; 
+    }
+}
+
+@media screen and (max-width: 800px){
+    .productsContainer{
+        grid-template-columns: repeat(2, 0.5fr);
+        width: 60vw;
+    }
+
+    .productContainer{
+      margin: 5px 5px;
+    }
 }
