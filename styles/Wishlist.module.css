@@ -7,6 +7,7 @@
     align-items: center;
     background-color: #E8E6E9;
     min-height: 50vh;
+
 }
 
 
@@ -79,5 +80,33 @@
 @media screen and (max-width: 800px){
     .wishlistField{
         margin: 20px 0px;
+    }
+}
+
+
+@media screen and (max-width: 700px){
+
+    .wishlistItem{
+        height: 300px;
+    }
+    .wishlistItem h1{
+        font-size: 1rem;
+        bottom: 0;
+        left: 0;
+        margin: 0;
+        padding: 4px;
+        width: 90%;
+    }
+
+    .itemPrice{
+      display: none;
+    }
+
+  
+}
+
+@media screen and (max-width: 400px){
+    .wishlistItem{
+        height: 200px;
     }
 }

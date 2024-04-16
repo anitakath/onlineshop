@@ -103,7 +103,12 @@ const Cart = () => {
       router.push('/checkout')
     } else if(isLoggedIn === false){
       setLoginInfo(true);
-      
+
+     setTimeout(() => {
+       const logonWrapper = document.querySelector(`.${styles.logonWrapper}`);
+       logonWrapper.scrollIntoView({ behavior: "smooth" });
+     }, 1000); //Scrollen nach 1 Sekunde
+
      
     }
     
@@ -117,11 +122,16 @@ useEffect(() => {
   function handleScroll() {
 
     if(checkoutField){
+
+      console.log(logonWrapper.offsetTop)
       if (window.pageYOffset > (logonWrapper.offsetTop -420)) {
-        checkoutField.style.position = "relative";
         checkoutField.style.top = "120px";
+        checkoutField.style.position = "relative";
+        checkoutField.style.right = "0px"
+        checkoutField.style.justifyContent = "end";
       } else {
         checkoutField.style.position = "fixed";
+        checkoutField.style.right = "60px";
       }
     }
     
@@ -136,12 +146,6 @@ useEffect(() => {
 
 
 
-  /*
-  const [cartFieldHeight, setCartFieldHeight] = useState('')
-
-  const cartFieldContainer = document.querySelector('.cartFieldContainer')
-
-  console.log(cartFieldContainer)*/
 
 
   return (
@@ -176,7 +180,7 @@ useEffect(() => {
                 <div className={styles.cartItemInfo}>
                   <div className={styles.cartItemTitle}>
                     <p>{item.name}</p>
-                    <p> - {item.price}</p>
+                    <p> - {item.price} </p>
                   </div>
 
                   <div className={styles.cartItemTotal}>
@@ -209,16 +213,10 @@ useEffect(() => {
             <div className={styles.checkoutBtnContainer}>
               <p className={styles.totalPrice}> {fixedTotalPrice}$ </p>
               <button className={styles.checkoutBtn} onClick={checkoutHandler}>
-                checkout
+                {loginInfo ? 'please log in first ' : 'checkout'}
               </button>
             </div>
-            <div className={styles.loginInfoContainer}>
-              {loginInfo && 
-              <p> please log in first. 
-                <Link href="/logon" className={styles.link}> Click here</Link>
-                </p>}
-              <p>{loginInfo}</p>
-            </div>
+           
           </div>
         )}
 
@@ -236,9 +234,6 @@ useEffect(() => {
           <div className={styles.logonContainer}>
             <Login />
             <Register />
-          </div>
-          <div className={styles.newsletterContainer}>
-            <Newsletter />
           </div>
         </div>
       )}

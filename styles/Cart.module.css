@@ -6,7 +6,12 @@
     margin-bottom: 40px;
     position: relative;
     overflow: auto;
-    
+    min-height: 25vh;
+    overflow: hidden;
+    z-index: 10000;
+
+
+
 }
 
 
@@ -103,15 +108,20 @@
 
 .checkoutField{
     width: 30%;
-    height: 300px;
+    min-height: 25vh;
     display: flex;
-    position: fixed;
-    z-index: 100;
-    right: 60px;
+    position: relative;
+   
     flex-direction: column;
     align-items: center;
-    justify-content: end;
     background-color: rgba(255, 255, 255, 0.5);
+    /*border: 4px solid purple;*/
+    overflow: hidden;
+}
+
+
+.wrapper{
+    position: fixed;
 }
 
 .checkoutBtnContainer{
@@ -127,35 +137,15 @@
     width: 100px;
     font-size: 1.3rem;
     cursor: pointer;
-    color: #AA7BC3
+    color: #AA7BC3;
+    width: 200px;
 }
 
 .totalPrice{
     color: grey;
 }
 
-.loginInfoContainer{
-    width: 100%;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-}
 
-.loginInfoContainer p{
-    font-size: 1.2rem;
-    color: #AA7BC3;
-    font-weight: bolder;
-    letter-spacing: 1px;
-}
-
-.link{
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-    margin-left: 5px;
-    font-weight: normal;
-    letter-spacing: 0px;
-}
 
 
 
@@ -169,19 +159,30 @@
 
 
 .logonWrapper{
-    overflow: auto;
-    height: 100vh;
+   
+    min-height: 70vh;
+
 }
 
 
 .logonContainer{
     display: flex;
     width: 100vw;
-   justify-content: space-evenly;
-   overflow: auto;
-   z-index: 1000;
+    justify-content: space-evenly;
+
+   
 }
 
 .newsletterContainer{
+    padding-left: 140px;
     padding-bottom: 80px;
+}
+
+
+
+
+@media screen and (max-width: 1000px){
+    .logonContainer{
+        flex-direction: column;
+    }
 }
