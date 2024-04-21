@@ -62,9 +62,8 @@ const Register = (props) =>{
 
     return (
       <div className={styles.registerContainer}>
-        <h1> REGISTRATION </h1>
         <form className={styles.loginForm} onSubmit={submitHandler}>
-          <label> NAME </label>
+          <h1 className={styles.title}> REGISTRATION </h1>
           <input
             type="type"
             placeholder="NAME"

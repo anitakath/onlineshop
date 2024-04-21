@@ -164,26 +164,52 @@ const submitHandler = async (e) =>{
     return (
       <Layout>
         <div className={styles.logonField}>
-          <Login
-            formData={formData}
-            setFormData={setFormData}
-            onChangeHandler={onChangeHandler}
-            submitHandler={submitHandler}
-            loginErrorMessage={loginErrorMessage}
-            loginSuccessMessage={loginSuccessMessage}
-          />
-          <Register
-            formData={formData}
-            setFormData={setFormData}
-            onChangeHandler={onChangeHandler}
-            submitHandler={submitHandler}
-          />
-          <Newsletter
-            formData={formData}
-            setFormData={setFormData}
-            onChangeHandler={onChangeHandler}
-            submitHandler={submitHandler}
-          />
+          <div className={styles.wrapper}>
+            <video autoPlay loop muted className={styles.background_video}>
+              <source src="/videos/login_video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
+            <Login
+              formData={formData}
+              setFormData={setFormData}
+              onChangeHandler={onChangeHandler}
+              submitHandler={submitHandler}
+              loginErrorMessage={loginErrorMessage}
+              loginSuccessMessage={loginSuccessMessage}
+            />
+          </div>
+
+          <div className={styles.wrapper}>
+            <video autoPlay loop muted className={styles.background_video}>
+              <source src="/videos/register_video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
+            <Register
+              formData={formData}
+              setFormData={setFormData}
+              onChangeHandler={onChangeHandler}
+              submitHandler={submitHandler}
+            />
+          </div>
+
+          <div className={styles.wrapper}>
+
+
+            <video autoPlay loop muted className={styles.background_video}>
+              <source src="/videos/newsletter_video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
+
+            <Newsletter
+              formData={formData}
+              setFormData={setFormData}
+              onChangeHandler={onChangeHandler}
+              submitHandler={submitHandler}
+            />
+          </div>
         </div>
       </Layout>
     );

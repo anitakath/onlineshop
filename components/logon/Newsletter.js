@@ -24,9 +24,8 @@ const Newsletter = (props) =>{
 
     return (
       <div className={styles.newsletterContainer}>
-        <h1> NEWSLETTER </h1>
         <form className={styles.newsletterForm} onSubmit={submitHandler}>
-          <label> email </label>
+          <h1 className={styles.title}> NEWSLETTER </h1>
           <input
             type="email"
             placeholder="E-MAIL"

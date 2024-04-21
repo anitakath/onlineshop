@@ -48,9 +48,9 @@ const Login = (props) =>{
 
   return (
     <div className={styles.loginContainer}>
-      <h1> LOG IN </h1>
 
       <form className={styles.loginForm} onSubmit={submitHandler}>
+        <h1 className={styles.title}> LOG IN </h1>
         <label> E-MAIL </label>
         <input
           type="email"
