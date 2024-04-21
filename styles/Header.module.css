@@ -7,7 +7,11 @@
     align-items: center;
     position: relative;
     background-color: var(--white_opaque);
+
+
 }
+
+
 
 .headerContainer h1{
     margin: 20px;
@@ -22,7 +26,7 @@
     height: 11vh;
     display: flex;
     align-items: center;
-   
+
 
 }
 
@@ -99,9 +103,12 @@
 }
 
 
-@media screen and (max-width: 1000px){
-    
+@media screen and (max-width: 1300px){
 
+    .headerContainer{
+        min-height: 15vh;
+   
+    }
 }
 
 @media screen and (max-width: 800px){
@@ -115,23 +122,46 @@
 
     .headerContainer{
         flex-direction: column;
-        height: 10vh;
+
     }
+
+
     .headerContainer h1{
-        margin: 10px 0px;
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         position: relative;
         top: 30px;
+        margin: 8px 0px;
     }
 
     .userContainer{
         right: 0;
-        top: 25px;
+        top: -4px;
+        height: 50px;
+
+    }
+
+    .Link{
+        margin: 0 20px;
+
+    }
+
+    .icon{
+        font-size: 1.3rem;
     }
 
     .user_p{
         position: absolute;
         left: 5px;
         top: 0px;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .userContainer{
+        top: 0px;
+    }
+
+    .icon{
+        font-size: 1.1rem;
     }
 }

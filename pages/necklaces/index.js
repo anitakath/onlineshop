@@ -11,7 +11,7 @@ import { incrementItem, decrementItem } from "@/store/cartSlice";
 import {incrementWishlist} from '@/store/wishlistSlice'
 
 //STYLES
-import styles from "../../styles/Necklaces.module.css";
+import styles from "./Necklaces.module.css";
 import { decrement, increment } from "@/store/counterSlice";
 
 const Necklaces = ({necklacesData}) => {

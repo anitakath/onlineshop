@@ -30,12 +30,6 @@ const UserProfile = () =>{
 
   console.log(isLoggedIn)
 
-    /*  <video controls>
-              <source src="/videos/Video.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video> 
-            */
-
 
 
     return (
@@ -49,15 +43,23 @@ const UserProfile = () =>{
 
             {!isLoggedIn && (
               <h1 className={styles.title}>
-                you are not logged in. Please log in <Link href="/logon" className={styles.login_link}> here</Link>
+                you are not logged in. Please log in
+                <Link href="/logon" className={styles.login_link}>
+                  {" "}
+                  here
+                </Link>
               </h1>
             )}
 
             {isLoggedIn && (
-              <div>
-                <h1 className={styles.title}> HI DU </h1>
+              <div className={styles.flex_div}>
+    
+
                 <div className={styles.flex}>
-                  <ul className={styles.profile_table}>
+                  <ul
+                    className={styles.profile_table}
+                    style={{ borderBottom: "2px solid grey" }}
+                  >
                     <li>
                       <FontAwesomeIcon
                         icon={faBagShopping}

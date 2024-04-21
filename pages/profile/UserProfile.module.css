@@ -86,7 +86,6 @@
 }
 
 .profile_table li:hover .icon{
-    
     color: var( --font-hover-purple);
 }
 
@@ -113,4 +112,68 @@
 
 .logout_btn:hover{
     color: var(--font-hover-purple-secondary);
+}
+
+
+@media screen and (max-width: 600px){
+
+    
+    .title{
+        margin: 20px;
+        position:fixed;
+        top:150px;
+        z-index: 10000;
+        background: rgba(255,255,255, 0.1);
+        padding: 3px;
+        border-top: 1px solid white;
+        border-bottom: 1px solid white;
+    }
+
+
+
+    .userInformation_div{
+        margin: 0;
+        padding: 0;
+        
+    }
+
+    .flex_div{
+        width: 100%;
+    }
+
+
+    .flex{
+        flex-direction: column;
+        z-index: 1000;
+        justify-content: start;
+        align-items: center;
+        width: 100%;
+      
+    }
+
+
+    .profile_table li{
+        left: 0;
+        width: 100%;
+        margin: 15px 0px;
+        padding: 0;
+    }
+
+    .Link{
+        font-size: 1.6rem;
+    }
+
+    .profile_table{
+        z-index: 10000;
+        margin: 0;
+        position: relative;
+
+        width: 80%;
+        left: 0;
+        padding: 20px 0px;
+    }
+
+    .background_video{
+        margin: 20px 0px;
+    }
 }
