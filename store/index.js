@@ -6,6 +6,23 @@ import cartSliceReducer from "./cartSlice";
 import wishlistSlice from "./wishlistSlice";
 import productSlice from "./productSlice";
 import usersSlice from "./usersSlice";
+import persistedReducer from "./persistConfig";
+
+/*
+
+const rootReducer = {
+  auth: authSliceReducer,
+  cart: cartSliceReducer,
+  wishlist: wishlistSlice,
+  products: productSlice,
+  users: usersSlice,
+};
+
+const store = configureStore({
+  reducer: persistedReducer(rootReducer), // Verwende den persistierten Reducer
+});
+
+*/
 
 const store = configureStore({
   reducer: {
@@ -18,3 +35,9 @@ const store = configureStore({
 });
 
 export default store;
+
+
+/* 
+
+
+*/

@@ -6,6 +6,9 @@ body{
 
 :root{
   --white_opaque: rgba(255,255,255, 0.3);
+  --font-hover-purple: rgba(213, 184, 255, 1);
+  --font-hover-purple-secondary: rgba(159,90,253,1);
+  --font-beige: rgba(237, 231, 225, 1);
 }
 .counterField, .adressBookField{
   width: 100vw;

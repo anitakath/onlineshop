@@ -10,15 +10,48 @@ app.listen(PORT, () => {
 });
 
 export default function handler(req, res) {
+
+  const userData = [
+    {
+      id: "first_user",
+      name: "Marlin",
+      email: "marlin@web.de",
+      password: "marlin-liebt-snacks"
+    },
+    {
+      id: "second_user",
+      name: "Max",
+      email: "max@web.de",
+      password: "max_verstappen"
+    },
+    {
+      id: "third_user",
+      name: "Anne",
+      email: "anne@web.de",
+      password: "anne123"
+    },
+  ];
+
+
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method Not Allowed" });
   }
 
   if (req.method === "POST") {
-    const { email, password } = req.body;
+    const { action, email, password } = req.body;
 
-    console.log(email);
-    console.log(password);
+    // Überprüfe die Eingaben des Benutzers mit den Daten in userData
+    const user = userData.find(
+      (user) => user.email === email && user.password === password
+    );
+
+    if (!user) {
+      return res
+        .status(401)
+        .json({
+          error: "Invalid login information. Please check your login details",
+        });
+    }
 
     function escape(input) {
       // Ersetze alle < und > Zeichen durch ihre HTML-Entities
@@ -53,77 +86,6 @@ export default function handler(req, res) {
   }
 
   return res.status(200).json({
-    message: "Daten erfolgreich validiert!",
+    message: "login successful!",
   });
 }
-
-/*
-const express = require("express");
-const app = express();
-const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-  console.log(`Server läuft auf Port ${PORT}`);
-});
-
-
-
-
-export default function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ message: "Method Not Allowed" });
-  }
-
-  if (req.method === "POST") {
-    const { email, password } = req.body;
-
-    //return res.status(200).json({ message: email });
-
-    
-    // Überprüfen der E-Mail mit RegEx
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return res.status(400).json({ error: "Ungültige E-Mail" });
-    }
-
-    // Überprüfen des Passworts
-    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,10}$/;
-    if (!passwordRegex.test(password)) {
-      return res.status(400).json({ error: "Ungültiges Passwort" });
-    }
-
-  
-    
-    // Speichere bereits registrierte Benutzer
-    const registeredUsers = [
-      { email: "anne@web.de", password: "aaaaaa1" },
-      { email: "user@example.com", password: "password456"},
-    ];
-
-    // Überprüfe, ob E-Mail in der Liste der registrierten Benutzer vorhanden ist
-    const user = registeredUsers.find((user) => user.email === email);
-    if (!user) {
-      return res.status(401).json({ message: "Invalid email or password" });
-    }
-
-    // Überprüfe, ob das eingegebene Passwort mit dem gespeicherten Passwort übereinstimmt
-    if (user.password !== password) {
-      return res.status(401).json({ message: "Invalid email or password" });
-    }
-
-  
-
-    if(email && password){
-      return res.status(200).json({ message: "Login successful" });
-    }
-
-    
-  }
-}
-
-*/
-
-
-
-
-

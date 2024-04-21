@@ -107,7 +107,7 @@ const Cart = () => {
      setTimeout(() => {
        const logonWrapper = document.querySelector(`.${styles.logonWrapper}`);
        logonWrapper.scrollIntoView({ behavior: "smooth" });
-     }, 1000); //Scrollen nach 1 Sekunde
+     }, 1000); //Scrollen nach 2 Sekunden
 
      
     }

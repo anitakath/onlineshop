@@ -1,15 +1,116 @@
 
 .container{
     min-height: 75vh;
-    padding: 10px;
+    padding: 0;
 }
 
 
 .userInformation_div{
-    height: 60vh;
+    min-height: 90vh;
     background-color: var(--white_opaque);
     padding: 10px;
+    padding-top: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.title{
+    z-index: 1000;
+    color: var(--font-beige);
+}
+
+
+.login_link{
+    color: var(--font-hover-purple);
+    text-decoration: none;
+    margin: 0px 5px;
+}
+
+
+.background_video{
+    z-index: 100;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    object-fit: cover;
+}
+
+
+.flex{
+    display: flex;
+    /*border: 2px solid red;*/
+    z-index: 10000;
+    width: 80%;
+    justify-content: center;
+}
+
+
+.profile_table{
+    height: 100%;
+    margin: 0px 10px;
+}
+
+.profile_table li{
+    height: 60px;
+    position: relative;
+    left: -20px;
+    margin:15px 5px;
+    text-decoration: none;
+    display: flex;
+    background: rgba(255,255,255, 0.5);
+    align-items: center;
+    width: 400px;
+    z-index: 1000;
+    transition: 0.2s ease;
+    border-radius: 4px;
+}
+
+.profile_table li:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+
+
+.icon{
+    font-size: 1.2rem;
+    margin: 0 8px;
+    margin: 0px 10px;
+    width: 20px;
+    color: grey;
+}
+
+.profile_table li:hover .icon{
+    
+    color: var( --font-hover-purple);
+}
+
+.Link{
+    font-size: 1.2rem;
+    color: black;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.profile_table li:hover .Link {
+    color: var(--font-hover-purple-secondary);
+}
+
+
+.logout_btn{
+    border: 2px solid red;
+    width: 100px;
+    font-size: 1.1rem;
+    background: transparent;
+    border: none;
+    transition: 0.2s ease;
+}
+
+.logout_btn:hover{
+    color: var(--font-hover-purple-secondary);
 }

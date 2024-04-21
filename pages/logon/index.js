@@ -16,11 +16,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { setUsers_data, setLoading} from "../../store/usersSlice";
 
 import { useRouter } from "next/router";
+import { login } from "@/store/authSlice";
+
+
 
 const Logon = () =>{
 
  const dispatch = useDispatch();
+ const router = useRouter();
  const [users, setUsers] = useState([]);
+
 
  useEffect(() => {
    dispatch(setLoading(true));
@@ -87,14 +92,24 @@ const [formData, setFormData] = useState({
  }
  
 /* -------------------------------------------------------------- FIXEN!!!!!! */
- const submitHandler = async (e) =>{
+ 
+
+ const [loginErrorMessage, setLoginErrorMessage] = useState("")
+ const [loginSuccessMessage, setLoginSuccessMessage] = useState("")
+
+const submitHandler = async (e) =>{
    e.preventDefault();
 
    console.log('SUBMITCITOOOO')
    console.log(formData)
 
    if(formData){
+     if(formData.action === null){
+       console.log('no entries made')
+       setLoginErrorMessage("please fill in the input fields");
+     }
      if(formData.action === "login"){
+       console.log('trying to login ...')
        try {
          const response = await fetch("/api/login", {
            method: "POST",
@@ -110,20 +125,26 @@ const [formData, setFormData] = useState({
          const data = await response.json();
 
          if (response.ok) {
-           //dispatch(login());
+           dispatch(login());
            console.log(response);
            console.log(data);
+           setLoginSuccessMessage(data.message);
 
-           const router = useRouter();
+           setTimeout(() => {
+             // Navigiere zur Seite /profile nach 2 Sekunden
+             router.push("/profile");
+           }, 2000); // Zeit in Millisekunden (2 Sekunden = 2000ms)
            //router.push("/user-profile");
          } else {
-           console.log("Fehler beim Einloggen");
+           console.log(data.error);
+           setLoginErrorMessage(data.error)
          }
        } catch (error) {
          console.log("Fehler beim Einloggen", error);
        }
        
      }
+
 
 
      else if(formData.action === "register"){
@@ -148,6 +169,8 @@ const [formData, setFormData] = useState({
             setFormData={setFormData}
             onChangeHandler={onChangeHandler}
             submitHandler={submitHandler}
+            loginErrorMessage={loginErrorMessage}
+            loginSuccessMessage={loginSuccessMessage}
           />
           <Register
             formData={formData}

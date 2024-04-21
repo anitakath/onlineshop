@@ -14,47 +14,19 @@ import {incrementWishlist} from '@/store/wishlistSlice'
 import styles from "../../styles/Necklaces.module.css";
 import { decrement, increment } from "@/store/counterSlice";
 
-const Necklaces = () => {
+const Necklaces = ({necklacesData}) => {
 
-  const [necklacesData, setNecklacesData] = useState([]);
- 
-  
-  useEffect(()=>{
-    const fetchData = async() =>{
-      try {
-        const response = await fetch("/api/necklacesData");
-        const data = await response.json();
-        console.log(data);
-        setNecklacesData(data);
-      } catch (error) {
-        console.log(error);
-      }
-
-    }
-    
-    fetchData();
-  
-  
-  }, [])
   
 
-  console.log(necklacesData)
-
+  if (!necklacesData) {
+    return <p> loading...</p>;
+  }
 
 
   const dispatch = useDispatch()
   const cartItems = useSelector((state) => state.cart)
   console.log(cartItems)
 
-
-/*
-  const counter = () =>{
-    cartItems.map((item) => {
-     return item.quantity
-    })
-  }
- 
-*/
 
 
   const increment = (item) =>{
@@ -125,5 +97,30 @@ const Necklaces = () => {
     </Layout>
   );
 };
+
+
+export async function getServerSideProps() {
+  try {
+    const response = await fetch("http://localhost:3000/api/necklacesData");
+    const data = await response.json();
+
+
+    console.log(data)
+
+    return {
+      props: {
+        necklacesData: data,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      props: {
+        necklacesData: [],
+      },
+    };
+  }
+}
+
 
 export default Necklaces;

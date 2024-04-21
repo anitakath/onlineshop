@@ -37,7 +37,11 @@ const Header = () =>{
     )
 
     let userGreeting = isLoggedIn ? 'ANNE' : 'USER'
-    let loginPath = isLoggedIn ? '/user-profile' : '/logon'
+    let loginPath = isLoggedIn ? '/profile' : '/logon'
+
+
+    console.log(isLoggedIn)
+    console.log(loginPath)
 
 
     return (
