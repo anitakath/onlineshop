@@ -13,12 +13,30 @@
 
 
 .noProducts_title{
-    height: 30vh;
+    height: 50vh;
     display: flex;
     align-items: center;
     justify-content: center;
     letter-spacing: 1px;
     word-spacing: 1px;
+    position: relative;
+}
+
+.title{
+    z-index: 10000;
+    color: var(--font-beige)
+}
+
+
+.background_video{
+    z-index: 100;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0px;
+    object-fit: cover;
+    opacity: 0.8;
 }
 
 .wrapper{

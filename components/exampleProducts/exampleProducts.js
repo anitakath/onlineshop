@@ -190,7 +190,7 @@ const ExampleProducts = () =>{
     return (
       <div className={styles.wrapper}>
         <div className={styles.headerContainer}>
-          <h2>you might like these products...</h2>
+          <h2 className={styles.title}>you might like these products...</h2>
           <div className={styles.btn_div}>
             <button className={styles.close_btn}>
               <FontAwesomeIcon icon={faXmark} />

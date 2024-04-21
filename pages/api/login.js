@@ -11,27 +11,28 @@ app.listen(PORT, () => {
 
 export default function handler(req, res) {
 
+  
+  //Do not panic. These are DUMMIE users!
   const userData = [
     {
       id: "first_user",
       name: "Marlin",
       email: "marlin@web.de",
-      password: "marlin-liebt-snacks"
+      password: "marlin-liebt-snacks",
     },
     {
       id: "second_user",
       name: "Max",
       email: "max@web.de",
-      password: "max_verstappen"
+      password: "max_verstappen",
     },
     {
       id: "third_user",
       name: "Anne",
       email: "anne@web.de",
-      password: "anne123"
+      password: "anne123",
     },
   ];
-
 
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method Not Allowed" });
@@ -46,11 +47,9 @@ export default function handler(req, res) {
     );
 
     if (!user) {
-      return res
-        .status(401)
-        .json({
-          error: "Invalid login information. Please check your login details",
-        });
+      return res.status(401).json({
+        error: "Invalid login information. Please check your login details",
+      });
     }
 
     function escape(input) {

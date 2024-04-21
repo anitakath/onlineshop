@@ -97,52 +97,65 @@ const Wishlist = () =>{
 
     return (
       <Layout>
-        {wishlist && (
-          <div>
-            <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-              <div className={styless.infoContainer}>
-                <Image
-                  alt="Beschreibung des Bildes"
-                  width={500} // Setze hier die gewünschte Breite
-                  height={650} // Setze- hier die gewünschte Höhe
-                  priority={true}
-                  src={selectedItem.img}
-                />
-                <div className={styless.closeBtnContainer}>
-                  <button onClick={closeModal} className={styless.closeBtn}>
-                    X
-                  </button>
-                </div>
-                <div className={styles.addToCartContainer}>
-                  {!addedItem && (
-                    <button
-                      className={styless.addToCartBtn}
-                      onClick={addItemHandler}
-                    >
-                      ADD TO CART
+        <div>
+          <h1> HELLO </h1>
+
+          {wishlist && (
+            <div>
+              <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+                <div className={styless.infoContainer}>
+                  <Image
+                    alt="Beschreibung des Bildes"
+                    width={500} // Setze hier die gewünschte Breite
+                    height={650} // Setze- hier die gewünschte Höhe
+                    priority={true}
+                    src={selectedItem.img}
+                  />
+                  <div className={styless.closeBtnContainer}>
+                    <button onClick={closeModal} className={styless.closeBtn}>
+                      X
                     </button>
-                  )}
-                  {addedItem && (
-                    <button
-                      className={styless.productInfo}
-                      
-                    >
-                      product has been successfully added to your shopping cart.{" "}
-                      <br />
-                      <button onClick={navigateToCartHandler} className={styless.btn_toBasket}> click here to go to your shopping basket</button>
-                 
-                    </button>
-                  )}
+                  </div>
+                  <div className={styles.addToCartContainer}>
+                    {!addedItem && (
+                      <button
+                        className={styless.addToCartBtn}
+                        onClick={addItemHandler}
+                      >
+                        ADD TO CART
+                      </button>
+                    )}
+                    {addedItem && (
+                      <button className={styless.productInfo}>
+                        product has been successfully added to your shopping
+                        cart. <br />
+                        <button
+                          onClick={navigateToCartHandler}
+                          className={styless.btn_toBasket}
+                        >
+                          {" "}
+                          click here to go to your shopping basket
+                        </button>
+                      </button>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </Modal>
-          </div>
-        )}
+              </Modal>
+
+              <h1> bye </h1>
+            </div>
+          )}
+        </div>
 
         {isEmpty && (
-          <h3 className={styles.noProducts_title}>
-            no products on your wishlist
-          </h3>
+          <div className={styles.noProducts_title}>
+            <video autoPlay loop muted className={styles.background_video}>
+              <source src="/videos/girl_road.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+
+            <h2 className={styles.title}> no products on your wishlist</h2>
+          </div>
         )}
 
         {!isEmpty && (
