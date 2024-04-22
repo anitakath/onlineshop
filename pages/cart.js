@@ -23,13 +23,15 @@ import Image from "next/image";
 import Link from 'next/link';
 
 
-const Cart = () => {
+//FONT AWESOME
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+
+const Cart = () => {
 
   const router = useRouter()
   const [ isEmpty, setIsEmpty ] = useState(true)
   const [loginInfo, setLoginInfo] = useState(false)
-
 
   const dispatch = useDispatch()
 
@@ -105,8 +107,10 @@ const Cart = () => {
       setLoginInfo(true);
 
      setTimeout(() => {
-       const logonWrapper = document.querySelector(`.${styles.logonWrapper}`);
+       /*const logonWrapper = document.querySelector(`.${styles.logonWrapper}`);
        logonWrapper.scrollIntoView({ behavior: "smooth" });
+       */
+      router.push("/logon")
      }, 1000); //Scrollen nach 2 Sekunden
 
      
@@ -115,34 +119,7 @@ const Cart = () => {
   }
 
 
-useEffect(() => {
-  const checkoutField = document.querySelector("." + styles.checkoutField);
-  const logonWrapper = document.querySelector("." + styles.logonWrapper);
 
-  function handleScroll() {
-
-    if(checkoutField){
-
-      console.log(logonWrapper.offsetTop)
-      if (window.pageYOffset > (logonWrapper.offsetTop -420)) {
-        checkoutField.style.top = "120px";
-        checkoutField.style.position = "relative";
-        checkoutField.style.right = "0px"
-        checkoutField.style.justifyContent = "end";
-      } else {
-        checkoutField.style.position = "fixed";
-        checkoutField.style.right = "60px";
-      }
-    }
-    
-  }
-
-  window.addEventListener("scroll", handleScroll);
-
-  return () => {
-    window.removeEventListener("scroll", handleScroll);
-  };
-}, [isEmpty]);
 
 
 
@@ -151,7 +128,6 @@ useEffect(() => {
   return (
     <Layout>
       <div className={styles.cartFieldContainer}>
-
         <div className={styles.cartField}>
           <div className={styles.emptyCartInfoContainer}>
             {isLoggedIn && <p> ja {isLoggedIn} </p>}
@@ -180,7 +156,7 @@ useEffect(() => {
                 <div className={styles.cartItemInfo}>
                   <div className={styles.cartItemTitle}>
                     <p>{item.name}</p>
-                    <p> - {item.price} </p>
+                    <p> - {item.price} $ </p>
                   </div>
 
                   <div className={styles.cartItemTotal}>
@@ -210,33 +186,42 @@ useEffect(() => {
 
         {!isEmpty && (
           <div className={styles.checkoutField}>
-            <div className={styles.checkoutBtnContainer}>
+            <div className={styles.subfield}>
+              <h2> SUB TOTAL </h2>
               <p className={styles.totalPrice}> {fixedTotalPrice}$ </p>
+            </div>
+
+            <div className={styles.subfield}>
+              <h2> SHIPPING </h2>
+              <p> 5.50$ </p>
+            </div>
+
+            <div className={styles.checkoutBtnContainer}>
               <button className={styles.checkoutBtn} onClick={checkoutHandler}>
-                {loginInfo ? 'please log in first ' : 'checkout'}
+                {loginInfo ? "please log in first " : "checkout"}
               </button>
             </div>
-           
+
+            <div className={styles.subfield_flex}>
+              <h4> WE ACCEPT </h4>
+              <div className={styles.flex_div}>
+                <div className={styles.mini_div}>
+            
+                </div>
+                <div className={styles.mini_div}></div>
+                <div className={styles.mini_div}></div>
+                <div className={styles.mini_div}></div>
+                <div className={styles.mini_div}></div>
+                <div className={styles.mini_div}></div>
+              </div>
+            </div>
+
+            <p> Do you have a discount code? Add it in the next step. </p>
           </div>
         )}
-
-
-        
       </div>
 
-
-
-
-
-
-      {!isLoggedIn && (
-        <div className={styles.logonWrapper}>
-          <div className={styles.logonContainer}>
-            <Login />
-            <Register />
-          </div>
-        </div>
-      )}
+      
     </Layout>
   );
 };

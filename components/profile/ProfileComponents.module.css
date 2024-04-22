@@ -1,0 +1,56 @@
+
+
+.container{
+    width: 100vw;
+    min-height: 100vh;
+    z-index: 100000;
+    background-color: rgba(255,255,255, 0.4);
+    position: relative;
+    top: -50px;
+    padding: 20px;
+    padding-top: 80px;
+}
+
+
+.goBack_btn{
+    border: none;
+    background-color: rgba(255,255,255, 0.5);
+    position: absolute;
+    top: 15px;
+    left: 30px;
+    width: 150px;
+    height: 50px;
+    
+}
+
+.icon{
+    font-size: 1.2rem;
+}
+
+
+.title{
+    position: relative;
+    left: 15px;
+}
+
+
+
+
+@media screen and (max-width: 600px){
+    .container{
+        top: 20px;
+        width: 90vw;
+    }
+
+    .title{
+        left: -5px;
+    }
+
+    .goBack_btn{
+        width: 50px;
+        top: 5px;  
+        left: 5px; 
+    }
+
+   
+}

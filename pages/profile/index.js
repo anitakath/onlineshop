@@ -1,4 +1,4 @@
-
+import { useState } from "react";
 import Layout from "@/components/Layout";
 
 
@@ -24,6 +24,11 @@ import Link from "next/link";
 //REDUX
 import { useSelector } from "react-redux";
 
+
+//COMPONENTS
+import MyOrders from "@/components/profile/my-orders";
+
+
 const UserProfile = () =>{
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
@@ -31,6 +36,9 @@ const UserProfile = () =>{
   console.log(isLoggedIn)
 
 
+  const [userProfile, setUserProfile] = useState("Start")
+
+ 
 
     return (
       <Layout>
@@ -51,23 +59,22 @@ const UserProfile = () =>{
               </h1>
             )}
 
-            {isLoggedIn && (
+            {isLoggedIn && userProfile === "Start" && (
               <div className={styles.flex_div}>
-    
-
                 <div className={styles.flex}>
                   <ul
                     className={styles.profile_table}
                     style={{ borderBottom: "2px solid grey" }}
                   >
-                    <li>
+                    <li
+                      style={{ background: "var(--font-hover-purple" }}
+                      onClick={() => setUserProfile("MyOrders")}
+                    >
                       <FontAwesomeIcon
                         icon={faBagShopping}
                         className={styles.icon}
                       />
-                      <Link href="/" className={styles.Link}>
-                        My orders
-                      </Link>
+                      <p className={styles.Link}>My orders</p>
                     </li>
 
                     <li>
@@ -75,32 +82,22 @@ const UserProfile = () =>{
                         icon={faRotateLeft}
                         className={styles.icon}
                       />
-                      <Link href="/" className={styles.Link}>
-                        My returns
-                      </Link>
+                      <p className={styles.Link}>My returns</p>
                     </li>
 
                     <li>
                       <FontAwesomeIcon icon={faInfo} className={styles.icon} />
-                      <Link href="/" className={styles.Link}>
-                        {" "}
-                        Help & F.A.Q.
-                      </Link>
+                      <p className={styles.Link}> Help & F.A.Q.</p>
                     </li>
 
                     <li>
                       <FontAwesomeIcon icon={faCrown} className={styles.icon} />
-                      <Link href="/" className={styles.Link}>
-                        V.I.P
-                      </Link>
+                      <p className={styles.Link}>V.I.P</p>
                     </li>
 
                     <li>
                       <FontAwesomeIcon icon={faGift} className={styles.icon} />
-                      <Link href="/" className={styles.Link}>
-                        {" "}
-                        Gift cards & vouchers{" "}
-                      </Link>
+                      <p className={styles.Link}> Gift cards & vouchers </p>
                     </li>
                   </ul>
                   <ul className={styles.profile_table}>
@@ -109,26 +106,18 @@ const UserProfile = () =>{
                         icon={faAddressCard}
                         className={styles.icon}
                       />
-                      <Link href="/" className={styles.Link}>
-                        {" "}
-                        My details
-                      </Link>
+                      <p className={styles.Link}> My details</p>
                     </li>
                     <li>
                       <FontAwesomeIcon icon={faLock} className={styles.icon} />
-                      <Link href="/" className={styles.Link}>
-                        {" "}
-                        Change password{" "}
-                      </Link>
+                      <p className={styles.Link}>Change password</p>
                     </li>
                     <li>
                       <FontAwesomeIcon
                         icon={faCreditCard}
                         className={styles.icon}
                       />
-                      <Link href="/" className={styles.Link}>
-                        My payment methods
-                      </Link>
+                      <p className={styles.Link}>My payment methods</p>
                     </li>
 
                     <li>
@@ -136,22 +125,25 @@ const UserProfile = () =>{
                         icon={faPenToSquare}
                         className={styles.icon}
                       />
-                      <Link href="/" className={styles.Link}>
-                        Contact
-                      </Link>
+                      <p className={styles.Link}>Contact</p>
                     </li>
                     <li>
                       <FontAwesomeIcon
                         icon={faFaceFrownOpen}
                         className={styles.icon}
                       />
-                      <Link href="/" className={styles.Link}>
-                        Logout
-                      </Link>
+                      <p className={styles.Link}>Logout</p>
                     </li>
                   </ul>
                 </div>
               </div>
+            )}
+
+            {isLoggedIn && userProfile === "MyOrders" && (
+              <MyOrders
+                userProfile={userProfile}
+                setUserProfile={setUserProfile}
+              />
             )}
           </div>
         </div>

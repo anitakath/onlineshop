@@ -87,7 +87,7 @@
 }
 
 .link:hover{
-    color: darkgreen;
+    color: var(--font-hover-purple-secondary);
     cursor: pointer;
 }
 
@@ -99,7 +99,7 @@
 }
 .icon:hover{
     transition: 0.4s ease;
-    color: darkblue;
+    color: var(--font-hover-purple-secondary);
 }
 
 

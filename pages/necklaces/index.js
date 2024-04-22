@@ -14,7 +14,7 @@ import {incrementWishlist} from '@/store/wishlistSlice'
 import styles from "./Necklaces.module.css";
 import { decrement, increment } from "@/store/counterSlice";
 
-const Necklaces = ({necklacesData}) => {
+const Necklaces = ({necklacesData, info}) => {
 
   
 
@@ -22,6 +22,8 @@ const Necklaces = ({necklacesData}) => {
     return <p> loading...</p>;
   }
 
+  console.log(necklacesData)
+  console.log(info)
 
   const dispatch = useDispatch()
   const cartItems = useSelector((state) => state.cart)
@@ -110,6 +112,7 @@ export async function getServerSideProps() {
     return {
       props: {
         necklacesData: data,
+        info: "this ✨ comes from the serverside"
       },
     };
   } catch (error) {

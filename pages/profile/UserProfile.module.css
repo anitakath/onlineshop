@@ -43,9 +43,8 @@
 
 .flex{
     display: flex;
-    /*border: 2px solid red;*/
     z-index: 10000;
-    width: 80%;
+    width: 100%;
     justify-content: center;
 }
 
@@ -86,7 +85,7 @@
 }
 
 .profile_table li:hover .icon{
-    color: var( --font-hover-purple);
+    color:  rgba(0,0,0,0.6)
 }
 
 .Link{

@@ -98,7 +98,6 @@ const Wishlist = () =>{
     return (
       <Layout>
         <div>
-          <h1> HELLO </h1>
 
           {wishlist && (
             <div>
@@ -133,7 +132,6 @@ const Wishlist = () =>{
                           onClick={navigateToCartHandler}
                           className={styless.btn_toBasket}
                         >
-                          {" "}
                           click here to go to your shopping basket
                         </button>
                       </button>
@@ -142,7 +140,7 @@ const Wishlist = () =>{
                 </div>
               </Modal>
 
-              <h1> bye </h1>
+        
             </div>
           )}
         </div>
