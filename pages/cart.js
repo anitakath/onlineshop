@@ -1,4 +1,5 @@
 
+import { v4 as uuidv4 } from 'uuid'; // Importiere die UUID-Bibliothek
 
 //REACT
 import {useState, useEffect} from 'react'
@@ -25,6 +26,7 @@ import Link from 'next/link';
 
 //FONT AWESOME
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { supabase } from '@/services/supabaseClient';
 
 
 const Cart = () => {
@@ -99,10 +101,51 @@ const Cart = () => {
 
 
 
-  const checkoutHandler = (e) =>{
+
+  const [orderNum, setOrderNum] = useState(null)
+
+
+  const checkoutHandler = async (e) =>{
     e.preventDefault();
+    
     if(isLoggedIn === true){
-      router.push('/checkout')
+
+      const orderId = uuidv4()
+     
+
+       const cartItemsWithUniqueOrderId = cartItems.map((item) => ({
+         ...item,
+         id: uuidv4(), // Generiere eine eindeutige orderId für jedes Objekt
+         orderId: orderId
+        }));
+
+      console.log(cartItemsWithUniqueOrderId)
+
+      const { data, error } = await supabase
+        .from("SHOPNAME_myOrders")
+        .insert(cartItemsWithUniqueOrderId);
+
+       if (error) {
+         console.error(
+           "Failed to insert data into SHOPNAME_myOrders:",
+           error.message
+         );
+         return;
+       }
+
+       console.log("Data inserted into SHOPNAME_myOrders:", data);
+
+       if(!error){
+         setOrderNum(orderId);
+       }
+
+       console.log(orderNum)
+      
+      
+      //router.push('/checkout')
+
+
+
     } else if(isLoggedIn === false){
       setLoginInfo(true);
 
@@ -118,8 +161,19 @@ const Cart = () => {
     
   }
 
+  if(orderNum){
+    //router.push("/checkout");
+
+    router.push({
+      pathname: "/checkout",
+      query: { orderId: orderNum },
+    });
+
+  }
 
 
+
+  console.log(orderNum)
 
 
 
