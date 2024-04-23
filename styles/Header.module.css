@@ -19,6 +19,7 @@
     font-size: 2rem;
     margin: 20px;
     letter-spacing: 1px;
+    
 }
 
 .userContainer{
@@ -110,7 +111,7 @@
 
     .headerContainer{
         min-height: 15vh;
-   
+       
     }
 }
 
@@ -129,8 +130,8 @@
     }
 
 
-    .headerContainer h1{
-        font-size: 1.5rem;
+    .title{
+        font-size: 1.7rem;
         position: relative;
         top: 30px;
         margin: 8px 0px;
@@ -160,9 +161,16 @@
 }
 
 @media screen and (max-width: 400px){
+
+   
     .userContainer{
         top: 0px;
+    
     }
+
+      .title{
+          font-size: 1.4rem;
+      }
 
     .icon{
         font-size: 1.1rem;

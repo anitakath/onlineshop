@@ -192,7 +192,7 @@ const Cart = () => {
       <div className={styles.cartFieldContainer}>
         <div className={styles.cartField}>
           <div className={styles.emptyCartInfoContainer}>
-            {isLoggedIn && <p> ja {isLoggedIn} </p>}
+      
 
             {isEmpty && (
               <h3 className={styles.emptyCartInfo}>

@@ -11,6 +11,9 @@
     padding-top: 80px;
     display: flex;
     flex-direction: column-reverse;
+    margin-top: 20px;
+    margin-bottom: 40px ;
+ 
 }
 
 
@@ -38,7 +41,8 @@
 .order_div{
     border-top: 1px solid black;
     border-bottom: 1px solid black;
-    margin: 10px 0px;
+    margin: 20px 0px;
+    
 }
 
 .order_title_div{

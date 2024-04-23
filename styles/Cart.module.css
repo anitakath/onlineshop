@@ -8,6 +8,7 @@
     overflow: auto;
     overflow: hidden;
     z-index: 10000;
+    min-height: 60vh;
 }
 
 
@@ -34,7 +35,7 @@
 }
 
 .emptyCartInfoContainer{
-    width: 100%;
+    width: 90%;
 }
 
 .emptyCartInfo{
