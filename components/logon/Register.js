@@ -144,7 +144,7 @@ const Register = (props) =>{
       
     };
 
-    console.log(error)
+   
 
     let btn_text = registrationLoading ? 'LOADING' : 'REGISTER'
 

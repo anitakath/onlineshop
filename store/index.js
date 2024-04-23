@@ -7,6 +7,7 @@ import wishlistSlice from "./wishlistSlice";
 import productSlice from "./productSlice";
 import usersSlice from "./usersSlice";
 import persistedReducer from "./persistConfig";
+import currentUserSlice from "./currentUserSlice";
 
 /*
 
@@ -31,6 +32,7 @@ const store = configureStore({
     wishlist: wishlistSlice,
     products: productSlice, // products && randomProducts
     users: usersSlice,
+    currentUser: currentUserSlice,
   },
 });
 

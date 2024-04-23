@@ -90,73 +90,6 @@ const [formData, setFormData] = useState({
      console.log("no type found");
    }
  }
- 
-/* -------------------------------------------------------------- FIXEN!!!!!! */
- 
-
- const [loginErrorMessage, setLoginErrorMessage] = useState("")
- const [loginSuccessMessage, setLoginSuccessMessage] = useState("")
-
-const submitHandler = async (e) =>{
-   e.preventDefault();
-
-   console.log('SUBMITCITOOOO')
-   console.log(formData)
-
-   if(formData){
-     if(formData.action === null){
-       console.log('no entries made')
-       setLoginErrorMessage("please fill in the input fields");
-     }
-     if(formData.action === "login"){
-       console.log('trying to login ...')
-       try {
-         const response = await fetch("/api/login", {
-           method: "POST",
-           headers: {
-             "Content-Type": "application/json",
-           },
-           body: JSON.stringify({
-             email: formData.email,
-             password: formData.password,
-           }),
-         });
-
-         const data = await response.json();
-
-         if (response.ok) {
-           dispatch(login());
-           console.log(response);
-           console.log(data);
-           setLoginSuccessMessage(data.message);
-
-           setTimeout(() => {
-             // Navigiere zur Seite /profile nach 2 Sekunden
-             router.push("/profile");
-           }, 2000); // Zeit in Millisekunden (2 Sekunden = 2000ms)
-           //router.push("/user-profile");
-         } else {
-           console.log(data.error);
-           setLoginErrorMessage(data.error)
-         }
-       } catch (error) {
-         console.log("Fehler beim Einloggen", error);
-       }
-       
-     }
-
-
-
-     else if(formData.action === "register"){
-       console.log(formData)
-     }
-  
-   }
-
-   
-
- }
-
 
 
 
@@ -174,9 +107,8 @@ const submitHandler = async (e) =>{
               formData={formData}
               setFormData={setFormData}
               onChangeHandler={onChangeHandler}
-              submitHandler={submitHandler}
-              loginErrorMessage={loginErrorMessage}
-              loginSuccessMessage={loginSuccessMessage}
+            
+           
             />
           </div>
 
@@ -190,7 +122,7 @@ const submitHandler = async (e) =>{
               formData={formData}
               setFormData={setFormData}
               onChangeHandler={onChangeHandler}
-              submitHandler={submitHandler}
+       
             />
           </div>
 
@@ -207,7 +139,7 @@ const submitHandler = async (e) =>{
               formData={formData}
               setFormData={setFormData}
               onChangeHandler={onChangeHandler}
-              submitHandler={submitHandler}
+  
             />
           </div>
         </div>

@@ -27,6 +27,7 @@ import Link from 'next/link';
 //FONT AWESOME
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { supabase } from '@/services/supabaseClient';
+import { current } from '@reduxjs/toolkit';
 
 
 const Cart = () => {
@@ -39,6 +40,18 @@ const Cart = () => {
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
   console.log(isLoggedIn)
+
+  const currentUserObject = useSelector((state) => state.currentUser.user);
+
+  let currentUser = "";
+
+  if (currentUserObject != null) {
+    currentUser = currentUserObject.name;
+  }
+
+  console.log(currentUserObject)
+  console.log(currentUser)
+
 
 
   const cartItems = useSelector((state) => state.cart);
@@ -108,55 +121,50 @@ const Cart = () => {
   const checkoutHandler = async (e) =>{
     e.preventDefault();
     
-    if(isLoggedIn === true){
+    if (currentUserObject != null) {
+      const orderId = uuidv4();
 
-      const orderId = uuidv4()
-     
+      console.log(currentUserObject.email)
 
-       const cartItemsWithUniqueOrderId = cartItems.map((item) => ({
-         ...item,
-         id: uuidv4(), // Generiere eine eindeutige orderId für jedes Objekt
-         orderId: orderId
-        }));
+      const cartItemsWithUniqueOrderId = cartItems.map((item) => ({
+        ...item,
+        id: uuidv4(), // Generiere eine eindeutige orderId für jedes Objekt
+        orderId: orderId,
+        email: currentUserObject.email,
+      }));
 
-      console.log(cartItemsWithUniqueOrderId)
+      console.log(cartItemsWithUniqueOrderId);
 
       const { data, error } = await supabase
         .from("SHOPNAME_myOrders")
         .insert(cartItemsWithUniqueOrderId);
 
-       if (error) {
-         console.error(
-           "Failed to insert data into SHOPNAME_myOrders:",
-           error.message
-         );
-         return;
-       }
+      if (error) {
+        console.error(
+          "Failed to insert data into SHOPNAME_myOrders:",
+          error.message
+        );
+        return;
+      }
 
-       console.log("Data inserted into SHOPNAME_myOrders:", data);
+      console.log("Data inserted into SHOPNAME_myOrders:", data);
 
-       if(!error){
-         setOrderNum(orderId);
-       }
+      if (!error) {
+        setOrderNum(orderId);
+      }
 
-       console.log(orderNum)
-      
-      
+      console.log(orderNum);
+
       //router.push('/checkout')
-
-
-
-    } else if(isLoggedIn === false){
+    } else if (isLoggedIn === false) {
       setLoginInfo(true);
 
-     setTimeout(() => {
-       /*const logonWrapper = document.querySelector(`.${styles.logonWrapper}`);
+      setTimeout(() => {
+        /*const logonWrapper = document.querySelector(`.${styles.logonWrapper}`);
        logonWrapper.scrollIntoView({ behavior: "smooth" });
        */
-      router.push("/logon")
-     }, 1000); //Scrollen nach 2 Sekunden
-
-     
+        router.push("/logon");
+      }, 1000); //Scrollen nach 2 Sekunden
     }
     
   }

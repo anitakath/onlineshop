@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import Link from 'next/link'
 
 
@@ -18,9 +18,19 @@ import { faUser} from "@fortawesome/free-solid-svg-icons";
 
 //STORE
 
+import { supabase } from '@/services/supabaseClient';
 
 
 const Header = () =>{
+
+
+  const currentUserObject = useSelector((state) => state.currentUser.user);
+
+  let currentUser = ""
+
+   if (currentUserObject != null) {
+     currentUser = currentUserObject.name;
+   }
 
 
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
@@ -36,21 +46,39 @@ const Header = () =>{
       initialValue
     )
 
-    let userGreeting = isLoggedIn ? 'ANNE' : 'USER'
-    let loginPath = isLoggedIn ? '/profile' : '/logon'
 
 
-    console.log(isLoggedIn)
-    console.log(loginPath)
+    
+    let loginPath = currentUserObject != null ? '/profile' : '/logon'
+
+
+    /*
+    useEffect(()=>{
+
+
+      const fetchUser = async() =>{
+
+        const { data, error } = await supabase
+          .from("SHOPNAME_users")
+          .select("*");
+
+
+          console.log(data)
+      }
+
+      fetchUser()
+
+    }, [isLoggedIn])*/
+
 
 
     return (
       <div className={styles.headerContainer}>
-        <h1> SHOPNAME </h1>
+        <Link href="/" className={styles.title}> SHOPNAME </Link>
 
-        <p className={styles.user_p}> HELLO 
-          <Link href="/profile" className={styles.link}>{userGreeting}</Link> 
-          ❤️ 
+        <p className={styles.user_p}>  hello {!currentUser && <span> you lovely person </span>}
+          {currentUser && <Link href="/profile" className={styles.link}>{currentUser}  </Link> }
+          ❤️
         </p>
 
         <div className={styles.userContainer}>

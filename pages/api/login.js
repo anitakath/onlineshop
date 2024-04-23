@@ -39,7 +39,7 @@ export default async function handler(req, res) {
       return res.status(401).json({
         error: "Invalid login information. Please check your login details or make a registration",
       });
-    }
+    } 
 
 
     function escape(input) {
@@ -77,5 +77,6 @@ export default async function handler(req, res) {
   return res.status(200).json({
     message: "login successful!",
     data: users,
+
   });
 }

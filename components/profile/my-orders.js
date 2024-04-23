@@ -10,6 +10,9 @@ import styles from './ProfileComponents.module.css'
 import Image from 'next/image';
 
 
+import { useSelector } from 'react-redux';
+
+
 const formatDate = (dateString) => {
   const date = new Date(dateString);
   const formattedDate = date.toLocaleDateString("de-DE", {
@@ -27,12 +30,25 @@ const MyOrders = ({ userProfile, setUserProfile }) => {
   const [orders, setOrders] = useState([]);
 
 
+
+  const currentUserObject = useSelector((state) => state.currentUser.user);
+
+  let currentUser = "";
+
+  if (currentUserObject != null) {
+    currentUser = currentUserObject.name;
+  }
+
+
+
+
   useEffect(() => {
     const fetchOrders = async () => {
 
       const { data, error } = await supabase
         .from("SHOPNAME_myOrders")
         .select("*")
+        .eq("email", currentUserObject.email)
         .order("orderId, created_at");
 
       if (error) {
@@ -64,15 +80,7 @@ const MyOrders = ({ userProfile, setUserProfile }) => {
   }, []);
 
 
-  console.log(orders)
-
-
-
-  console.log(userProfile);
-
-  const closeComponentHandler = () => {
-   
-  };
+ 
 
 
   return (

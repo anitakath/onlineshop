@@ -2,7 +2,7 @@
 
 .container{
     width: 100vw;
-    min-height: 100vh;
+    min-height: 10vh;
     z-index: 100000;
     background-color: rgba(255,255,255, 0.4);
     position: relative;
