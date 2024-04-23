@@ -18,9 +18,10 @@ const Register = (props) =>{
 
 
     const onChangeHandler = props.onChangeHandler;
-    const submitHandler = props.submitHandler;
+    //const submitHandler = props.submitHandler;
 
 
+    /*
      const nameChangeHandler = (e) => {
        setName(e.target.value);
        onChangeHandler({
@@ -57,6 +58,96 @@ const Register = (props) =>{
       });
     };
 
+    */
+
+    const nameChangeHandler = (e) => {
+      setName(e.target.value);
+    };
+
+    const emailChangeHandler = (e) => {
+      setEmail(e.target.value);
+    };
+
+    const passwordChangeHandler = (e) => {
+      setPassword(e.target.value);
+    };
+
+    const passwordRepChangeHandler = (e) => {
+      setPasswordRep(e.target.value);
+    };
+
+
+    const [error, setError] = useState()
+    const [success, setSuccess] = useState()
+    const [registrationLoading, setRegistrationLoading] = useState(false)
+
+
+
+
+    const submitHandler = async (e) => {
+      e.preventDefault();
+
+
+
+      const userData = {
+        name: name,
+        email: email,
+        password: password,
+        password_rep: passwordRep,
+      };
+
+      setRegistrationLoading(true)
+
+
+      console.log(userData)
+      
+      try {
+        const response = await fetch("/api/registration", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        });
+
+
+
+        //const data = await response.json();
+
+        //console.log(data.message)
+
+        if (response.ok) {
+          // Registrierung erfolgreich
+          const data = await response.json();
+          console.log(data.message);
+          setRegistrationLoading(false)
+          setError('')
+          setSuccess(data.message)
+        } else if (response.status === 409) {
+          // Benutzer existiert bereits
+          const errorData = await response.json();
+          setRegistrationLoading(false);
+          setSuccess('')
+          setError(errorData.error);
+        } else {
+          // Andere Fehler behandeln
+          const errorData = await response.json();
+          setSuccess('')
+          setRegistrationLoading(false);
+          setError(errorData.error);
+        }
+
+        // Handle successful registration response here
+      } catch (error) {
+        console.error(error);
+      }
+      
+    };
+
+    console.log(error)
+
+    let btn_text = registrationLoading ? 'LOADING' : 'REGISTER'
+
      
 
 
@@ -64,6 +155,9 @@ const Register = (props) =>{
       <div className={styles.registerContainer}>
         <form className={styles.loginForm} onSubmit={submitHandler}>
           <h1 className={styles.title}> REGISTRATION </h1>
+
+          {error && <p className={styles.error_msg}>{error} </p>}
+          {success && <p className={styles.success_msg}> {success} </p>}
           <input
             type="type"
             placeholder="NAME"
@@ -95,7 +189,7 @@ const Register = (props) =>{
             value={passwordRep}
           ></input>
 
-          <button type="submit"> REGISTER </button>
+          <button type="submit"> {btn_text} </button>
         </form>
       </div>
     );

@@ -1,5 +1,5 @@
 
-
+import { supabase } from "@/services/supabaseClient";
 
 const express = require("express");
 const app = express();
@@ -9,48 +9,38 @@ app.listen(PORT, () => {
   console.log(`Server läuft auf Port ${PORT}`);
 });
 
-export default function handler(req, res) {
 
-  
-  //Do not panic. These are DUMMIE users!
-  const userData = [
-    {
-      id: "first_user",
-      name: "Marlin",
-      email: "marlin@web.de",
-      password: "marlin-liebt-snacks",
-    },
-    {
-      id: "second_user",
-      name: "Max",
-      email: "max@web.de",
-      password: "max_verstappen",
-    },
-    {
-      id: "third_user",
-      name: "Anne",
-      email: "anne@web.de",
-      password: "anne123",
-    },
-  ];
+
+
+export default async function handler(req, res) {
+
+  //fetch existing user data from supabase
+
+  const { data: users, error } = await supabase.from('SHOPNAME_users').select('*');
+
+
 
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method Not Allowed" });
   }
 
+  // post login data from frontend to backend
+
   if (req.method === "POST") {
     const { action, email, password } = req.body;
 
-    // Überprüfe die Eingaben des Benutzers mit den Daten in userData
-    const user = userData.find(
+    // check, if frontend data matches to one of the users @supabase
+    const user = users.find(
       (user) => user.email === email && user.password === password
     );
 
+    //if theres no match send an error telling the user to check their inputs || to make a  registration
     if (!user) {
       return res.status(401).json({
-        error: "Invalid login information. Please check your login details",
+        error: "Invalid login information. Please check your login details or make a registration",
       });
     }
+
 
     function escape(input) {
       // Ersetze alle < und > Zeichen durch ihre HTML-Entities
@@ -86,5 +76,6 @@ export default function handler(req, res) {
 
   return res.status(200).json({
     message: "login successful!",
+    data: users,
   });
 }

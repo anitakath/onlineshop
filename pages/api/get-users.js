@@ -2,7 +2,7 @@ import { supabase } from "@/services/supabaseClient";
 
 export default async (req, res) => {
   try {
-    const { data, error } = await supabase.from("shopname").select("*");
+    const { data, error } = await supabase.from("SHOPNAME_users").select("*");
 
     if (error) {
       console.error("Error fetching users:", error.message);
