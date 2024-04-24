@@ -19,7 +19,7 @@ import styles from './exampleProducts.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faSpinner, faCartPlus, faHeart,faXmark} from '@fortawesome/free-solid-svg-icons'
 
-const ExampleProducts = () =>{
+const ExampleProducts = ({productsData}) =>{
 
     const [products, setProducts] = useState([])
     const [randomProducts, setRandomProducts] = useState([]);
@@ -29,6 +29,7 @@ const ExampleProducts = () =>{
     const [newProduct, setNewProduct] = useState('')
 
 
+    console.log(productsData)
 
     useEffect(()=>{
 
@@ -244,3 +245,4 @@ const ExampleProducts = () =>{
 }
 
 export default ExampleProducts;
+

@@ -37,12 +37,57 @@
     left: 2px;
     cursor: pointer;
     font-size: 1.5rem;
+    border-radius: 50%;
+    background: rgba(255,255,255, 0.4);
+    transition: 0.4s ease;
+    
 }
 
-.wishlist:hover{
-    transition: 0.3s ease;
-    font-size: 1.6rem;
+.wishlist.clicked {
+    position: relative;
 }
+
+.wishlist.clicked::after {
+    content: '❤️';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: slideHeart 1s forwards;
+}
+
+@keyframes slideHeart {
+    0% { transform: translate(-50%, -50%); }
+    100% { transform: translateX(100%); opacity: 0; }
+}
+
+
+/*
+
+.heartIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    animation: slideHeart 0.5s forwards;
+}
+
+@keyframes slideHeart {
+    0% { transform: translate(-50%, -50%); }
+    100% { transform: translateX(100%); }
+}
+*/
+/*
+.clicked{
+    background: var(--font-hover-purple);
+}
+
+
+.wishlist:active{
+    background: var(--font-hover-purple);
+    
+}*/
 
 .itemInfoCounter{
     display: flex;

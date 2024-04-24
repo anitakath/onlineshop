@@ -16,7 +16,8 @@ import { decrement, increment } from "@/store/counterSlice";
 
 const Necklaces = ({necklacesData, info}) => {
 
-  
+  const [clickedItemId, setClickedItemId] = useState(null);
+
 
   if (!necklacesData) {
     return <p> loading...</p>;
@@ -50,6 +51,11 @@ const Necklaces = ({necklacesData, info}) => {
     console.log('adding')
     console.log(item)
     dispatch(incrementWishlist(item));
+
+    setClickedItemId(item.product_id);
+    
+
+    
   }
 
   return (
@@ -79,9 +85,12 @@ const Necklaces = ({necklacesData, info}) => {
                 <div className={styles.itemInfo}>
                   <div className={styles.wishlistContainer}>
                     <button
-                      className={styles.wishlist}
+                      className={`${styles.wishlist} ${clickedItemId === necklace.id ? styles.clicked : ''}`}
                       onClick={() => addToWishlistHandler(necklace)}
+                   
                     > ❤️ </button>
+
+
                   </div>
                   <div className={styles.itemInfoCounter}>
                     <button onClick={() => decrement(necklace)}> - </button>
@@ -101,7 +110,7 @@ const Necklaces = ({necklacesData, info}) => {
 };
 
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   try {
     const response = await fetch("http://localhost:3000/api/necklacesData");
     const data = await response.json();
@@ -112,7 +121,7 @@ export async function getServerSideProps() {
     return {
       props: {
         necklacesData: data,
-        info: "this ✨ comes from the serverside"
+        info: "this ✨ comes via getStaticProps "
       },
     };
   } catch (error) {

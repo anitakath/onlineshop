@@ -93,12 +93,26 @@ const Wishlist = () =>{
       router.push("/cart"); 
     };
 
-   ;
+   const [itemDeleted, setItemDeleted] = useState(false)
 
+    const deleteItemFromWhishlistHandler = (e) =>{
+
+      e.preventDefault()
+      dispatch(decrementWishlist(selectedItem));
+      /*setItemDeleted(true)
+      console.log('deleting from wishlist...')
+
+      setTimeout(()=>{
+        setItemDeleted(null)
+      }, 3000)*/
+    }
+
+
+
+    console.log(selectedItem)
     return (
       <Layout>
         <div>
-
           {wishlist && (
             <div>
               <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
@@ -117,13 +131,25 @@ const Wishlist = () =>{
                   </div>
                   <div className={styles.addToCartContainer}>
                     {!addedItem && (
-                      <button
-                        className={styless.addToCartBtn}
-                        onClick={addItemHandler}
-                      >
-                        ADD TO CART
-                      </button>
+                      <div className={styless.btn_div}>
+                        <button
+                          className={styless.addToCartBtn}
+                          onClick={addItemHandler}
+                        >
+                          ADD TO CART
+                        </button>
+                        <button
+                          className={styless.deleteFromWishlistBtn}
+                          onClick={deleteItemFromWhishlistHandler}
+                        >
+                          delete from wishlist
+                        </button>
+                        
+                      </div>
                     )}
+
+
+
                     {addedItem && (
                       <button className={styless.productInfo}>
                         product has been successfully added to your shopping
@@ -139,8 +165,6 @@ const Wishlist = () =>{
                   </div>
                 </div>
               </Modal>
-
-        
             </div>
           )}
         </div>

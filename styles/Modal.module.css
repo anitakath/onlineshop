@@ -89,30 +89,57 @@
     justify-content: center;
     position: absolute;
     bottom: 0;
-    border: 20px solid red;
+    
 }
 
+
+.btn_div{
+    position: relative;
+    display: flex;
+    width: 500px;
+}
 .addToCartBtn, .productInfo{
     border: none;
-    width: 500px;
+    width: 70%;
     background-color: rgba(0,0,0, 0.5);
     height: 70px;
     cursor: pointer;
     color: white;
     font-size: 1.3rem;
+    color: var(--font-hover-purple);
+    border-right: 2px solid darkgrey;
+    
+}
+
+.deleteFromWishlistBtn{
+    background-color: rgba(0,0,0, 0.5);
+    cursor: pointer;
+    width: 30%;
+    height: 70px;
+    position: relative;
+    top: 0px;
+    border: none;
+    transition: 0.2s ease;
+    font-size: 0.9rem;
+    padding: 0px;
+}
+
+.deleteFromWishlistBtn:hover{
+    color: var(--font-hover-purple);
 }
 
 .productInfo{
     transition:0.2s ease;
     font-size: 1rem;
-    color: beige;
+    color: white;
     margin: 0;
     padding: 0;
+    width: 500px;
 }
 
 
 .btn_toBasket{
-    color: purple;
+    color:var(--font-hover-purple);
     text-decoration: none;
     margin: 10px 0px;
     background-color: transparent;
@@ -125,6 +152,6 @@
 
 .addToCartBtn:hover{
     transition: 0.3s ease;
-    color: lightblue;
+    color: white;
 }
 
