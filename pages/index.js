@@ -4,14 +4,15 @@ import styles from '@/styles/Home.module.css'
 
 import { useState, useEffect } from 'react';
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, useRef } from "react-redux";
 
 import Layout from '@/components/Layout';
 
 
 //ANIMATIONS
 import { CSSTransition } from "react-transition-group";
-
+import { Transition } from 'react-transition-group';
+import { gsap } from "gsap";
 
 //COMPONENTS
 
@@ -25,6 +26,7 @@ import NewsLetter from '@/components/call_to_actions/NewsLetter';
 import useSWR from 'swr'
 
 const inter = Inter({ subsets: ['latin'] })
+
 
 export default function Home() {
 
@@ -40,6 +42,8 @@ export default function Home() {
   }
 
   let btnText = mobileNavIsOpen ? 'close' : 'open'
+
+
  
 
   return (
@@ -60,22 +64,65 @@ export default function Home() {
           </video>
         </div>
 
-        <CSSTransition
-          in={mobileNavIsOpen}
-          timeout={300}
-          classNames={{
-            enter: styles.slideEnter,
-            enterActive: styles.slideEnterActive,
-            exit: styles.slideExit,
-            exitActive: styles.slideExitActive,
-          }}
+        {/*
+        {mobileNavIsOpen && (
+          <MobileNavigation mobileNavIsOpen={mobileNavIsOpen} />
+        )}
+        */}
+
+        <Transition
+          timeout={2000}
+          mountOnEnter
           unmountOnExit
+          in={mobileNavIsOpen}
+          onEntering={(node) => {
+            gsap.fromTo(
+              node,
+              0.5,
+              {
+                y: -100,
+                autoAlpha: mobileNavIsOpen ? 0 : 1,
+              },
+              {
+                y: 0,
+              }
+            );
+          }}
+          addEndListener={(node, done) => {
+            gsap.to(node, 0.5, {
+              y: mobileNavIsOpen ? 0 : -100,
+              autoAlpha: mobileNavIsOpen ? 1 : 0,
+              onComplete: done,
+            });
+          }}
         >
           <MobileNavigation mobileNavIsOpen={mobileNavIsOpen} />
-        </CSSTransition>
+        </Transition>
 
-        {/*{mobileNavIsOpen && <MobileNavigation />}*/}
-        <MobileSlider />
+        <Transition
+          timeout={2000}
+          mountOnEnter
+          unmountOnExit
+          in={mobileNavIsOpen}
+          onEntering={(node) => {
+            gsap.fromTo(
+              node,
+              { y: 0 },
+              { duration: 1, y: mobileNavIsOpen ? 0 :0 }
+            );
+          }}
+          addEndListener={(node, done) => {
+            gsap.to(node, {
+              duration: 0.5,
+              y: mobileNavIsOpen ? 0 : -100,
+              onComplete: done,
+            });
+          }}
+        >
+          <MobileSlider />
+        </Transition>
+
+        { !mobileNavIsOpen && <MobileSlider />}
 
         <NewsLetter />
       </Layout>
