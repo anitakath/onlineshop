@@ -5,6 +5,7 @@
     justify-content: space-between;
     position: relative;
     width: 90vw;
+
 }
 
 .btn_div{
@@ -43,6 +44,7 @@
     color: var(--font-hover-purple-secondary);
     position: relative;
     left: 5px;
+
 }
 
 .productsContainer{
@@ -58,6 +60,7 @@
     height: 200px;
     margin: 0px 10px;
     border: 2px solid transparent;
+    
     
 }
 
@@ -230,4 +233,15 @@
    
     
     
+}
+
+@media screen and (max-width: 300px){
+
+
+
+
+    .productContainer{
+        width: 100px;
+        height: 100px;
+    }
 }

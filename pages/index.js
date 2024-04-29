@@ -9,6 +9,9 @@ import { useSelector, useDispatch } from "react-redux";
 import Layout from '@/components/Layout';
 
 
+//ANIMATIONS
+import { CSSTransition } from "react-transition-group";
+
 
 //COMPONENTS
 
@@ -57,7 +60,21 @@ export default function Home() {
           </video>
         </div>
 
-        {mobileNavIsOpen && <MobileNavigation />}
+        <CSSTransition
+          in={mobileNavIsOpen}
+          timeout={300}
+          classNames={{
+            enter: styles.slideEnter,
+            enterActive: styles.slideEnterActive,
+            exit: styles.slideExit,
+            exitActive: styles.slideExitActive,
+          }}
+          unmountOnExit
+        >
+          <MobileNavigation mobileNavIsOpen={mobileNavIsOpen} />
+        </CSSTransition>
+
+        {/*{mobileNavIsOpen && <MobileNavigation />}*/}
         <MobileSlider />
 
         <NewsLetter />

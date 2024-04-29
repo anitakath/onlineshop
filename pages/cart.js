@@ -49,9 +49,6 @@ const Cart = () => {
     currentUser = currentUserObject.name;
   }
 
-  console.log(currentUserObject)
-  console.log(currentUser)
-
 
 
   const cartItems = useSelector((state) => state.cart);
@@ -164,7 +161,7 @@ const Cart = () => {
        logonWrapper.scrollIntoView({ behavior: "smooth" });
        */
         router.push("/logon");
-      }, 1000); //Scrollen nach 2 Sekunden
+      }, 2000); //Scrollen nach 2 Sekunden
     }
     
   }
@@ -192,8 +189,6 @@ const Cart = () => {
       <div className={styles.cartFieldContainer}>
         <div className={styles.cartField}>
           <div className={styles.emptyCartInfoContainer}>
-      
-
             {isEmpty && (
               <h3 className={styles.emptyCartInfo}>
                 {userName} SHOPPING CART IS EMPTY 😔
@@ -217,8 +212,8 @@ const Cart = () => {
 
                 <div className={styles.cartItemInfo}>
                   <div className={styles.cartItemTitle}>
-                    <p>{item.name}</p>
-                    <p> - {item.price} $ </p>
+                    <p className={styles.item_name}>{item.name}</p>
+                    <p className={styles.item_name}> - {item.price} $ </p>
                   </div>
 
                   <div className={styles.cartItemTotal}>
@@ -249,13 +244,13 @@ const Cart = () => {
         {!isEmpty && (
           <div className={styles.checkoutField}>
             <div className={styles.subfield}>
-              <h2> SUB TOTAL </h2>
+              <h2 className={styles.title}> SUB TOTAL </h2>
               <p className={styles.totalPrice}> {fixedTotalPrice}$ </p>
             </div>
 
             <div className={styles.subfield}>
-              <h2> SHIPPING </h2>
-              <p> 5.50$ </p>
+              <h2 className={styles.title}> SHIPPING </h2>
+              <p className={styles.totalPrice}> 5.50$ </p>
             </div>
 
             <div className={styles.checkoutBtnContainer}>
@@ -267,9 +262,7 @@ const Cart = () => {
             <div className={styles.subfield_flex}>
               <h4> WE ACCEPT </h4>
               <div className={styles.flex_div}>
-                <div className={styles.mini_div}>
-            
-                </div>
+                <div className={styles.mini_div}></div>
                 <div className={styles.mini_div}></div>
                 <div className={styles.mini_div}></div>
                 <div className={styles.mini_div}></div>
@@ -278,12 +271,10 @@ const Cart = () => {
               </div>
             </div>
 
-            <p> Do you have a discount code? Add it in the next step. </p>
+            <p className={styles.subtitle}> Do you have a discount code? Add it in the next step. </p>
           </div>
         )}
       </div>
-
-      
     </Layout>
   );
 };

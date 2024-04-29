@@ -12,6 +12,9 @@ import Image from 'next/image';
 
 import { useSelector } from 'react-redux';
 
+//FONT AWESOME
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -28,6 +31,7 @@ const formatDate = (dateString) => {
 const MyOrders = ({ userProfile, setUserProfile }) => {
  
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(false)
 
 
 
@@ -45,6 +49,8 @@ const MyOrders = ({ userProfile, setUserProfile }) => {
   useEffect(() => {
     const fetchOrders = async () => {
 
+      setLoading(true)
+
       const { data, error } = await supabase
         .from("SHOPNAME_myOrders")
         .select("*")
@@ -55,6 +61,9 @@ const MyOrders = ({ userProfile, setUserProfile }) => {
         console.error("Error fetching orders:", error.message);
       } else {
         // Gruppiere die Bestellungen nach orderId und created_at
+
+
+        setLoading(false)
         const groupedOrders = data.reduce((acc, order) => {
           const key = `${order.orderId}-${order.created_at}`;
           if (!acc[key]) {
@@ -111,6 +120,13 @@ const MyOrders = ({ userProfile, setUserProfile }) => {
         </div>
       ))}
 
+      {loading && (
+        <div className={styles.loading_spinner_div}>
+          <FontAwesomeIcon icon={faSpinner} className={styles.spinner_icon} spin />
+          <p> loading your orders ... </p>
+        
+        </div>
+      )}
       <h1 className={styles.title}> My Orders </h1>
     </div>
   );

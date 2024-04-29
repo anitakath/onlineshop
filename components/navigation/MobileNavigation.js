@@ -2,7 +2,9 @@ import Link from "next/link"
 
 import styles from './MobileNavigation.module.css'
 
-const MobileNavigation = () =>{
+const MobileNavigation = (props) =>{
+
+  const mobileNavIsOpen = props.mobileNavIsOpen
 
 
     return (
@@ -12,7 +14,6 @@ const MobileNavigation = () =>{
           Your browser does not support the video tag.
         </video>
 
-        
         <div className={styles.gradient_overlay}></div>
 
         <ul className={styles.nav_table}>

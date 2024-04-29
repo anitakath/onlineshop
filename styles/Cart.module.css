@@ -21,6 +21,7 @@
     align-items: center;
     background-color: #E8E6E9;
     min-height: 25vh;
+    
 }
 
 .cartItemContainer{
@@ -169,7 +170,6 @@
 .checkoutBtn{
     position: relative;
     border: none;
-    background-color: transparent;
     height: 50px;
     border-radius: 5px;
     box-shadow: 1px 1px 4px grey;
@@ -182,7 +182,7 @@
 }
 
 .checkoutBtn:hover{
-    color: white;
+    color: black;
 
 }
 
@@ -191,19 +191,17 @@
   position: absolute;
   height: 10px;
   top: -0%;
-  left: -30px;
+  left: -300px;
   width: calc(100% + var(--fade-width));
   height: calc(100%);
   border-radius: 4px;
-  width: 40px;
-  
- 
+  width: 200px;
 }
 
 .checkoutBtn:hover::before {
-    left: 80%;
+    left: 0%;
     transition:left 0.5s ease-in-out; 
-    background-image: linear-gradient(to right, rgba(255,255,255,0), rgba(255,255,255,1));
+    background-image: linear-gradient(to left, rgba(255,255,255,0), rgba(255,255,255,1));
     
 }
 
@@ -211,7 +209,6 @@
     color: black;
     font-size: 1rem;
 }
-
 
 
 
@@ -275,3 +272,77 @@
 }
 
 
+@media screen and (max-width: 450px){
+    .cartItemContainer{
+        margin: 20px 0px;
+        width: 100vw;
+    }
+
+    .cartItemImage{
+
+        display: flex;
+        align-items: center;
+    }
+
+    .image{
+        width: 150px;
+        height: 150px;
+    }
+
+    .cartItemInfo{
+        margin: 0;
+        width: 99%;
+    }
+    .cartItemTitle{
+        width: 100%;
+        height: 35%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .checkoutField{
+        width: 100vw;
+        height: 420px;
+    }
+
+   .item_name{
+       font-size: 1rem;
+       margin: 0;
+       padding: 0;
+   }
+
+   .cartItemTotal{
+       margin: 0;
+       padding: 0;
+       height: 12%;
+   }
+
+   .cartItemEdit{
+       padding: 0;
+   }
+
+   .counter{
+       width: 70%;
+   }
+
+   .counter button{
+       font-size: 1rem;
+   }
+   .cartItemDelete{
+       width: 30%;
+       font-size: 0.9rem;
+   }
+
+
+   .totalPrice{
+       color: var(--font-hover-purple);
+       font-size: 1rem;
+
+   }
+
+   .subtitle{
+       padding: 0px 10px;
+   }
+}

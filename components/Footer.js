@@ -26,6 +26,7 @@ const Footer = () =>{
             <li> Facebook </li>
             <li> TikTok </li>
             <li> Pinterest</li>
+            <li className={styles.newsletter}> Newsletter </li>
           </ul>
         </div>
 

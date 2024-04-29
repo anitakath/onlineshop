@@ -37,7 +37,7 @@
     margin: 10px 0px;
     font-size: 1.2rem;
     transition: 0.2s ease;
-    color: grey;
+    /*color: grey;*/
     cursor: pointer;
     position: relative;
     left: -15px;
@@ -47,11 +47,14 @@
     color: black;
 }
 
+.newsletter{
+    color: var(--font-hover-purple-secondary);
+}
+
+
 
 @media screen and (max-width: 1000px){
-    /*.container{
-        flex-direction: column;
-    }*/
+   
     .nav_div{
         width: 100%;
         margin: 0;
@@ -108,6 +111,14 @@
         font-size: 0.9rem;
     }
 
-
+  
    
+}
+
+@media screen and (max-width: 300px){
+    .nav_div{
+        width: 34%;
+        margin: 0;
+        padding: 0;
+    }
 }
