@@ -27,56 +27,97 @@ export default async function handler(req, res) {
   // post login data from frontend to backend
 
   if (req.method === "POST") {
-    const { action, email, password } = req.body;
-
-    // check, if frontend data matches to one of the users @supabase
-    const user = users.find(
-      (user) => user.email === email && user.password === password
-    );
-
-    //if theres no match send an error telling the user to check their inputs || to make a  registration
-    if (!user) {
-      return res.status(401).json({
-        error: "Invalid login information. Please check your login details or make a registration",
-      });
-    } 
+    const { action, email, password, name, passwordRep } = req.body;
 
 
-    function escape(input) {
-      // Ersetze alle < und > Zeichen durch ihre HTML-Entities
-      input = input.replace(/</g, "&lt;");
-      input = input.replace(/>/g, "&gt;");
+    // Check if the action is 'register'
+    if (action === "register") {
+      // Check if the email already exists in the database
+      
+      const existingUser = users.find((user) => user.email === email);
+      if (existingUser) {
+        return res.status(400).json({ error: "Email already registered" });
+      }
 
-      // Weitere Bereinigungen oder Ersetzungen können hier hinzugefügt werden
+      // Validate input data
+      if (!name || !email || !password || !passwordRep) {
+        return res.status(400).json({ error: "Please fill in all fields" });
+      }
 
-      return input;
+      // Additional validation for email and password
+      // ...
+
+      // Save new user to the database
+      const newUser = await supabase
+        .from("SHOPNAME_users")
+        .insert([{ name, email, password, password_rep: passwordRep }]);
+
+      return res
+        .status(201)
+        .json({ message: "Useeeer registered successfully", data: newUser });
+      
+     
     }
 
-    escape(email);
-    escape(password);
+    if (action === "login") {
+      // check, if frontend data matches to one of the users @supabase
+      const user = users.find(
+        (user) => user.email === email && user.password === password
+      );
 
-    const trimEmail = email.trim();
+      //if theres no match send an error telling the user to check their inputs || to make a  registration
+      if (!user) {
+        return res.status(401).json({
+          error:
+            "Invalid login information. Please check your login details or make a registration",
+        });
+      }
 
-    const trimPassword = password.trim();
+      function escape(input) {
+        // Ersetze alle < und > Zeichen durch ihre HTML-Entities
+        input = input.replace(/</g, "&lt;");
+        input = input.replace(/>/g, "&gt;");
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Der RegEx für E-Mail-Adressen
+        // Weitere Bereinigungen oder Ersetzungen können hier hinzugefügt werden
 
-    if (!trimEmail || !emailRegex.test(trimEmail)) {
-      return res.status(400).json({
-        error: "Ungültige E-Mail-Adresse",
-      });
+        return input;
+      }
+
+      escape(email);
+      escape(password);
+
+      const trimEmail = email.trim();
+
+      const trimPassword = password.trim();
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Der RegEx für E-Mail-Adressen
+
+      if (!trimEmail || !emailRegex.test(trimEmail)) {
+        return res.status(400).json({
+          error: "Ungültige E-Mail-Adresse",
+        });
+      }
+
+      if (
+        !trimPassword ||
+        trimPassword.length < 6 ||
+        trimPassword.length > 14
+      ) {
+        return res.status(400).json({
+          error: "Ungültiges Passwort",
+        });
+      }
     }
 
-    if (!trimPassword || trimPassword.length < 6 || trimPassword.length > 14) {
-      return res.status(400).json({
-        error: "Ungültiges Passwort",
-      });
+    return res.status(200).json({
+      message: "login successful!",
+    });
+
+
+
+
     }
-  }
 
-  return res.status(200).json({
-    message: "login successful!",
-    data: users,
 
-  });
+    
 }

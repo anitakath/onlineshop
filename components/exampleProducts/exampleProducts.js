@@ -147,7 +147,7 @@ const ExampleProducts = ({ productsData, randomProductss, productss }) => {
 
       <div className={styles.productsContainer}>
         {!showProducts && <h1> loading products ... </h1>}
-        {noProducts && <p> you have added all prodcuts to your cart ❤️ </p>}
+        {noProducts && <p className={styles.products_info}> you have added all prodcuts to your cart ❤️ </p>}
         {showProducts &&
           randomProducts.map((product) => (
             <div

@@ -42,8 +42,6 @@ export default function Home() {
   let btnText = mobileNavIsOpen ? 'close' : 'open'
 
 
- 
-
   return (
     <div className={styles.backgroundContainer}>
       <Layout>
@@ -56,10 +54,7 @@ export default function Home() {
           >
             {btnText} menu
           </button>
-          <video autoPlay loop muted className={styles.background_video}>
-            <source src="/videos/blue_air.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          
         </div>
 
         <Transition
@@ -100,7 +95,7 @@ export default function Home() {
             gsap.fromTo(
               node,
               { y: 0 },
-              { duration: 1, y: mobileNavIsOpen ? 0 :0 }
+              { duration: 1, y: mobileNavIsOpen ? 0 : 0 }
             );
           }}
           addEndListener={(node, done) => {
@@ -114,7 +109,7 @@ export default function Home() {
           <MobileSlider />
         </Transition>
 
-        { !mobileNavIsOpen && <MobileSlider />}
+        {!mobileNavIsOpen && <MobileSlider />}
 
         <NewsLetter />
       </Layout>

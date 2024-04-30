@@ -18,10 +18,14 @@ const Register = (props) =>{
 
 
     const onChangeHandler = props.onChangeHandler;
+    const setFormData = props.setFormData;
+    const formData = props.formData;
+
+    console.log(formData)
     //const submitHandler = props.submitHandler;
 
 
-    /*
+    
      const nameChangeHandler = (e) => {
        setName(e.target.value);
        onChangeHandler({
@@ -58,7 +62,8 @@ const Register = (props) =>{
       });
     };
 
-    */
+    
+    /*
 
     const nameChangeHandler = (e) => {
       setName(e.target.value);
@@ -75,6 +80,7 @@ const Register = (props) =>{
     const passwordRepChangeHandler = (e) => {
       setPasswordRep(e.target.value);
     };
+    */
 
 
     const [error, setError] = useState()
@@ -85,21 +91,50 @@ const Register = (props) =>{
 
 
     const submitHandler = async (e) => {
+
       e.preventDefault();
 
+      console.log('REISTER ************************')
+
+      if(formData){
+        if(formData.action === "register"){
+          try{
+
+            //post data to /api/login 
+
+            const response = await fetch("/api/login", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                action: "register",
+                name: formData.name,
+                email: formData.email,
+                password: formData.password,
+                passwordRep: formData.passwordRep
+              }),
+            });
 
 
-      const userData = {
-        name: name,
-        email: email,
-        password: password,
-        password_rep: passwordRep,
-      };
+            console.log(response)
+
+            const data = await response.json();
+
+            console.log(data)
+
+
+
+          } catch (error){
+            console.log('Failed to register', error)
+          }
+        }
+      }
 
       setRegistrationLoading(true)
 
 
-      console.log(userData)
+      /*
       
       try {
         const response = await fetch("/api/registration", {
@@ -141,14 +176,19 @@ const Register = (props) =>{
       } catch (error) {
         console.error(error);
       }
+
+      */
       
     };
+
+    
 
    
 
     let btn_text = registrationLoading ? 'LOADING' : 'REGISTER'
 
      
+
 
 
     return (

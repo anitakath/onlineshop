@@ -17,7 +17,6 @@ import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import { faUser} from "@fortawesome/free-solid-svg-icons";
 
 //STORE
-
 import { supabase } from '@/services/supabaseClient';
 
 

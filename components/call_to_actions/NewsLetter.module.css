@@ -14,21 +14,22 @@
 .email_input{
     outline: none;
     border: none;
-    border-bottom: 2px solid silver;
-    background: transparent;
     margin: 10px 0px;
     width: 50vw;
     font-size: 1.2rem;
     padding: 10px;
     cursor: pointer;
     transition: 0.2s ease;
+    height: 20px;
+    background: rgba(255,255,255, 0.5);
 }
 
 
 .email_input:hover{
-    background: rgba(255,255,255, 0.5);
-    border-bottom: 2px solid rgba(0,0,0, 0.3)
+    background: transparent;
+    border-bottom: 2px solid rgba(255,255,255, 0.5);
 }
+
 
 .signUp_btn{
     margin: 0px 10px;
@@ -39,10 +40,13 @@
     cursor: pointer;
     transition: 0.2s ease;
     cursor: pointer;
+    height: 40px;
+    border-radius: 10px;
 }
 
 .signUp_btn:hover{
-    background: white;
+    background: black;
+    color: rgba(255,255,255, 0.9);
 }
 
 
