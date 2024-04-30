@@ -36,3 +36,9 @@ body{
   color: white;
 }
 
+
+.link{
+  color: var(--font-hover-purple-secondary);
+  text-decoration: none;
+  font-size: 1rem;
+}

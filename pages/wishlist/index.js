@@ -23,188 +23,237 @@ import Image from "next/image";
 import { incrementItem } from "@/store/cartSlice";
 import { decrementWishlist } from "@/store/wishlistSlice";
 
-const Wishlist = () =>{
-
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(null);
-    const [wishlist, setWishlist] = useState(false)
-    const [addedItem, setAddedItem] = useState(false)
-    const [isEmpty, setIsEmpty] = useState(true)
 
 
-    const openModal = (item) => {
-      setAddedItem(false)
-        setWishlist(true)
-        setSelectedItem(item)
-        setModalIsOpen(true);
-        console.log(item)
-    };
-     
+const Wishlist = ({ greeting, productss, randomProductss }) => {
+  console.log("PRODUCTSTSTSTSTSTS");
+  console.log(productss);
+  console.log(randomProductss);
 
-    const closeModal = () => {
-      if(wishlistItems.length === 0){
-        setIsEmpty(true)
-      }
-        setModalIsOpen(false);
-    };
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [wishlist, setWishlist] = useState(false);
+  const [addedItem, setAddedItem] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(true);
 
-  
-    const wishlistItems = useSelector((state) => state.wishlist)
+  const openModal = (item) => {
+    setAddedItem(false);
+    setWishlist(true);
+    setSelectedItem(item);
+    setModalIsOpen(true);
+    console.log(item);
+  };
 
-    useEffect(()=>{
-      if(wishlistItems.length === 0){
-        setIsEmpty(true)
-      } else{
-        setIsEmpty(false)
-      }
-    }, []);
+  const closeModal = () => {
+    if (wishlistItems.length === 0) {
+      setIsEmpty(true);
+    }
+    setModalIsOpen(false);
+  };
 
+  const wishlistItems = useSelector((state) => state.wishlist);
 
+  useEffect(() => {
+    if (wishlistItems.length === 0) {
+      setIsEmpty(true);
+    } else {
+      setIsEmpty(false);
+    }
+  }, []);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const addItemHandler = () => {
-      console.log("moincito");
-      dispatch(incrementItem(selectedItem));
-      dispatch(decrementWishlist(selectedItem));
-      setAddedItem(true)
-      
-    };
+  const addItemHandler = () => {
+    console.log("moincito");
+    dispatch(incrementItem(selectedItem));
+    dispatch(decrementWishlist(selectedItem));
+    setAddedItem(true);
+  };
 
-    console.log(wishlistItems)
-    console.log(wishlist)
-    console.log(selectedItem)
+  console.log(wishlistItems);
+  console.log(wishlist);
+  console.log(selectedItem);
 
-    useEffect(()=>{
+  useEffect(() => {
+    if (wishlistItems.length > 0) {
+      setIsEmpty(false);
+    }
+  }, [wishlistItems]);
 
-      if(wishlistItems.length > 0){
-        setIsEmpty(false)
+  const router = useRouter();
 
-      }
+  const navigateToCartHandler = () => {
+    console.log("hi");
+    router.push("/cart");
+  };
 
-    }, [wishlistItems])
+  const [itemDeleted, setItemDeleted] = useState(false);
 
-
-
-    const router = useRouter();
-
-    const navigateToCartHandler = () => {
-      console.log('hi')
-      router.push("/cart"); 
-    };
-
-   const [itemDeleted, setItemDeleted] = useState(false)
-
-    const deleteItemFromWhishlistHandler = (e) =>{
-
-      e.preventDefault()
-      dispatch(decrementWishlist(selectedItem));
-      /*setItemDeleted(true)
+  const deleteItemFromWhishlistHandler = (e) => {
+    e.preventDefault();
+    dispatch(decrementWishlist(selectedItem));
+    /*setItemDeleted(true)
       console.log('deleting from wishlist...')
 
       setTimeout(()=>{
         setItemDeleted(null)
       }, 3000)*/
-    }
+  };
+
+  console.log(selectedItem);
 
 
 
-    console.log(selectedItem)
-    return (
-      <Layout>
-        <div>
-          {wishlist && (
-            <div>
-              <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-                <div className={styless.infoContainer}>
-                  <Image
-                    alt="Beschreibung des Bildes"
-                    width={500} // Setze hier die gewünschte Breite
-                    height={650} // Setze- hier die gewünschte Höhe
-                    priority={true}
-                    src={selectedItem.img}
-                  />
-                  <div className={styless.closeBtnContainer}>
-                    <button onClick={closeModal} className={styless.closeBtn}>
-                      X
-                    </button>
-                  </div>
-                  <div className={styles.addToCartContainer}>
-                    {!addedItem && (
-                      <div className={styless.btn_div}>
-                        <button
-                          className={styless.addToCartBtn}
-                          onClick={addItemHandler}
-                        >
-                          ADD TO CART
-                        </button>
-                        <button
-                          className={styless.deleteFromWishlistBtn}
-                          onClick={deleteItemFromWhishlistHandler}
-                        >
-                          delete from wishlist
-                        </button>
-                        
-                      </div>
-                    )}
+
+
+    const reloadrandomProductsHandler = () => {
+      const randomArray = [];
+      while (randomArray.length < 5) {
+        const randomIndex = Math.floor(Math.random() * randomProductss.length);
+        if (!randomArray.includes(randomProductss[randomIndex])) {
+          randomArray.push(randomProductss[randomIndex]);
+          console.log(randomProductss[randomIndex]);
+        }
+      }
+
+    };
 
 
 
-                    {addedItem && (
-                      <button className={styless.productInfo}>
-                        product has been successfully added to your shopping
-                        cart. <br />
-                        <button
-                          onClick={navigateToCartHandler}
-                          className={styless.btn_toBasket}
-                        >
-                          click here to go to your shopping basket
-                        </button>
+
+  return (
+    <Layout>
+      <div>
+        {wishlist && (
+          <div>
+            <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+              <div className={styless.infoContainer}>
+                <Image
+                  alt="Beschreibung des Bildes"
+                  width={500} // Setze hier die gewünschte Breite
+                  height={650} // Setze- hier die gewünschte Höhe
+                  priority={true}
+                  src={selectedItem.img}
+                />
+                <div className={styless.closeBtnContainer}>
+                  <button onClick={closeModal} className={styless.closeBtn}>
+                    X
+                  </button>
+                </div>
+                <div className={styles.addToCartContainer}>
+                  {!addedItem && (
+                    <div className={styless.btn_div}>
+                      <button
+                        className={styless.addToCartBtn}
+                        onClick={addItemHandler}
+                      >
+                        ADD TO CART
                       </button>
-                    )}
-                  </div>
+                      <button
+                        className={styless.deleteFromWishlistBtn}
+                        onClick={deleteItemFromWhishlistHandler}
+                      >
+                        delete from wishlist
+                      </button>
+                    </div>
+                  )}
+
+                  {addedItem && (
+                    <button className={styless.productInfo}>
+                      product has been successfully added to your shopping cart.{" "}
+                      <br />
+                      <button
+                        onClick={navigateToCartHandler}
+                        className={styless.btn_toBasket}
+                      >
+                        click here to go to your shopping basket
+                      </button>
+                    </button>
+                  )}
                 </div>
-              </Modal>
-            </div>
-          )}
-        </div>
-
-        {isEmpty && (
-          <div className={styles.noProducts_title}>
-            <video autoPlay loop muted className={styles.background_video}>
-              <source src="/videos/girl_road.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-
-            <h2 className={styles.title}> no products on your wishlist</h2>
+              </div>
+            </Modal>
           </div>
         )}
+      </div>
 
-        {!isEmpty && (
-          <div className={styles.wishlistField}>
-            {wishlistItems.map((item) => {
-              return (
-                <div
-                  onClick={() => openModal(item)}
-                  className={styles.wishlistItem}
-                  style={{ backgroundImage: `url(${item.img})` }}
-                  key={item.id}
-                >
-                  <h1>{item.name}</h1>
-                  <p className={styles.itemPrice}>{item.price}</p>
-                </div>
-              );
-            })}
-          </div>
-        )}
+      {isEmpty && (
+        <div className={styles.noProducts_title}>
+          <video autoPlay loop muted className={styles.background_video}>
+            <source src="/videos/girl_road.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
 
-        <div className={styles.wrapper}>
-          <div className={styles.examples_div}>
-            <ExampleProducts />
-          </div>
+          <h2 className={styles.title}> no products on your wishlist</h2>
         </div>
-      </Layout>
-    );
-}
+      )}
+
+      {!isEmpty && (
+        <div className={styles.wishlistField}>
+          {wishlistItems.map((item) => {
+            return (
+              <div
+                onClick={() => openModal(item)}
+                className={styles.wishlistItem}
+                style={{ backgroundImage: `url(${item.img})` }}
+                key={item.id}
+              >
+                <h1>{item.name}</h1>
+                <p className={styles.itemPrice}>{item.price}</p>
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      <div className={styles.wrapper}>
+        <div className={styles.examples_div}>
+          <ExampleProducts randomProductss={randomProductss} productss={productss} />
+        </div>
+      </div>
+    </Layout>
+  );
+};
 
 export default Wishlist;
+
+export async function getStaticProps() {
+
+
+  try {
+    const responseOne = await fetch("http://localhost:3000/api/necklacesData");
+    const dataOne = await responseOne.json();
+
+    const responseTwo = await fetch("http://localhost:3000/api/randomProductsData");
+    const dataTwo = await responseTwo.json();
+
+    const products = [...dataOne, ...dataTwo];
+
+    const randomArray = [];
+    while (randomArray.length < 6) {
+      const randomIndex = Math.floor(Math.random() * products.length);
+      if (!randomArray.includes(products[randomIndex])) {
+        randomArray.push(products[randomIndex]);
+      }
+    }
+
+    return {
+      props: {
+        greeting: 'MOINCITO',
+        productss: products,
+        randomProductss: randomArray,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      props: {
+        greeting: "ADIOSCITO",
+        productss: null,
+        randomProductss: null,
+      },
+    };
+  }
+
+  
+}

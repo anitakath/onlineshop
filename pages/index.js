@@ -2,15 +2,14 @@
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-import { useSelector, useDispatch, useRef } from "react-redux";
+
 
 import Layout from '@/components/Layout';
 
 
 //ANIMATIONS
-import { CSSTransition } from "react-transition-group";
 import { Transition } from 'react-transition-group';
 import { gsap } from "gsap";
 
@@ -30,7 +29,6 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
-  const dispatch = useDispatch()
 
 
   const [mobileNavIsOpen, setMobileNavIsOpen] = useState(false)
@@ -63,12 +61,6 @@ export default function Home() {
             Your browser does not support the video tag.
           </video>
         </div>
-
-        {/*
-        {mobileNavIsOpen && (
-          <MobileNavigation mobileNavIsOpen={mobileNavIsOpen} />
-        )}
-        */}
 
         <Transition
           timeout={2000}

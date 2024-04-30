@@ -30,6 +30,7 @@
     height: 11vh;
     display: flex;
     align-items: center;
+   
 
 
 }
@@ -165,6 +166,7 @@
    
     .userContainer{
         top: 0px;
+       
     
     }
 
@@ -172,7 +174,21 @@
           font-size: 1.4rem;
       }
 
+
+    .Link{
+       
+        margin:  0px 15px;
+        position: relative;
+        top: 5px;
+    }
+
     .icon{
         font-size: 1.1rem;
+       
+    }
+
+    .sumQuantities{
+        
+        font-size: 0.8rem;
     }
 }

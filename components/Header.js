@@ -52,23 +52,7 @@ const Header = () =>{
     let loginPath = currentUserObject != null ? '/profile' : '/logon'
 
 
-    /*
-    useEffect(()=>{
-
-
-      const fetchUser = async() =>{
-
-        const { data, error } = await supabase
-          .from("SHOPNAME_users")
-          .select("*");
-
-
-          console.log(data)
-      }
-
-      fetchUser()
-
-    }, [isLoggedIn])*/
+ 
 
 
 
@@ -92,7 +76,7 @@ const Header = () =>{
 
           <Link href="/cart" className={styles.Link}>
             <FontAwesomeIcon icon={faCartShopping} className={styles.icon} />
-            {sumQuantities}
+            <span className={styles.sumQuantities}>{sumQuantities}</span>
           </Link>
 
           <Link href={loginPath} className={styles.Link}>

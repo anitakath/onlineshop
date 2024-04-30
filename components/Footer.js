@@ -1,5 +1,4 @@
-
-
+import Link from 'next/link';
 
 import styles from '../styles/Footer.module.css'
 
@@ -26,7 +25,7 @@ const Footer = () =>{
             <li> Facebook </li>
             <li> TikTok </li>
             <li> Pinterest</li>
-            <li className={styles.newsletter}> Newsletter </li>
+            <li className={styles.newsletter}><Link href="/logon" className="link">  Newsletter</Link> </li>
           </ul>
         </div>
 

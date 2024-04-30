@@ -94,7 +94,15 @@
     right: 10px;
 }
 
+@media screen and (max-width: 1300px){
+    .wishlistItem{
+        width: 90vw;
+    }
 
+    .wishlistItem:hover{
+        width: 95vw;
+    }
+}
 @media screen and (max-width: 800px){
     .wishlistField{
         margin: 20px 0px;
@@ -104,9 +112,6 @@
 
 @media screen and (max-width: 700px){
 
-    .wishlistItem{
-        height: 300px;
-    }
     .wishlistItem h1{
         font-size: 1rem;
         bottom: 0;
@@ -121,10 +126,15 @@
     }
 
   
+  
+
+  
 }
 
-@media screen and (max-width: 400px){
+@media screen and (max-width: 500px){
     .wishlistItem{
         height: 200px;
+       
     }
+   
 }

@@ -266,13 +266,15 @@
     .checkoutField{
         position: relative;
         width: 90vw;
-        height: 40vh;
+        
     
     }
 }
 
 
 @media screen and (max-width: 450px){
+
+    
     .cartItemContainer{
         margin: 20px 0px;
         width: 100vw;
@@ -304,7 +306,6 @@
 
     .checkoutField{
         width: 100vw;
-        height: 420px;
     }
 
    .item_name{
