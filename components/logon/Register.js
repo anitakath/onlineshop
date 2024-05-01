@@ -63,24 +63,7 @@ const Register = (props) =>{
     };
 
     
-    /*
-
-    const nameChangeHandler = (e) => {
-      setName(e.target.value);
-    };
-
-    const emailChangeHandler = (e) => {
-      setEmail(e.target.value);
-    };
-
-    const passwordChangeHandler = (e) => {
-      setPassword(e.target.value);
-    };
-
-    const passwordRepChangeHandler = (e) => {
-      setPasswordRep(e.target.value);
-    };
-    */
+  
 
 
     const [error, setError] = useState()
@@ -89,6 +72,8 @@ const Register = (props) =>{
 
 
 
+    const [errorMessage, setErrorMessage] = useState('')
+    const [successMessage, setSuccessMessage] = useState('')
 
     const submitHandler = async (e) => {
 
@@ -117,12 +102,23 @@ const Register = (props) =>{
             });
 
 
-            console.log(response)
+            
 
             const data = await response.json();
 
             console.log(data)
 
+            if(data.error){
+  
+              setSuccessMessage("");
+              setErrorMessage(data.error)
+            } else {
+              //handle successful registration}
+              setErrorMessage("");
+              setSuccessMessage(data.message);
+
+
+            }
 
 
           } catch (error){
@@ -231,6 +227,8 @@ const Register = (props) =>{
 
           <button type="submit"> {btn_text} </button>
         </form>
+        {errorMessage && <p className={styles.error_msg}> {errorMessage} </p>}
+        { successMessage && <p className={styles.success_msg}> {successMessage}</p>}
       </div>
     );
 }

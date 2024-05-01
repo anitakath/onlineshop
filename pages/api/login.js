@@ -33,7 +33,7 @@ export default async function handler(req, res) {
     // Check if the action is 'register'
     if (action === "register") {
       // Check if the email already exists in the database
-      
+
       const existingUser = users.find((user) => user.email === email);
       if (existingUser) {
         return res.status(400).json({ error: "Email already registered" });
@@ -45,7 +45,17 @@ export default async function handler(req, res) {
       }
 
       // Additional validation for email and password
-      // ...
+
+      // Additional validation for password length and match
+      if (password.length < 6) {
+        return res
+          .status(400)
+          .json({ error: "Password must be at least 6 characters long" });
+      }
+
+      if (password !== passwordRep) {
+        return res.status(400).json({ error: "Passwords do not match" });
+      }
 
       // Save new user to the database
       const newUser = await supabase
@@ -54,9 +64,7 @@ export default async function handler(req, res) {
 
       return res
         .status(201)
-        .json({ message: "Useeeer registered successfully", data: newUser });
-      
-     
+        .json({ message: "  registered successfully", data: newUser });
     }
 
     if (action === "login") {
