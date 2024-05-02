@@ -19,6 +19,19 @@ export default async function handler(req, res) {
   const { data: users, error } = await supabase.from('SHOPNAME_users').select('*');
 
 
+  function validateEmail(email) {
+    const trimEmail = email.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Der RegEx für E-Mail-Adressen
+
+    if (!trimEmail || !emailRegex.test(trimEmail)) {
+      return false;
+    }
+
+    return true;
+  }
+
+
+
 
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method Not Allowed" });
@@ -29,19 +42,19 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const { action, email, password, name, passwordRep } = req.body;
 
+    /*--------------------- REGISTER ------------------------- */
 
     // Check if the action is 'register'
     if (action === "register") {
-      // Check if the email already exists in the database
+      // check if all inputs have values
+      if (!name || !email || !password || !passwordRep) {
+        return res.status(400).json({ error: "Please fill in all fields" });
+      }
 
+      // Check if the email already exists in the database
       const existingUser = users.find((user) => user.email === email);
       if (existingUser) {
         return res.status(400).json({ error: "Email already registered" });
-      }
-
-      // Validate input data
-      if (!name || !email || !password || !passwordRep) {
-        return res.status(400).json({ error: "Please fill in all fields" });
       }
 
       // Additional validation for email and password
@@ -67,7 +80,14 @@ export default async function handler(req, res) {
         .json({ message: "  registered successfully", data: newUser });
     }
 
+    /*--------------------- LOGIN ------------------------- */
+
     if (action === "login") {
+      // check if all inputs have values
+      if (!email || !password) {
+        return res.status(400).json({ error: "Please fill in all fields" });
+      }
+
       // check, if frontend data matches to one of the users @supabase
       const user = users.find(
         (user) => user.email === email && user.password === password
@@ -115,16 +135,44 @@ export default async function handler(req, res) {
           error: "Ungültiges Passwort",
         });
       }
+
+      return res.status(200).json({
+        message: "login successful!",
+        data: user,
+      });
     }
 
-    return res.status(200).json({
-      message: "login successful!",
-    });
 
 
 
 
+
+
+    /*--------------------- NEWSLETTER ------------------------- */
+
+
+
+
+
+
+
+
+    if (action === "newsletter") {
+      if (!email) {
+        return res.status(400).json({ error: "Please enter your email" });
+      }
+
+
+      validateEmail(email)
+
+
+      if(!validateEmail(email)){
+        return res.status(400).json({error: "invalid email, please enter a valid email"})
+      } else{
+        return res.status(200).json({message: "nice, gracias por tu email"})
+      }
     }
+  }
 
 
     

@@ -7,14 +7,11 @@ import styles from '../../styles/Logon.module.css'
 
 const Register = (props) =>{
 
-    const dispatch = useDispatch();
 
     const [name, setName] = useState("")
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordRep, setPasswordRep] = useState("")
-
-    const [isTouched, setIsTouched] = useState(false);
 
 
     const onChangeHandler = props.onChangeHandler;
@@ -22,18 +19,18 @@ const Register = (props) =>{
     const formData = props.formData;
 
     console.log(formData)
-    //const submitHandler = props.submitHandler;
+
 
 
     
-     const nameChangeHandler = (e) => {
-       setName(e.target.value);
-       onChangeHandler({
-         type: "name",
-         value: e.target.value,
-         action: "register",
-       });
-     };
+    const nameChangeHandler = (e) => {
+      setName(e.target.value);
+      onChangeHandler({
+        type: "name",
+        value: e.target.value,
+        action: "register",
+      });
+    };
 
     const emailChangeHandler = (e) => {
       setEmail(e.target.value);
@@ -70,8 +67,6 @@ const Register = (props) =>{
     const [success, setSuccess] = useState()
     const [registrationLoading, setRegistrationLoading] = useState(false)
 
-
-
     const [errorMessage, setErrorMessage] = useState('')
     const [successMessage, setSuccessMessage] = useState('')
 
@@ -79,9 +74,13 @@ const Register = (props) =>{
 
       e.preventDefault();
 
-      console.log('REISTER ************************')
+      setRegistrationLoading(true)
 
       if(formData){
+        if(formData.action === null){
+          setErrorMessage("please fill in all input fields")
+          setRegistrationLoading(false)
+        }
         if(formData.action === "register"){
           try{
 
@@ -109,15 +108,17 @@ const Register = (props) =>{
             console.log(data)
 
             if(data.error){
-  
+              setRegistrationLoading(false)
               setSuccessMessage("");
               setErrorMessage(data.error)
             } else {
-              //handle successful registration}
+              setRegistrationLoading(false)
               setErrorMessage("");
               setSuccessMessage(data.message);
-
-
+              setName("");
+              setEmail("");
+              setPassword("");
+              setPasswordRep("");
             }
 
 
@@ -126,54 +127,6 @@ const Register = (props) =>{
           }
         }
       }
-
-      setRegistrationLoading(true)
-
-
-      /*
-      
-      try {
-        const response = await fetch("/api/registration", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userData),
-        });
-
-
-
-        //const data = await response.json();
-
-        //console.log(data.message)
-
-        if (response.ok) {
-          // Registrierung erfolgreich
-          const data = await response.json();
-          console.log(data.message);
-          setRegistrationLoading(false)
-          setError('')
-          setSuccess(data.message)
-        } else if (response.status === 409) {
-          // Benutzer existiert bereits
-          const errorData = await response.json();
-          setRegistrationLoading(false);
-          setSuccess('')
-          setError(errorData.error);
-        } else {
-          // Andere Fehler behandeln
-          const errorData = await response.json();
-          setSuccess('')
-          setRegistrationLoading(false);
-          setError(errorData.error);
-        }
-
-        // Handle successful registration response here
-      } catch (error) {
-        console.error(error);
-      }
-
-      */
       
     };
 

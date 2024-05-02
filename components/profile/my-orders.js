@@ -93,41 +93,57 @@ const MyOrders = ({ userProfile, setUserProfile }) => {
 
 
   return (
-    <div className={styles.container}>
-      <Button userProfile={userProfile} setUserProfile={setUserProfile} />
+    <div className={styles.wrapper}>
 
-      {orders.map((orderGroup, index) => (
-        <div key={index} className={styles.order_div}>
-          <div className={styles.order_title_div}>
-            <h2>Order {index + 1}</h2>
-            <p> - {formatDate(orderGroup[0].created_at)}</p>
+      
+      <div className={styles.title_div}>
+        {loading && (
+          <div className={styles.loading_spinner_div}>
+            <FontAwesomeIcon
+              icon={faSpinner}
+              className={styles.spinner_icon}
+              spin
+            />
+            <p> loading your orders ... </p>
           </div>
+        )}
 
-          <ul>
-            {orderGroup.map((order) => (
-              <li key={order.id} className={styles.product_li}>
-                {/* Hier kannst du die Details der Bestellung anzeigen */}
-                <Image
-                  src={order.img}
-                  width={50}
-                  height={50}
-                  className={styles.image}
-                />
-                <p> {order.name}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+        {orders.length === 0 && (
+          <h2 className={styles.noOrdersMade_info}> no orders made yet </h2>
+        )}
+        <h1 className={styles.title}> My Orders </h1>
+      </div>
 
-      {loading && (
-        <div className={styles.loading_spinner_div}>
-          <FontAwesomeIcon icon={faSpinner} className={styles.spinner_icon} spin />
-          <p> loading your orders ... </p>
-        
-        </div>
-      )}
-      <h1 className={styles.title}> My Orders </h1>
+
+
+
+      <div className={styles.container}>
+        <Button userProfile={userProfile} setUserProfile={setUserProfile} />
+
+        {orders.map((orderGroup, index) => (
+          <div key={index} className={styles.order_div}>
+            <div className={styles.order_title_div}>
+              <h2>Order {index + 1}</h2>
+              <p> - {formatDate(orderGroup[0].created_at)}</p>
+            </div>
+
+            <ul>
+              {orderGroup.map((order) => (
+                <li key={order.id} className={styles.product_li}>
+                  {/* Hier kannst du die Details der Bestellung anzeigen */}
+                  <Image
+                    src={order.img}
+                    width={50}
+                    height={50}
+                    className={styles.image}
+                  />
+                  <p> {order.name}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

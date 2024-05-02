@@ -53,7 +53,6 @@ const UserProfile = () =>{
               <h1 className={styles.title}>
                 you are not logged in. Please log in
                 <Link href="/logon" className={styles.login_link}>
-                  {" "}
                   here
                 </Link>
               </h1>

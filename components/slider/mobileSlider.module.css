@@ -7,9 +7,6 @@
 
 
 
-
-
-
 @media screen and (max-width: 800px){
     
     .mobileMain{
@@ -41,15 +38,21 @@
         transition: opacity 0.5s; /* CSS-Transition für das Bild */
     }
 
-    /*
 
-    .active .mobileSlides {
-        opacity: 1; // Aktives Bild vollständig sichtbar 
-    }*//*
-
-    .mobileSlides:not(.active) {
-        opacity: 0; // Inaktive Bilder unsichtbar machen 
-    }*/
+}
 
 
+@media screen and (max-width: 400px){
+
+
+    .mobileMain{
+        padding: 10px 0px;
+  
+    }
+
+    .mobileMainSlider{
+        width: 100vw;
+        padding: 0;
+        margin: 0;
+    }
 }

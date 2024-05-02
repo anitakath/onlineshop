@@ -27,6 +27,7 @@
     height: 11vh;
     display: flex;
     align-items: center;
+    
 }
 
 
@@ -143,7 +144,7 @@
 
     .userContainer{
         right: 0;
-        top: -4px;
+        top: 10px;
         height: 50px;
 
     }

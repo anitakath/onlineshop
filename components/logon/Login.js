@@ -1,7 +1,7 @@
 
 
 import { useRouter } from "next/router";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 //STORE
@@ -12,7 +12,9 @@ import { setCurrentUser } from "@/store/currentUserSlice";
 //STYLES
 import styles from '../../styles/Logon.module.css'
 
-
+//CUSTOM HOOK
+import useFormHandler from "../custom hooks/useFormHandler";
+import { current } from "@reduxjs/toolkit";
 
 
 const Login = (props) =>{
@@ -29,7 +31,24 @@ const Login = (props) =>{
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
+  const {
+    errorMessage,
+    setErrorMessage,
+    successMessage,
+    setSuccessMessage,
+    currentUser,
+    loading,
+    isLoggedIn,
+    submitHandlerr,
+  } = useFormHandler();
+
+  console.log(errorMessage)
+  console.log(successMessage)
+  console.log(currentUser)
+  console.log(isLoggedIn)
+
+  // const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   const emailChangeHandler = (e) => {
     setEmail(e.target.value);
@@ -49,76 +68,43 @@ const Login = (props) =>{
 
  const [loginErrorMessage, setLoginErrorMessage] = useState("");
  const [loginSuccessMessage, setLoginSuccessMessage] = useState("");
- const [loading, setLoading] = useState(false)
+
+
+
 
  const submitHandler = async (e) => {
    e.preventDefault();
 
-   console.log("LOGIN ************************* ");
-  
-   setLoading(true)
-
-   if (formData) {
-     if (formData.action === null) {
-       //console.log("no entries made");
-       setLoginErrorMessage("please fill in the input fields");
-     }
-     if (formData.action === "login") {
-       //console.log("trying to login ...");
-       try {
-         const response = await fetch("/api/login", {
-           method: "POST",
-           headers: {
-             "Content-Type": "application/json",
-           },
-           body: JSON.stringify({
-             email: formData.email,
-             password: formData.password,
-           }),
-         });
-
-         const data = await response.json();
-
-         if (response.ok) {
-           dispatch(login());
-           //console.log(response);
-           console.log(data);
-           setLoginSuccessMessage(data.message);
-           setLoading(false)
-
-            const currentUser = data.data.find(
-              (user) =>
-                user.email === formData.email &&
-                user.password === formData.password
-            );
-
-       
-            dispatch(setCurrentUser(currentUser));
+   await submitHandlerr(formData, "login", dispatch, router)
 
 
 
+   //FIX FIX FIX FIX FIX FIX FIX!!!!
+   // FIXEN!! momentan ist es noch so, dass der User 2x submitten muss, um sich einloggen zu können..
+   
+   if(isLoggedIn){
+     console.log('yesyesyesyes')
+     dispatch(login());
 
-           setTimeout(() => {
-             // Navigiere zur Seite /profile nach 2 Sekunden
-             router.push("/profile");
-           }, 2000); // Zeit in Millisekunden (2 Sekunden = 2000ms)
-           //router.push("/user-profile");
-         } else {
-           console.log(data.error);
-           setLoginErrorMessage(data.error);
-           setLoading(false)
-         }
-       } catch (error) {
-         console.log("Fehler beim Einloggen", error);
-       }
-     }
+     dispatch(setCurrentUser(currentUser));
+
+     setTimeout(() => {
+       router.push("/profile");
+     }, 2000); // Navigiere zur Seite /profile nach 2 Sekunden
+   } else{
+     console.log('nononononono')
    }
+
+
  };
+
+
 
 
 
  let btn_text = loading ? 'LOGGING IN ...' : 'LOGIN'
 
+ console.log(formData)
 
   return (
     <div className={styles.loginContainer}>
