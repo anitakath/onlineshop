@@ -97,7 +97,7 @@ export default async function handler(req, res) {
       if (!user) {
         return res.status(401).json({
           error:
-            "Invalid login information. Please check your login details or make a registration",
+            "Invalid login information. The email address entered is not registered.",
         });
       }
 
@@ -142,35 +142,29 @@ export default async function handler(req, res) {
       });
     }
 
-
-
-
-
-
-
     /*--------------------- NEWSLETTER ------------------------- */
-
-
-
-
-
-
-
 
     if (action === "newsletter") {
       if (!email) {
         return res.status(400).json({ error: "Please enter your email" });
       }
 
+      validateEmail(email);
 
-      validateEmail(email)
-
-
-      if(!validateEmail(email)){
-        return res.status(400).json({error: "invalid email, please enter a valid email"})
-      } else{
-        return res.status(200).json({message: "nice, gracias por tu email"})
+      if (!validateEmail(email)) {
+        return res
+          .status(400)
+          .json({ error: "invalid email, please enter a valid email" });
+      } else {
+        return res.status(200).json({ message: "nice, gracias por tu email" });
       }
+    }
+
+    /*--------------------- NEWSLETTER ------------------------- */
+
+
+    if(action === "reset"){
+      return res.status(200).json({message: "HERE WE GOOOO "})
     }
   }
 

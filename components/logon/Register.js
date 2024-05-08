@@ -1,12 +1,23 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
+
+import { useRouter } from 'next/router';
 //STYLES
 import styles from '../../styles/Logon.module.css'
 
+
+
+//CUSTOM HOOK
+import useFormHandler from '../custom hooks/useFormHandler';
+
+
+
 const Register = (props) =>{
 
+    const dispatch = useDispatch();
+    const router = useRouter();
 
     const [name, setName] = useState("")
     const [email, setEmail] = useState("");
@@ -15,11 +26,20 @@ const Register = (props) =>{
 
 
     const onChangeHandler = props.onChangeHandler;
-    const setFormData = props.setFormData;
     const formData = props.formData;
 
-    console.log(formData)
 
+
+     const {
+       errorMessage,
+       setErrorMessage,
+       successMessage,
+       setSuccessMessage,
+       currentUser,
+       loading,
+       isLoggedIn,
+       submitHandlerr,
+     } = useFormHandler();
 
 
     
@@ -60,81 +80,33 @@ const Register = (props) =>{
     };
 
     
+
+
+     const submitHandler = async (e) => {
+       e.preventDefault();
+
+
+       await submitHandlerr(formData, "register", dispatch, router);
+     };
+
+
+     useEffect(()=>{
+      if(successMessage){
+
+        // clear inputs, when registration successfully
+        setName("");
+        setEmail("");
+        setPassword("");
+        setPasswordRep("");
   
-
-
-    const [error, setError] = useState()
-    const [success, setSuccess] = useState()
-    const [registrationLoading, setRegistrationLoading] = useState(false)
-
-    const [errorMessage, setErrorMessage] = useState('')
-    const [successMessage, setSuccessMessage] = useState('')
-
-    const submitHandler = async (e) => {
-
-      e.preventDefault();
-
-      setRegistrationLoading(true)
-
-      if(formData){
-        if(formData.action === null){
-          setErrorMessage("please fill in all input fields")
-          setRegistrationLoading(false)
-        }
-        if(formData.action === "register"){
-          try{
-
-            //post data to /api/login 
-
-            const response = await fetch("/api/login", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                action: "register",
-                name: formData.name,
-                email: formData.email,
-                password: formData.password,
-                passwordRep: formData.passwordRep
-              }),
-            });
-
-
-            
-
-            const data = await response.json();
-
-            console.log(data)
-
-            if(data.error){
-              setRegistrationLoading(false)
-              setSuccessMessage("");
-              setErrorMessage(data.error)
-            } else {
-              setRegistrationLoading(false)
-              setErrorMessage("");
-              setSuccessMessage(data.message);
-              setName("");
-              setEmail("");
-              setPassword("");
-              setPasswordRep("");
-            }
-
-
-          } catch (error){
-            console.log('Failed to register', error)
-          }
-        }
       }
-      
-    };
 
-    
+     }, [successMessage])
+
 
    
 
-    let btn_text = registrationLoading ? 'LOADING' : 'REGISTER'
+    let btn_text = loading ? 'LOADING' : 'REGISTER'
 
      
 
@@ -145,8 +117,7 @@ const Register = (props) =>{
         <form className={styles.loginForm} onSubmit={submitHandler}>
           <h1 className={styles.title}> REGISTRATION </h1>
 
-          {error && <p className={styles.error_msg}>{error} </p>}
-          {success && <p className={styles.success_msg}> {success} </p>}
+       
           <input
             type="type"
             placeholder="NAME"

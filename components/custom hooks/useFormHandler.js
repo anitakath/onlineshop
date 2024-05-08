@@ -6,57 +6,6 @@ import { login, setCurrentUser } from "@/store/authSlice";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 
-/*
-
-export const loginUser = createAsyncThunk(
-  "auth/loginUser",
-  async (formData) => {
-    try {
-      const response = await fetch("/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          action: "login",
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (data.error) {
-        throw new Error(data.error);
-      }
-
-      return data;
-    } catch (error) {
-      throw new Error("Fehler beim Einloggen");
-    }
-  }
-);
-
-const submitHandlerr = async (formData, dispatch, router) => {
-  try {
-    setLoading(true);
-    const data = await dispatch(loginUser(formData));
-
-    setSuccessMessage(data.message);
-    setCurrentUser(data.data);
-
-    setTimeout(() => {
-      router.push("/profile");
-    }, 2000); // Navigiere zur Seite /profile nach 2 Sekunden
-  } catch (error) {
-    console.log("Fehler beim Einloggen", error);
-    setErrorMessage(error.message);
-  }
-};
-
-*/
-
-
 
 const useFormHandler = () => {
 
@@ -64,7 +13,7 @@ const useFormHandler = () => {
     const [successMessage, setSuccessMessage] = useState("");
     const [currentUser, setCurrentUser] = useState("")
     const [loading, setLoading] = useState("")
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState(null)
     const dispatch = useDispatch();
 
      const submitHandlerr = async (formData, action, dispatch, router) => {
@@ -79,7 +28,11 @@ const useFormHandler = () => {
        }
 
        console.log(action)
-       console.log(formData)
+       
+
+       if(action === "reset"){
+         console.log('MOINCITO')
+       }
 
 
 
@@ -116,6 +69,8 @@ const useFormHandler = () => {
                  setSuccessMessage(data.message);
                  setCurrentUser(data.data);
 
+                 
+
                  if (
                    data.data &&
                    data.data.email === formData.email &&
@@ -142,6 +97,9 @@ const useFormHandler = () => {
 
          if (action === "register") {
 
+            console.log('REGISTER')
+
+            
              try {
                setLoading(true);
 
@@ -154,8 +112,10 @@ const useFormHandler = () => {
                  },
                  body: JSON.stringify({
                    action,
+                   name: formData.name,
                    email: formData.email,
                    password: formData.password,
+                   passwordRep: formData.passwordRep
                  }),
                });
 
@@ -166,6 +126,8 @@ const useFormHandler = () => {
                  setLoading(false);
                  setErrorMessage(data.error);
                } else {
+
+                console.log(data)
                  setLoading(false);
                  setIsLoggedIn(true);
                  //dispatch(login());
@@ -185,6 +147,7 @@ const useFormHandler = () => {
              } catch (error) {
                console.log("Fehler beim Einloggen", error);
              }
+          
          }
          
 
@@ -193,6 +156,9 @@ const useFormHandler = () => {
 
 
      };
+
+
+     console.log(errorMessage)
 
      return {
        errorMessage,

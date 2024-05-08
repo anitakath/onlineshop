@@ -23,12 +23,10 @@ const Necklaces = ({necklacesData, info}) => {
     return <p> loading...</p>;
   }
 
-  console.log(necklacesData)
-  console.log(info)
 
   const dispatch = useDispatch()
   const cartItems = useSelector((state) => state.cart)
-  console.log(cartItems)
+ 
 
 
 
@@ -39,17 +37,15 @@ const Necklaces = ({necklacesData, info}) => {
   }
 
   const decrement = (item) =>{
-    console.log(item)
     dispatch(decrementItem(item))
   }
 
 
   const wishlistItems = useSelector((state) => (state.wishlist))
-  console.log(wishlistItems)
+ 
 
   const addToWishlistHandler = (item) =>{
-    console.log('adding')
-    console.log(item)
+ 
     dispatch(incrementWishlist(item));
 
     setClickedItemId(item.product_id);

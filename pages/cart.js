@@ -39,7 +39,7 @@ const Cart = () => {
   const dispatch = useDispatch()
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
-  console.log(isLoggedIn)
+  
 
   const currentUserObject = useSelector((state) => state.currentUser.user);
 
@@ -52,7 +52,7 @@ const Cart = () => {
 
 
   const cartItems = useSelector((state) => state.cart);
-  console.log(cartItems)
+  
   
   useEffect(()  =>{
      if (cartItems.length > 0) {
@@ -95,14 +95,13 @@ const Cart = () => {
     }
   }, [cartItems])
 
-  console.log(isEmpty)
+  
 
 
   
 
 
   const deleteItemHandler = (item) =>{
-    console.log(item)
     dispatch(deleteAllItems(item));
 
   }
@@ -178,7 +177,7 @@ const Cart = () => {
 
 
 
-  console.log(orderNum)
+ 
 
 
 
@@ -198,7 +197,7 @@ const Cart = () => {
 
           {cartItems.map((item) => {
             return (
-              <div className={styles.cartItemContainer}>
+              <div className={styles.cartItemContainer} key={item.id}>
                 <div className={styles.cartItemImage}>
                   <Image
                     className={styles.image}

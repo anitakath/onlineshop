@@ -93,12 +93,74 @@
    
 }
 
-.forgotPasswordLink{
+.forgotPassword_div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.forgotPassword_btn{
     margin: 11px;
-     z-index: 1000;
+    z-index: 1000000;
+    border: none;
+    cursor: pointer;
+    width: 70%;
+    height: 40px;
+    background: transparent;
+    transition: 0.2s ease;
+}
+
+.forgotPassword_btn:hover{
+    background: rgba(255,255,255, 0.5);
 }
 
 
+.forgotPassword_input{
+    border: none;
+    width: 100%;
+    margin: 30px;
+    height: 40px;
+    z-index: 100000;
+    font-size: 1.3rem;
+    background: rgba(255,255,255, 0.4);
+    border-bottom: 1px solid white;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.forgotPassword_btn_opaque{
+    margin: 11px;
+    z-index: 1000000;
+    border: none;
+    cursor: pointer;
+    width: 70%;
+    height: 40px;
+    background: transparent;
+    transition: 0.2s ease;
+    opacity: 0.6;
+}
+
+.forgotPassword_input:focus{
+    outline: none;
+    border: none;
+}
+
+.submit_form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit_form button{
+    border: none;
+    position: relative;
+    bottom: 15px;
+    height: 30px;
+    width: 180px;
+
+}
 
 
 .registerContainer{
@@ -106,7 +168,17 @@
 }
 
 
+.input_div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 10000000;
+}
 
+.input_div label{
+    position: relative;
+    top: 20px;
+}
 .loginForm button:hover, .newsletterForm button:hover, .registerContainer button:hover{
     transition: 0.4s ease;
     background-color: rgba(255, 255, 255, 0.3);

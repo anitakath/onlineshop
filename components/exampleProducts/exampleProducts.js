@@ -26,10 +26,7 @@ const ExampleProducts = ({ productsData, randomProductss, productss }) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   //const [newProduct, setNewProduct] = useState('');
 
-  console.log(randomProductss);
-  console.log(randomProducts)
-  console.log(productss);
-  console.log(products)
+ 
 
   useEffect(() => {
     if (randomProductss && productss) {
@@ -120,7 +117,7 @@ const ExampleProducts = ({ productsData, randomProductss, productss }) => {
       const randomIndex = Math.floor(Math.random() * products.length);
       if (!randomArray.includes(products[randomIndex])) {
         randomArray.push(products[randomIndex]);
-        //console.log(products[randomIndex]);
+      
       }
     }
 

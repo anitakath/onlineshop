@@ -26,9 +26,7 @@ import { decrementWishlist } from "@/store/wishlistSlice";
 
 
 const Wishlist = ({ greeting, productss, randomProductss }) => {
-  console.log("PRODUCTSTSTSTSTSTS");
-  console.log(productss);
-  console.log(randomProductss);
+
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -41,7 +39,7 @@ const Wishlist = ({ greeting, productss, randomProductss }) => {
     setWishlist(true);
     setSelectedItem(item);
     setModalIsOpen(true);
-    console.log(item);
+   
   };
 
   const closeModal = () => {
@@ -64,15 +62,10 @@ const Wishlist = ({ greeting, productss, randomProductss }) => {
   const dispatch = useDispatch();
 
   const addItemHandler = () => {
-    console.log("moincito");
     dispatch(incrementItem(selectedItem));
     dispatch(decrementWishlist(selectedItem));
     setAddedItem(true);
   };
-
-  console.log(wishlistItems);
-  console.log(wishlist);
-  console.log(selectedItem);
 
   useEffect(() => {
     if (wishlistItems.length > 0) {
@@ -83,7 +76,6 @@ const Wishlist = ({ greeting, productss, randomProductss }) => {
   const router = useRouter();
 
   const navigateToCartHandler = () => {
-    console.log("hi");
     router.push("/cart");
   };
 
@@ -99,9 +91,6 @@ const Wishlist = ({ greeting, productss, randomProductss }) => {
         setItemDeleted(null)
       }, 3000)*/
   };
-
-  console.log(selectedItem);
-
 
 
 
