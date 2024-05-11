@@ -31,9 +31,7 @@ import MyOrders from "@/components/profile/my-orders";
 
 const UserProfile = () =>{
 
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-
-  console.log(isLoggedIn)
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
 
   const [userProfile, setUserProfile] = useState("Start")

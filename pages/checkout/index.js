@@ -14,11 +14,7 @@ const Checkout = () =>{
    const router = useRouter();
    const { orderId } = router.query;
 
-   console.log(orderId)
-
  
-
-
 
 
     return (
@@ -33,13 +29,6 @@ const Checkout = () =>{
              <Image src="/images/thankyou.jpg" className={styles.thanks_img} width={200} height={200} alt="thank you so much"></Image>
 
           </div>
-
-
-
-
-
-         
-         
         
         </div>
      

@@ -58,7 +58,7 @@ const MyOrders = ({ userProfile, setUserProfile }) => {
         .order("orderId, created_at");
 
       if (error) {
-        console.error("Error fetching orders:", error.message);
+        //console.error("Error fetching orders:", error.message);
       } else {
         // Gruppiere die Bestellungen nach orderId und created_at
 

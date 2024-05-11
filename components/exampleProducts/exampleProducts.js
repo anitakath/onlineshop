@@ -33,7 +33,7 @@ const ExampleProducts = ({ productsData, randomProductss, productss }) => {
       setRandomProducts(randomProductss);
       setProducts(productss);
       setShowProducts(true);
-      //dispatch(setRandomProductss(randomArray));
+
     }
    
   }, []);
@@ -63,12 +63,12 @@ const ExampleProducts = ({ productsData, randomProductss, productss }) => {
         (p) => p.id !== product.id
       );
       dispatch(setUpdatedRandomProducts(product));
-      console.log(updatedRandomProducts);
+
       setRandomProducts(updatedRandomProducts);
 
       // überprüfe, ob products noch Objekte hält
       if (filterProductArray.length === 0) {
-        console.log("alle Produkte gesehen");
+       
       } else {
         let newProduct;
         let randomIndex;
@@ -123,6 +123,8 @@ const ExampleProducts = ({ productsData, randomProductss, productss }) => {
 
     setRandomProducts(randomArray);
   };
+
+
 
   return (
     <div className={styles.wrapper}>

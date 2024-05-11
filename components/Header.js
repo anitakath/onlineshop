@@ -31,9 +31,6 @@ const Header = () =>{
      currentUser = currentUserObject.name;
    }
 
-
-    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
-
     const cartItems = useSelector((state) => state.cart)
 
     const quantities = cartItems.map((item) => item.quantity)

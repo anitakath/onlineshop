@@ -25,7 +25,7 @@ import { decrementWishlist } from "@/store/wishlistSlice";
 
 
 
-const Wishlist = ({ greeting, productss, randomProductss }) => {
+const Wishlist = ({ productss, randomProductss }) => {
 
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -84,12 +84,6 @@ const Wishlist = ({ greeting, productss, randomProductss }) => {
   const deleteItemFromWhishlistHandler = (e) => {
     e.preventDefault();
     dispatch(decrementWishlist(selectedItem));
-    /*setItemDeleted(true)
-      console.log('deleting from wishlist...')
-
-      setTimeout(()=>{
-        setItemDeleted(null)
-      }, 3000)*/
   };
 
 
@@ -237,7 +231,6 @@ export async function getStaticProps() {
     console.log(error);
     return {
       props: {
-        greeting: "ADIOSCITO",
         productss: null,
         randomProductss: null,
       },

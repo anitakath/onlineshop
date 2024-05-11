@@ -41,7 +41,6 @@ const Necklaces = ({necklacesData, info}) => {
   }
 
 
-  const wishlistItems = useSelector((state) => (state.wishlist))
  
 
   const addToWishlistHandler = (item) =>{
@@ -112,8 +111,6 @@ export async function getStaticProps() {
     const data = await response.json();
 
 
-    console.log(data)
-
     return {
       props: {
         necklacesData: data,
@@ -121,7 +118,7 @@ export async function getStaticProps() {
       },
     };
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     return {
       props: {
         necklacesData: [],

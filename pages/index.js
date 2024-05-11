@@ -3,7 +3,8 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 
 import { useState } from 'react';
-
+import {useSelector} from 'react-redux'
+import { PersistGate } from "redux-persist/integration/react";
 
 
 import Layout from '@/components/Layout';
@@ -44,6 +45,7 @@ export default function Home() {
 
   return (
     <div className={styles.backgroundContainer}>
+     
       <Layout>
         <WebSlider />
 
@@ -54,7 +56,6 @@ export default function Home() {
           >
             {btnText} menu
           </button>
-          
         </div>
 
         <Transition

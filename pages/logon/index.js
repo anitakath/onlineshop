@@ -34,7 +34,6 @@ export async function getStaticProps() {
 
 const Logon = ({userss}) =>{
 
-  console.log(userss)
   const dispatch = useDispatch();
   const [users, setUsers] = useState([]);
 
@@ -54,7 +53,7 @@ const Logon = ({userss}) =>{
 
         dispatch(setLoading(false));
       } catch (error) {
-        console.error(error);
+        //console.error(error);
       }
     };
 

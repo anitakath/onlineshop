@@ -12,9 +12,8 @@ const Newsletter = (props) =>{
   const formData = props.formData
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  //const submitHandler = props.submitHandler;
 
-   const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("");
 
 
   const emailChangeHandler = (e) => {
@@ -48,8 +47,6 @@ const Newsletter = (props) =>{
 
           const data = await response.json();
 
-          console.log(data);
-
           if(data.error){
             setError(data.error)
             setSuccess("")
@@ -62,8 +59,7 @@ const Newsletter = (props) =>{
           }
 
         } catch(error){
-          console.log(error)
-         
+          //console.log(error)
         }
       }
 

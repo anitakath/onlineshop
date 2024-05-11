@@ -27,11 +27,11 @@ const useFormHandler = () => {
          return;
        }
 
-       console.log(action)
+   
        
 
        if(action === "reset"){
-         console.log('MOINCITO')
+         
        }
 
 
@@ -41,8 +41,6 @@ const useFormHandler = () => {
              try {
                setLoading(true);
 
-               console.log("MOINCITOOOOO");
-               console.log("LOGIN!!!!!!")
 
                const response = await fetch("/api/login", {
                  method: "POST",
@@ -77,8 +75,7 @@ const useFormHandler = () => {
                    data.data.password === formData.password
                  ) {
                    setCurrentUser(data.data);
-                   //const currentUser = data.data;
-                   //dispatch(setCurrentUser(currentUser));
+   
                  }
                }
              } catch (error) {
@@ -97,13 +94,13 @@ const useFormHandler = () => {
 
          if (action === "register") {
 
-            console.log('REGISTER')
+         
 
             
              try {
                setLoading(true);
 
-               console.log("MOINCITOOOOO");
+              
 
                const response = await fetch("/api/login", {
                  method: "POST",
@@ -127,7 +124,7 @@ const useFormHandler = () => {
                  setErrorMessage(data.error);
                } else {
 
-                console.log(data)
+             
                  setLoading(false);
                  setIsLoggedIn(true);
                  //dispatch(login());
@@ -145,7 +142,7 @@ const useFormHandler = () => {
                  }
                }
              } catch (error) {
-               console.log("Fehler beim Einloggen", error);
+               //console.log("Fehler beim Einloggen", error);
              }
           
          }
@@ -157,8 +154,6 @@ const useFormHandler = () => {
 
      };
 
-
-     console.log(errorMessage)
 
      return {
        errorMessage,
