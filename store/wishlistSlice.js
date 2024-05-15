@@ -26,8 +26,8 @@ const wishlistSlice = createSlice({
       if (findProductIndex === -1) {
         product.quantity += 1;
         state.push(product);
-      } else {
-          return
+      }else{
+        state[findProductIndex].quantity += 1;
       }
 
      

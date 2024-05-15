@@ -25,6 +25,7 @@ const persistConfig = {
   key: "root",
   storage,
   whitelist: ["auth", "cart", "wishlist", "products", "users", "currentUser"],
+  timeout: 500,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

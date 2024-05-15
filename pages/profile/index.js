@@ -22,8 +22,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
 //REDUX
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "@/store/authSlice";
 
 //COMPONENTS
 import MyOrders from "@/components/profile/my-orders";
@@ -32,11 +32,14 @@ import MyOrders from "@/components/profile/my-orders";
 const UserProfile = () =>{
 
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
-
+  const dispatch = useDispatch()
 
   const [userProfile, setUserProfile] = useState("Start")
 
  
+  const logoutHandler = () =>{
+    dispatch(logout())
+  }
 
     return (
       <Layout>
@@ -71,7 +74,7 @@ const UserProfile = () =>{
                         icon={faBagShopping}
                         className={styles.icon}
                       />
-                      <p className={styles.Link}>My orders</p>
+                      <button className={styles.Link}>My orders</button>
                     </li>
 
                     <li>
@@ -79,22 +82,22 @@ const UserProfile = () =>{
                         icon={faRotateLeft}
                         className={styles.icon}
                       />
-                      <p className={styles.Link}>My returns</p>
+                      <button className={styles.Link}>My returns</button>
                     </li>
 
                     <li>
                       <FontAwesomeIcon icon={faInfo} className={styles.icon} />
-                      <p className={styles.Link}> Help & F.A.Q.</p>
+                      <button className={styles.Link}> Help & F.A.Q.</button>
                     </li>
 
                     <li>
                       <FontAwesomeIcon icon={faCrown} className={styles.icon} />
-                      <p className={styles.Link}>V.I.P</p>
+                      <button className={styles.Link}>V.I.P</button>
                     </li>
 
                     <li>
                       <FontAwesomeIcon icon={faGift} className={styles.icon} />
-                      <p className={styles.Link}> Gift cards & vouchers </p>
+                      <button className={styles.Link}> Gift cards & vouchers </button>
                     </li>
                   </ul>
                   <ul className={styles.profile_table}>
@@ -103,18 +106,18 @@ const UserProfile = () =>{
                         icon={faAddressCard}
                         className={styles.icon}
                       />
-                      <p className={styles.Link}> My details</p>
+                      <button className={styles.Link}> My details</button>
                     </li>
                     <li>
                       <FontAwesomeIcon icon={faLock} className={styles.icon} />
-                      <p className={styles.Link}>Change password</p>
+                      <button className={styles.Link}>Change password</button>
                     </li>
                     <li>
                       <FontAwesomeIcon
                         icon={faCreditCard}
                         className={styles.icon}
                       />
-                      <p className={styles.Link}>My payment methods</p>
+                      <button className={styles.Link}>My payment methods</button>
                     </li>
 
                     <li>
@@ -122,14 +125,14 @@ const UserProfile = () =>{
                         icon={faPenToSquare}
                         className={styles.icon}
                       />
-                      <p className={styles.Link}>Contact</p>
+                      <button className={styles.Link}>Contact</button>
                     </li>
                     <li>
                       <FontAwesomeIcon
                         icon={faFaceFrownOpen}
                         className={styles.icon}
                       />
-                      <p className={styles.Link}>Logout</p>
+                      <button className={styles.Link} onClick={logoutHandler}>Logout</button>
                     </li>
                   </ul>
                 </div>

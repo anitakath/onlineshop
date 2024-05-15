@@ -13,17 +13,17 @@
     text-align: center;
     font-size: 1.2rem;
     margin: 20px;
+    z-index: 1000;
 }
 
 
 .subtitle{
     margin: 10px 20px;
-}
-
-.subtitle {
     font-weight: bolder;
     color: black;
+    z-index: 10000;
 }
+
 
 
 .orderId{
