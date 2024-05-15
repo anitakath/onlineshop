@@ -19,25 +19,23 @@ const productsSlice = createSlice({
     },
     setRandomProductss: (state, action) => {
       state.randomProducts = action.payload;
-      console.log(action.payload)
       console.log(state.randomProducts)
     },
     setShowProductss: (state, action) => {
-      state.showProducts.action.payload;
+      
+      state.showProducts = action.payload;
     },
     setSelectedProductt: (state, action) => {
       state.selectedProduct = action.payload;
-      console.log(action.payload);
     },
     setFilterProductArray: (state, action) => {
       state.filterProductArray = action.payload;
     },
     setUpdatedRandomProducts: (state, action) => {
-        console.log(action.payload)
-   
-      const filteredRandomProducts = state.randomProducts.filter((p) => p !== action.payload);
-      console.log(filteredRandomProducts)
-      state.updateRandomProducts = [... filteredRandomProducts] 
+      const filteredRandomProducts = state.randomProducts.filter(
+        (p) => p !== action.payload
+      );
+      state.updateRandomProducts = [...filteredRandomProducts];
     },
     setNewProduct: (state, action) => {
       state.newProduct = action.payload;

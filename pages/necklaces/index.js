@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 //COMPONENTS
 import Layout from "@/components/Layout";
@@ -12,7 +12,7 @@ import {incrementWishlist} from '@/store/wishlistSlice'
 
 //STYLES
 import styles from "./Necklaces.module.css";
-import { decrement, increment } from "@/store/counterSlice";
+
 
 const Necklaces = ({necklacesData, info}) => {
 
@@ -28,8 +28,6 @@ const Necklaces = ({necklacesData, info}) => {
   const cartItems = useSelector((state) => state.cart)
  
 
-
-
   const increment = (item) =>{
     
     dispatch(incrementItem(item))
@@ -41,15 +39,9 @@ const Necklaces = ({necklacesData, info}) => {
   }
 
 
- 
-
   const addToWishlistHandler = (item) =>{
- 
     dispatch(incrementWishlist(item));
-
     setClickedItemId(item.product_id);
-    
-
     
   }
 

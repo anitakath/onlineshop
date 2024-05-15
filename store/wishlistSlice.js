@@ -35,18 +35,19 @@ const wishlistSlice = createSlice({
     decrementWishlist: (state, action) =>{
       const { id } = action.payload;
 
+
       const findProductIndex = state.findIndex((product) => product.id === id);
 
-      if (state[findProductIndex].quantity > 1) {
-        state[findProductIndex].quantity -= 1;
-      } else {
-        state.splice(findProductIndex, 1);
-      }
+     if (state[findProductIndex] && state[findProductIndex].quantity > 1) {
+       state[findProductIndex].quantity -= 1;
+     } else {
+       state.splice(findProductIndex, 1);
+     }
 
-      state.forEach((product) => {
-        const totalPrice = product.quantity * product.price;
-        product.totalPrice = totalPrice.toFixed(2);
-      });
+     state.forEach((product) => {
+       const totalPrice = product.quantity * product.price;
+       product.totalPrice = totalPrice.toFixed(2);
+     });
     }
   },
 });

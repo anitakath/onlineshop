@@ -1,5 +1,4 @@
 
-
 //COMPONENTS
 import Layout from "@/components/Layout";
 import Login from "@/components/logon/Login";
@@ -12,11 +11,8 @@ import styles from '../../styles/Logon.module.css'
 
 import { useState, useEffect } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { setUsers_data, setLoading} from "../../store/usersSlice";
-
-import { useRouter } from "next/router";
-import { login } from "@/store/authSlice";
 
 
 
@@ -31,6 +27,9 @@ export async function getStaticProps() {
     },
   };
 }
+
+
+
 
 const Logon = ({userss}) =>{
 
@@ -104,8 +103,6 @@ const Logon = ({userss}) =>{
     }
   };
 
-
-  console.log(formData)
 
   return (
     <Layout>

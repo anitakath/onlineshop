@@ -115,9 +115,7 @@ export default async function handler(req, res) {
       escape(password);
 
       const trimEmail = email.trim();
-
       const trimPassword = password.trim();
-
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Der RegEx für E-Mail-Adressen
 
       if (!trimEmail || !emailRegex.test(trimEmail)) {

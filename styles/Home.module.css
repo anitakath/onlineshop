@@ -52,8 +52,8 @@
 }
 
 .openMobilenav_btn{
-    display: none;
-  }
+    display: none;    
+}
 
 @media screen and (max-width: 800px){
 
@@ -61,7 +61,6 @@
     position: relative;
     top: 2px;
     height: 30px;
-  
 
   }
 

@@ -1,175 +1,123 @@
-
-import { v4 as uuidv4 } from 'uuid'; // Importiere die UUID-Bibliothek
+ import { v4 as uuidv4 } from 'uuid'; // Importiere die UUID-Bibliothek
 
 //REACT
 import {useState, useEffect} from 'react'
+
 //REDUX 
 import { useSelector, useDispatch } from "react-redux";
 import { incrementItem, decrementItem, deleteAllItems} from "@/store/cartSlice";
-import { incrementWishlist } from '@/store/wishlistSlice'
-import { login, logout } from '@/store/authSlice'
 import { useRouter } from 'next/router';
-
 import Layout from "@/components/Layout";
-
-//COMPONENTS
-import Login from '@/components/logon/Login';
-import Register from '@/components/logon/Register';
-import Newsletter from '@/components/logon/Newsletter';
 
 
 //STYLES
 import styles from '../styles/Cart.module.css'
 import Image from "next/image";
-import Link from 'next/link';
 
 
-//FONT AWESOME
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { supabase } from '@/services/supabaseClient';
-import { current } from '@reduxjs/toolkit';
+
 
 
 const Cart = () => {
 
-  const router = useRouter()
-  const [ isEmpty, setIsEmpty ] = useState(true)
-  const [loginInfo, setLoginInfo] = useState(false)
+  const router = useRouter();
+  const [isEmpty, setIsEmpty] = useState(true);
+  const [loginInfo, setLoginInfo] = useState(false);
 
-  const dispatch = useDispatch()
-
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
-  
-
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
   const currentUserObject = useSelector((state) => state.currentUser.user);
 
+  // Extract the first name from the currentUser object
   let currentUser = "";
-
   if (currentUserObject != null) {
     currentUser = currentUserObject.name;
   }
 
-
-
+  // get all cart items that the user had previously added to their cart
   const cartItems = useSelector((state) => state.cart);
-  
-  
-  useEffect(()  =>{
-     if (cartItems.length > 0) {
-       setIsEmpty(false);
-     }
-     
-  }, [])
+  useEffect(() => {
+    if (cartItems.length > 0) {
+      setIsEmpty(false);
+    }
+  }, []);
 
- 
-
- 
-
-  const totalPrice = cartItems.reduce((acc, item) =>{
+  // calculate the totalPrice from all cartitems
+  const totalPrice = cartItems.reduce((acc, item) => {
     const price = item.price;
     const quantity = item.quantity;
-    const amount = price * quantity
-  
+    const amount = price * quantity;
 
-    return acc + amount
-  }, 0)
+    return acc + amount;
+  }, 0);
 
-  const fixedTotalPrice = totalPrice.toFixed(2)
-
+  const fixedTotalPrice = totalPrice.toFixed(2);
 
 
-
-  const increment = (item) =>{
+  const increment = (item) => {
     dispatch(incrementItem(item));
-    
-  }
+  };
 
-  const decrement = (item) =>{
-    dispatch(decrementItem(item))
+  const decrement = (item) => {
+    dispatch(decrementItem(item));
+  };
 
-  }
-
-  useEffect(()=>{
+  useEffect(() => {
     if (cartItems.length <= 0) {
       setIsEmpty(true);
     }
-  }, [cartItems])
+  }, [cartItems]);
 
-  
-
-
-  
-
-
-  const deleteItemHandler = (item) =>{
+  const deleteItemHandler = (item) => {
     dispatch(deleteAllItems(item));
+  };
 
-  }
+  let userName = isLoggedIn ? "ANNE, YOUR" : "YOUR";
 
-  let userName = isLoggedIn  ? 'ANNE, YOUR' : 'YOUR'
+  const [orderNum, setOrderNum] = useState(null);
 
-
-
-
-  const [orderNum, setOrderNum] = useState(null)
-
-
-  const checkoutHandler = async (e) =>{
+  const checkoutHandler = async (e) => {
     e.preventDefault();
-    
+
     if (currentUserObject != null) {
       const orderId = uuidv4();
 
       const cartItemsWithUniqueOrderId = cartItems.map((item) => ({
         ...item,
-        id: uuidv4(), // Generiere eine eindeutige orderId für jedes Objekt
+        id: uuidv4(),
         orderId: orderId,
         email: currentUserObject.email,
       }));
-
 
       const { data, error } = await supabase
         .from("SHOPNAME_myOrders")
         .insert(cartItemsWithUniqueOrderId);
 
       if (error) {
-        //console.error("Failed to insert data into SHOPNAME_myOrders:",error.message);
+        console.error(
+          "Failed to insert data into SHOPNAME_myOrders:",
+          error.message
+        );
         return;
-      }
-
-      //console.log("Data inserted into SHOPNAME_myOrders:", data);
-
-      if (!error) {
+      } else {
         setOrderNum(orderId);
       }
-
     } else if (isLoggedIn === false) {
       setLoginInfo(true);
 
       setTimeout(() => {
-   
         router.push("/logon");
       }, 2000); //Scrollen nach 2 Sekunden
     }
-    
-  }
+  };
 
-  if(orderNum){
-
+  if (orderNum) {
     router.push({
       pathname: "/checkout",
       query: { orderId: orderNum },
     });
-
   }
-
-
-
- 
-
-
-
-
 
   return (
     <Layout>
@@ -258,7 +206,10 @@ const Cart = () => {
               </div>
             </div>
 
-            <p className={styles.subtitle}> Do you have a discount code? Add it in the next step. </p>
+            <p className={styles.subtitle}>
+              {" "}
+              Do you have a discount code? Add it in the next step.{" "}
+            </p>
           </div>
         )}
       </div>

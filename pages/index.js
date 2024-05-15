@@ -3,8 +3,6 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 
 import { useState } from 'react';
-import {useSelector} from 'react-redux'
-import { PersistGate } from "redux-persist/integration/react";
 
 
 import Layout from '@/components/Layout';
@@ -22,22 +20,17 @@ import MobileNavigation from '@/components/navigation/MobileNavigation';
 import NewsLetter from '@/components/call_to_actions/NewsLetter';
 
 
-//HOOKS
-import useSWR from 'swr'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
 
 export default function Home() {
 
-
-
   const [mobileNavIsOpen, setMobileNavIsOpen] = useState(false)
 
   const openMobileNavHandler = () =>{
-
     setMobileNavIsOpen(!mobileNavIsOpen)
-
   }
 
   let btnText = mobileNavIsOpen ? 'close' : 'open'
@@ -49,6 +42,9 @@ export default function Home() {
       <Layout>
         <WebSlider />
 
+
+        {/* MOBILE VERSION */}
+        
         <div className={styles.flex}>
           <button
             onClick={openMobileNavHandler}

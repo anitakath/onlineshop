@@ -1,6 +1,5 @@
 //REACT
 import { useState, useEffect} from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 //COMPONENTS
@@ -25,8 +24,7 @@ import { decrementWishlist } from "@/store/wishlistSlice";
 
 
 
-const Wishlist = ({ productss, randomProductss }) => {
-
+const Wishlist = ({ products, randomProducts }) => {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -83,7 +81,12 @@ const Wishlist = ({ productss, randomProductss }) => {
 
   const deleteItemFromWhishlistHandler = (e) => {
     e.preventDefault();
+
     dispatch(decrementWishlist(selectedItem));
+    
+
+    closeModal()
+    setIsEmpty(true)
   };
 
 
@@ -92,10 +95,10 @@ const Wishlist = ({ productss, randomProductss }) => {
     const reloadrandomProductsHandler = () => {
       const randomArray = [];
       while (randomArray.length < 5) {
-        const randomIndex = Math.floor(Math.random() * randomProductss.length);
-        if (!randomArray.includes(randomProductss[randomIndex])) {
-          randomArray.push(randomProductss[randomIndex]);
-          console.log(randomProductss[randomIndex]);
+        const randomIndex = Math.floor(Math.random() * randomProducts.length);
+        if (!randomArray.includes(randomProducts[randomIndex])) {
+          randomArray.push(randomProducts[randomIndex]);
+          console.log(randomProducts[randomIndex]);
         }
       }
 
@@ -143,7 +146,7 @@ const Wishlist = ({ productss, randomProductss }) => {
 
                   {addedItem && (
                     <button className={styless.productInfo}>
-                      product has been successfully added to your shopping cart.{" "}
+                      product has been successfully added to your shopping cart.
                       <br />
                       <button
                         onClick={navigateToCartHandler}
@@ -191,7 +194,7 @@ const Wishlist = ({ productss, randomProductss }) => {
 
       <div className={styles.wrapper}>
         <div className={styles.examples_div}>
-          <ExampleProducts randomProductss={randomProductss} productss={productss} />
+          <ExampleProducts randomProductss={randomProducts} productss={products} />
         </div>
       </div>
     </Layout>
@@ -200,31 +203,39 @@ const Wishlist = ({ productss, randomProductss }) => {
 
 export default Wishlist;
 
+
+
+function generateRandomArray(products) {
+  const randomArray = [];
+  while (randomArray.length < 6) {
+    const randomIndex = Math.floor(Math.random() * products.length);
+    if (!randomArray.includes(products[randomIndex])) {
+      randomArray.push(products[randomIndex]);
+    }
+  }
+  return randomArray;
+}
+
+
 export async function getStaticProps() {
 
 
   try {
-    const responseOne = await fetch("http://localhost:3000/api/necklacesData");
-    const dataOne = await responseOne.json();
+    const necklacesResponse = await fetch("http://localhost:3000/api/necklacesData");
+    const necklacesData = await necklacesResponse.json();
 
-    const responseTwo = await fetch("http://localhost:3000/api/randomProductsData");
-    const dataTwo = await responseTwo.json();
+    const randomProductsResponse = await fetch("http://localhost:3000/api/randomProductsData");
+    const randomProductsData = await randomProductsResponse.json();
 
-    const products = [...dataOne, ...dataTwo];
+    const products = [...necklacesData, ...randomProductsData];
 
-    const randomArray = [];
-    while (randomArray.length < 6) {
-      const randomIndex = Math.floor(Math.random() * products.length);
-      if (!randomArray.includes(products[randomIndex])) {
-        randomArray.push(products[randomIndex]);
-      }
-    }
+    const randomArray = generateRandomArray(products)
+
 
     return {
       props: {
-        greeting: 'MOINCITO',
-        productss: products,
-        randomProductss: randomArray,
+        products: products,
+        randomProducts: randomArray,
       },
     };
   } catch (error) {

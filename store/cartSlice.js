@@ -44,22 +44,27 @@ const cartSlice = createSlice({
             const { id } = action.payload;
 
             const findProductIndex = state.findIndex((product) => product.id === id)
-          
-            if(state[findProductIndex].quantity > 1){
-                state[findProductIndex].quantity -=1;
-            } else{
-                state.splice(findProductIndex, 1)
-            }
 
-            state.forEach((product) => {
-              const totalPrice = product.quantity * product.price;
-              product.totalPrice = totalPrice.toFixed(2);
-            });
+            if (findProductIndex >= 0) {
+              if (state[findProductIndex].quantity === 0) {
+                return;
+              } else if (state[findProductIndex].quantity > 1) {
+                state[findProductIndex].quantity -= 1;
+              } else {
+                state.splice(findProductIndex, 1);
+              }
+
+              state.forEach((product) => {
+                const totalPrice = product.quantity * product.price;
+                product.totalPrice = totalPrice.toFixed(2);
+              });
+            }
+    
         },
 
         deleteAllItems: (state, action) =>{
 
-            let { id, quantity } = action.payload;
+            let { id, } = action.payload;
 
             const findProductIndex = state.findIndex((product) => product.id === id)
 

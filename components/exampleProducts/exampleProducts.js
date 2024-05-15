@@ -17,39 +17,50 @@ import styles from './exampleProducts.module.css'
 
 //FONT AWESOME
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {faSpinner, faCartPlus, faHeart,faXmark} from '@fortawesome/free-solid-svg-icons'
+import {faSpinner, faCartPlus, faHeart,faXmark, faCaretDown} from '@fortawesome/free-solid-svg-icons'
 
-const ExampleProducts = ({ productsData, randomProductss, productss }) => {
+
+const ExampleProducts = ({randomProductss, productss }) => {
+  const dispatch = useDispatch();
+
   const [products, setProducts] = useState([]);
   const [randomProducts, setRandomProducts] = useState([]);
+  const [availableProducts, setAvailableProducts] = useState([]);
   const [showProducts, setShowProducts] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  //const [newProduct, setNewProduct] = useState('');
+  const [initialized, setInitialized] = useState(false);
 
- 
+  const [noProducts, setNoProducts] = useState(false);
 
   useEffect(() => {
-    if (randomProductss && productss) {
+    const randomProductIds = randomProducts.map((product) => product.id);
+    const availableProducts = products.filter(
+      (product) => !randomProductIds.includes(product.id)
+    );
+
+    setAvailableProducts(availableProducts);
+
+  }, [products]);
+
+  
+
+  const wishlistItems = useSelector((state) => state.wishlist);
+
+
+  useEffect(() => {
+    if (randomProductss && productss && !initialized) {
       setRandomProducts(randomProductss);
       setProducts(productss);
       setShowProducts(true);
-
+      setInitialized(true);
     }
-   
-  }, []);
-
-
-
-
-       
-  const dispatch = useDispatch();
+  }, [productss, randomProductss, initialized]);
 
   const addProductHandler = (product) => {
     //füge das ausgewählte Produkt zum Warenkorb hinzu.
     dispatch(incrementItem(product));
 
     //füge dem Produkt den auserwählten Zustand zu, um es optisch verändert anzeigen zu lassen.
-
     dispatch(setSelectedProductt(product));
     setSelectedProduct(product);
 
@@ -62,45 +73,109 @@ const ExampleProducts = ({ productsData, randomProductss, productss }) => {
       const updatedRandomProducts = randomProducts.filter(
         (p) => p.id !== product.id
       );
-      dispatch(setUpdatedRandomProducts(product));
+      dispatch(setUpdatedRandomProducts(updatedRandomProducts));
 
-      setRandomProducts(updatedRandomProducts);
+
+
+      setSelectedProduct(null);
+
 
       // überprüfe, ob products noch Objekte hält
-      if (filterProductArray.length === 0) {
-       
-      } else {
-        let newProduct;
-        let randomIndex;
-
-        // Entferne gemeinsame Elemente zwischen filterProductArray und updatedRandomProducts
-        const uniqueProducts = filterProductArray.filter(
-          (product) => !updatedRandomProducts.some((p) => p.id === product.id)
-        );
-
-        if (uniqueProducts.length === 0) {
-          setRandomProducts([...updatedRandomProducts]);
-          return;
-        } else {
-          randomIndex = Math.floor(Math.random() * uniqueProducts.length);
-          newProduct = uniqueProducts[randomIndex];
-
-          /*etNewProduct(newProduct);*/
-          setRandomProducts([...updatedRandomProducts, newProduct]);
-
-          if (randomProducts.length === 0) {
-          }
-        }
-      }
 
       setSelectedProduct(null);
     }, 1000);
   };
 
-  const [noProducts, setNoProducts] = useState(false);
+
+  /*----------------------------- RENDER PRODUCTS -----------------------------  */
+
+
+   const [duplicateProduct, setDuplicateProduct] = useState(null);
+
+
 
   const likeProductHandler = (product) => {
+    // Check whether the product is already in the wish list
+
+    const duplicate = wishlistItems.find((item) => {
+      return item.id === product.id;
+    });
+
+    if (duplicate != undefined) {
+      setDuplicateProduct(product);
+
+      setTimeout(() => {
+        setDuplicateProduct(null);
+      }, 3000);
+      return;
+    }
+
+    // Add the selected product to the wish list
     dispatch(incrementWishlist(product));
+
+    // Select and remove a random product from availableProducts
+    const randomIndex = Math.floor(Math.random() * availableProducts.length);
+    const newRandomProduct = availableProducts[randomIndex];
+
+    // Remove the clicked product from randomProducts...
+    const updatedRandomProducts = randomProducts.filter(
+      (p) => p.id !== product.id
+    );
+
+    // ... replace it with newRandomProduct
+
+    const newRandomProducts = [...updatedRandomProducts, newRandomProduct];
+
+    // remove newRandomProduct from availableProducts
+    const updatedAvailableProducts = availableProducts.filter(
+      (p) => p.id !== newRandomProduct.id
+    );
+
+    setAvailableProducts(updatedAvailableProducts);
+    setRandomProducts(newRandomProducts);
+  };
+
+  
+
+  /*----------------------------- RENDER PRODUCTS -----------------------------  */
+
+  const renderProducts = () => {
+    return randomProducts.map((product) => (
+      <div
+        className={`
+           ${styles.productContainer}
+           ${selectedProduct === product ? styles.selectedProduct : ""}
+           ${duplicateProduct === product ? styles.duplicate : ""}
+        `}
+        key={product.id}
+      >
+        {product && product.img && (
+          <Image
+            src={product.img}
+            alt="jajja"
+            className={styles.product}
+            width={300}
+            height={300}
+            priority={true}
+          />
+        )}
+        <button
+          className={styles.likeProductsBtn}
+          onClick={() => likeProductHandler(product)}
+        >
+          <FontAwesomeIcon icon={faHeart} className={styles.heart} />
+        </button>
+
+        <button
+          className={styles.addProductBtn}
+          onClick={() => addProductHandler(product)}
+        >
+          <FontAwesomeIcon icon={faCartPlus} className={styles.icon} />
+        </button>
+        {duplicateProduct === product ? <p className={styles.duplicate_info}> product already @ wishlist </p> : <p></p>}
+      </div>
+    
+    ));
   };
 
   useEffect(() => {
@@ -117,12 +192,20 @@ const ExampleProducts = ({ productsData, randomProductss, productss }) => {
       const randomIndex = Math.floor(Math.random() * products.length);
       if (!randomArray.includes(products[randomIndex])) {
         randomArray.push(products[randomIndex]);
-      
       }
     }
 
     setRandomProducts(randomArray);
   };
+
+  const [showExampleproducts, setShowExampleProducts] = useState(true)
+
+
+  const closeExampleProducts = () =>{
+
+    setShowExampleProducts(!showExampleproducts)
+
+  }
 
 
 
@@ -131,8 +214,12 @@ const ExampleProducts = ({ productsData, randomProductss, productss }) => {
       <div className={styles.headerContainer}>
         <h2 className={styles.title}>you might like these products...</h2>
         <div className={styles.btn_div}>
-          <button className={styles.close_btn}>
-            <FontAwesomeIcon icon={faXmark} />
+          <button className={styles.close_btn} onClick={closeExampleProducts}>
+            {showExampleproducts ? (
+              <FontAwesomeIcon icon={faXmark} />
+            ) : (
+              <FontAwesomeIcon icon={faCaretDown} />
+            )}
           </button>
           <button className={styles.reload_btn}>
             <FontAwesomeIcon
@@ -146,37 +233,12 @@ const ExampleProducts = ({ productsData, randomProductss, productss }) => {
 
       <div className={styles.productsContainer}>
         {!showProducts && <h1> loading products ... </h1>}
-        {noProducts && <p className={styles.products_info}> you have added all prodcuts to your cart ❤️ </p>}
-        {showProducts &&
-          randomProducts.map((product) => (
-            <div
-              className={`${styles.productContainer} ${
-                selectedProduct === product ? styles.selectedProduct : ""
-              }`}
-            >
-              <Image
-                src={product.img}
-                alt="jajja"
-                className={styles.product}
-                width={300}
-                height={300}
-                priority={true}
-              />
-              <button
-                className={styles.likeProductsBtn}
-                onClick={() => likeProductHandler(product)}
-              >
-                <FontAwesomeIcon icon={faHeart} className={styles.heart} />
-              </button>
-
-              <button
-                className={styles.addProductBtn}
-                onClick={() => addProductHandler(product)}
-              >
-                <FontAwesomeIcon icon={faCartPlus} className={styles.icon} />
-              </button>
-            </div>
-          ))}
+        {noProducts && (
+          <p className={styles.products_info}>
+            you have added all prodcuts to your cart ❤️{" "}
+          </p>
+        )}
+        {showExampleproducts && renderProducts()}
       </div>
     </div>
   );
@@ -185,150 +247,3 @@ const ExampleProducts = ({ productsData, randomProductss, productss }) => {
 export default ExampleProducts;
 
 
-
-
-
- /*
-  
-  
-}
-
-*/
-
-/*
-export async function getStaticProps() {
-  try {
-    const responseOne = await fetch("/api/necklacesData");
-    const dataOne = await responseOne.json();
-
-    const responseTwo = await fetch("/api/randomProductsData");
-    const dataTwo = await responseTwo.json();
-
-    const products = [...dataOne, ...dataTwo];
-
-    const randomArray = [];
-    while (randomArray.length < 6) {
-      const randomIndex = Math.floor(Math.random() * products.length);
-      if (!randomArray.includes(products[randomIndex])) {
-        randomArray.push(products[randomIndex]);
-      }
-    }
-
-    return {
-      props: {
-        productss: randomArray,
-      },
-    };
-  } catch (error) {
-    console.log(error);
-    return {
-      props: {
-        productss: error,
-      },
-    };
-  }
-}
-*/
-
-/*
-
-
-export async function getServerSideProps() {
-
-
-
-
-   try {
-     const responseOne = await fetch("/api/necklacesData");
-     const dataOne = await responseOne.json();
-     const responseTwo = await fetch("/api/randomProductsData");
-     const dataTwo = await responseTwo.json();
-     const products = [...dataOne, ...dataTwo];
-
-     //setProducts(products);
-
-     const randomArray = [];
-     while (randomArray.length < 6) {
-       const randomIndex = Math.floor(Math.random() * products.length);
-       if (!randomArray.includes(products[randomIndex])) {
-         randomArray.push(products[randomIndex]);
-       }
-     }
-
-     return {
-       props: {
-         productss: products,
-       },
-     };
-
-     //dispatch(setRandomProductss(randomArray));
-     //setRandomProducts(randomArray);
-     //setShowProducts(true);
-   } catch (error) {
-     console.log(error);
-     return {
-       props: {
-         productss: error,
-       },
-     };
-   }
-   
-  
-
-   /*
-
-  try {
-    const responseOne = await fetch("/api/necklacesData");
-    const dataOne = await responseOne.json();
-    const responseTwo = await fetch("/api/randomProductsData");
-    const dataTwo = await responseTwo.json();
-    const products = [...dataOne, ...dataTwo];
-
-    //setProducts(products);
-
-
-
-    const randomArray = [];
-    while (randomArray.length < 6) {
-      const randomIndex = Math.floor(Math.random() * products.length);
-      if (!randomArray.includes(products[randomIndex])) {
-        randomArray.push(products[randomIndex]);
-      }
-    }
-
-     return {
-       props: {
-         products: data,
-       },
-     };
-
-    //dispatch(setRandomProductss(randomArray));
-    //setRandomProducts(randomArray);
-    //setShowProducts(true);
-  } catch (error) {
-    console.log(error);
-  }
-
-
-
-
-  try {
-    const response = await fetch("/api/randomProductsData");
-    const data = await response.json();
-
-    return {
-      props: {
-        randomProductsData: data,
-      },
-    };
-  } catch (error) {
-    console.error(error);
-    return {
-      props: {
-        randomProductsData: [],
-      },
-    };
-  }
-
-  
-}*/
