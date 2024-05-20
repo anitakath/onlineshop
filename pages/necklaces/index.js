@@ -13,10 +13,16 @@ import {incrementWishlist} from '@/store/wishlistSlice'
 //STYLES
 import styles from "./Necklaces.module.css";
 
+//SUOABASE
+import { supabase } from "@/services/supabaseClient";
+import { SupabaseClient } from "@supabase/supabase-js";
+
 
 const Necklaces = ({necklacesData, info}) => {
 
   const [clickedItemId, setClickedItemId] = useState(null);
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+
 
 
   if (!necklacesData) {
@@ -39,14 +45,39 @@ const Necklaces = ({necklacesData, info}) => {
   }
 
 
-  const addToWishlistHandler = (item) =>{
-    dispatch(incrementWishlist(item));
+  const addToWishlistHandler = async (item) =>{
+
+    if (isLoggedIn){
+      console.log('user is logged in. send item (object) to supabase!')
+      console.log(item)
+      try {
+        const response = await fetch("/api/addToWishlist", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ item }),
+        });
+
+        const responseData = await response.json();
+        console.log(responseData);
+      } catch (error) {
+        console.error(error);
+      }
+
+    } else{
+      console.log('user is not logged in, store item (object) at redux stoarge')
+      dispatch(incrementWishlist(item));
+    }
+    
+    console.log(item);
+    
     setClickedItemId(item.product_id);
     
   }
 
   return (
-    <Layout>
+    <div>
       <div className={styles.itemContainer}>
         {necklacesData.map((necklace) => {
           const cartItem = cartItems.find((item) => item.id === necklace.id)
@@ -92,7 +123,7 @@ const Necklaces = ({necklacesData, info}) => {
 
         })}
       </div>
-    </Layout>
+    </div>
   );
 };
 

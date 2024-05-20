@@ -10,9 +10,8 @@ import styles from '../../styles/Logon.module.css'
 
 
 import { useState, useEffect } from "react";
-
 import {  useDispatch } from "react-redux";
-import { setUsers_data, setLoading} from "../../store/usersSlice";
+
 
 
 
@@ -38,7 +37,7 @@ const Logon = ({userss}) =>{
 
   
   useEffect(() => {
-    dispatch(setLoading(true));
+   
 
     const fetchData = async () => {
       try {
@@ -59,9 +58,10 @@ const Logon = ({userss}) =>{
     fetchData();
   }, []);
 
+  /*
   useEffect(() => {
     dispatch(setUsers_data(users));
-  }, [users]);
+  }, [users]);*/
 
 
 

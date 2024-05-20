@@ -1,6 +1,4 @@
 import { useState } from "react";
-import Layout from "@/components/Layout";
-
 
 import styles from './UserProfile.module.css'
 
@@ -24,6 +22,8 @@ import Link from "next/link";
 //REDUX
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "@/store/authSlice";
+import { setCurrentUser } from "@/store/authSlice";
+import { deleteAllItems } from "@/store/cartSlice";
 
 //COMPONENTS
 import MyOrders from "@/components/profile/my-orders";
@@ -38,11 +38,13 @@ const UserProfile = () =>{
 
  
   const logoutHandler = () =>{
+    dispatch(deleteAllItems());
+    dispatch(setCurrentUser(null))
     dispatch(logout())
   }
 
     return (
-      <Layout>
+      <div>
         <div className={styles.container}>
           <div className={styles.userInformation_div}>
             <video autoPlay loop muted className={styles.background_video}>
@@ -147,7 +149,7 @@ const UserProfile = () =>{
             )}
           </div>
         </div>
-      </Layout>
+      </div>
     );
 }
 

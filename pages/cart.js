@@ -7,7 +7,6 @@ import {useState, useEffect} from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import { incrementItem, decrementItem, deleteAllItems} from "@/store/cartSlice";
 import { useRouter } from 'next/router';
-import Layout from "@/components/Layout";
 
 
 //STYLES
@@ -27,7 +26,7 @@ const Cart = () => {
 
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const currentUserObject = useSelector((state) => state.currentUser.user);
+  const currentUserObject = useSelector((state) => state.auth.user);
 
   // Extract the first name from the currentUser object
   let currentUser = "";
@@ -120,7 +119,7 @@ const Cart = () => {
   }
 
   return (
-    <Layout>
+    <div>
       <div className={styles.cartFieldContainer}>
         <div className={styles.cartField}>
           <div className={styles.emptyCartInfoContainer}>
@@ -207,13 +206,12 @@ const Cart = () => {
             </div>
 
             <p className={styles.subtitle}>
-              {" "}
-              Do you have a discount code? Add it in the next step.{" "}
+              Do you have a discount code? Add it in the next step.
             </p>
           </div>
         )}
       </div>
-    </Layout>
+    </div>
   );
 };
 

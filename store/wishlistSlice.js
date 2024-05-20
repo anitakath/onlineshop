@@ -26,32 +26,32 @@ const wishlistSlice = createSlice({
       if (findProductIndex === -1) {
         product.quantity += 1;
         state.push(product);
-      }else{
+      } else {
         state[findProductIndex].quantity += 1;
       }
-
-     
     },
-    decrementWishlist: (state, action) =>{
+    decrementWishlist: (state, action) => {
       const { id } = action.payload;
-
 
       const findProductIndex = state.findIndex((product) => product.id === id);
 
-     if (state[findProductIndex] && state[findProductIndex].quantity > 1) {
-       state[findProductIndex].quantity -= 1;
-     } else {
-       state.splice(findProductIndex, 1);
-     }
+      if (state[findProductIndex] && state[findProductIndex].quantity > 1) {
+        state[findProductIndex].quantity -= 1;
+      } else {
+        state.splice(findProductIndex, 1);
+      }
 
-     state.forEach((product) => {
-       const totalPrice = product.quantity * product.price;
-       product.totalPrice = totalPrice.toFixed(2);
-     });
-    }
+      state.forEach((product) => {
+        const totalPrice = product.quantity * product.price;
+        product.totalPrice = totalPrice.toFixed(2);
+      });
+    },
+    deleteAllWishlistItems: (state, action) => {
+      state.splice(0, state.length);
+    },
   },
 });
 
 
 export default wishlistSlice.reducer;
-export const { incrementWishlist, decrementWishlist } = wishlistSlice.actions;
+export const { incrementWishlist, decrementWishlist, deleteAllWishlistItems } = wishlistSlice.actions;

@@ -3,7 +3,7 @@ import { useState, useEffect} from "react";
 import { useRouter } from "next/router";
 
 //COMPONENTS
-import Layout from "@/components/Layout";
+
 import Modal from "@/components/modal/Modal";
 import ExampleProducts from "@/components/exampleProducts/exampleProducts";
 
@@ -108,7 +108,7 @@ const Wishlist = ({ products, randomProducts }) => {
 
 
   return (
-    <Layout>
+    <div>
       <div>
         {wishlist && (
           <div>
@@ -197,7 +197,7 @@ const Wishlist = ({ products, randomProducts }) => {
           <ExampleProducts randomProductss={randomProducts} productss={products} />
         </div>
       </div>
-    </Layout>
+    </div>
   );
 };
 

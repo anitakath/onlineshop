@@ -5,15 +5,15 @@ import store from '../store/index.js'
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 
-import { useSelector, useDispatch } from 'react-redux';
 
 
 //FONTAWESOME
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 library.add(fas);
+
+import Layout from '@/components/Layout.js';
 
 
 export default function App({ Component, pageProps }) {
@@ -54,7 +54,9 @@ export default function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </PersistGate>
     </Provider>
   ); 

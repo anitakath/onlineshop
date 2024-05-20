@@ -1,10 +1,11 @@
 
 
-//COMPONENTS
-import Layout from "@/components/Layout";
-
 const Rings = () => {
-  return <Layout>rings</Layout>;
+  return (
+    <div>
+      <h1> rings </h1>
+    </div>
+  )
 };
 
 export default Rings;

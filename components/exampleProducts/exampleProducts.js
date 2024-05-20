@@ -8,8 +8,8 @@ import Image from "next/image";
 //STORE
 import { useSelector, useDispatch } from 'react-redux';
 import { incrementItem, decrementItem } from "@/store/cartSlice";
-import { setSelectedProductt, setFilterProductArray, setUpdatedRandomProducts, setNewProduct } from '@/store/productSlice.js'
-import {setProducts, setRandomProductss, setShowProductts} from '@/store/productSlice.js'
+//import { setSelectedProductt, setFilterProductArray, setUpdatedRandomProducts, setNewProduct } from '@/store/productSlice.js'
+//import {setProducts, setRandomProductss, setShowProductts} from '@/store/productSlice.js'
 import { incrementWishlist } from '@/store/wishlistSlice';
 
 //STYLES

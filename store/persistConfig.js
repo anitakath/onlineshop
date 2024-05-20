@@ -7,24 +7,22 @@ import { combineReducers } from "@reduxjs/toolkit";
 import authSliceReducer from "./authSlice";
 import cartSliceReducer from "./cartSlice";
 import wishlistSlice from "./wishlistSlice";
-import productSlice from "./productSlice";
-import usersSlice from "./usersSlice";
-import currentUserSlice from "./currentUserSlice";
+
+
+
 
 const rootReducer = combineReducers({
   auth: authSliceReducer,
+ 
   cart: cartSliceReducer,
   wishlist: wishlistSlice,
-  products: productSlice,
-  users: usersSlice,
-  currentUser: currentUserSlice,
 });
 
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth", "cart", "wishlist", "products", "users", "currentUser"],
+  whitelist: ["auth", "cart", "wishlist", ],
   timeout: 500,
 };
 

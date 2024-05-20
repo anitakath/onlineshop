@@ -3,9 +3,9 @@ import Image from "next/image";
 
 
 import { useRouter } from "next/router";
-import Layout from "@/components/Layout";
 
 import styles from './Checkout.module.css'
+
 
 const Checkout = () =>{
 
@@ -18,7 +18,7 @@ const Checkout = () =>{
 
 
     return (
-      <Layout>
+      <div>
         <div className={styles.container}>
           <h1 className={styles.title}> Thank you for your purchase! 🫶🏼 </h1>
           {orderId && <p  className={styles.subtitle} > Your order number is: <br/>
@@ -32,7 +32,7 @@ const Checkout = () =>{
         
         </div>
      
-      </Layout>
+      </div>
     );
 }
 

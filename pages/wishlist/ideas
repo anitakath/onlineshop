@@ -1,0 +1,26 @@
+
+/*
+
+
+ich habe den logoutHandler  in /pages/profile/index.js in Kraft gesetzt.. 
+wenn der user sich ausloggt, soll der Warenkorb und die Wunschliste geleert werden. 
+Während der Warenkorb, dessen Inhalt mithilfe von redux persistiert wird,
+einfach grundlegend geleert werden kann, fände ich es besser dies nicht mit 
+der Wunschliste zu tun. diese soll, wenn der User sich ausloggt, 
+beim nächsten login wieder voll abrufbar sein.  
+Daher möchte ich die Wunschliste in supabase speichern, wenn der User eingeloggt ist. 
+Wenn kein User eingeloggt ist, dann können wir die Produkte mit redux persistieren
+
+
+*/
+/*
+
+I have set the logoutHandler in /pages/profile/index.js in effect... 
+when the user logs out, the shopping cart and the wish list should be emptied. 
+While the shopping cart, whose content is persisted using redux, 
+can simply be emptied, I would prefer not to do this with the wishlist. 
+when the user logs out, it should be fully accessible again at the next login. 
+Therefore, I would like to save the wishlist in supabase when the user is logged in.
+If no user is logged in, then we can persist the products with redux
+
+*/

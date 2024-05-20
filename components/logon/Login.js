@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 //STORE
 import {useDispatch} from 'react-redux';
 import { login, logout } from '@/store/authSlice';
-import { setCurrentUser } from "@/store/currentUserSlice";
+import { setCurrentUser } from "@/store/authSlice";
 
 //STYLES
 import styles from '../../styles/Logon.module.css'

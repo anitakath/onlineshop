@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/services/supabaseClient';
 
 
-//COMPONENTS
+//COMPONENTS AND STYLES
 import Button from './Button';
-
 import styles from './ProfileComponents.module.css'
+
 
 import Image from 'next/image';
 
@@ -35,7 +35,7 @@ const MyOrders = ({ userProfile, setUserProfile }) => {
 
 
 
-  const currentUserObject = useSelector((state) => state.currentUser.user);
+  const currentUserObject = useSelector((state) => state.auth.user);
 
   let currentUser = "";
 
