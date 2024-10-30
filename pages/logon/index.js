@@ -10,11 +10,27 @@ import styles from '../../styles/Logon.module.css'
 
 import { useState, useEffect } from "react";
 import {  useDispatch } from "react-redux";
+import { supabase } from "@/services/supabaseClient";
+
+export async function getStaticProps() {
+    const { data, error } = await supabase.from("SHOPNAME_users").select("*");
+
+    if (error) {
+        console.error("Error fetching users:", error.message);
+        return {
+            notFound: true,
+        };
+    }
+
+    return {
+        props: {
+            userss: data,
+        },
+    };
+}
 
 
-
-
-
+/*
 export async function getStaticProps() {
   const response = await fetch("/api/get-users");
   const data = await response.json();
@@ -24,7 +40,7 @@ export async function getStaticProps() {
       userss: data,
     },
   };
-}
+}*/
 
 
 
