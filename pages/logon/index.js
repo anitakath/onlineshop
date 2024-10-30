@@ -16,7 +16,7 @@ import {  useDispatch } from "react-redux";
 
 
 export async function getStaticProps() {
-  const response = await fetch("http://localhost:3000/api/get-users");
+  const response = await fetch("/api/get-users");
   const data = await response.json();
 
   return {
