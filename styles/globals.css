@@ -1,18 +1,15 @@
 body{
-  background-image: url('/images/bokeh.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   padding: 0;
   margin: 0;
   height: 100vh;
+  background: white;
 }
 
 
 
 :root{
   --main-bg: #F9E7E7;
-  --white_opaque: rgba(255,255,255, 0.3);
+  --white_opaque: rgba(255,255,255, 0.8);
   --font-purple-dark: rgba(90, 34, 139, 1);
   --font-hover-purple: rgba(213, 184, 255, 1);
   --font-hover-purple-secondary: rgba(159,90,253,1);

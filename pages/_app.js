@@ -20,35 +20,6 @@ export default function App({ Component, pageProps }) {
 
   const persistor = persistStore(store);
 
-  
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Simuliere eine Verzögerung von 2 Sekunden für das Laden der Seite
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-  }, []);
-
-  if (isLoading) {
-    return (
-      <p
-        style={{
-          fontSize: "2rem",
-          color: "purple",
-          position: "relative",
-          top: "40px",
-          left: "40px",
-          margin: "0px",
-          padding: "0px"
-        }}
-      >
-        loading page content
-      </p>
-    );
-  } 
-
-
 
 
   return (

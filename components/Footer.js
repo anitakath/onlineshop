@@ -30,7 +30,7 @@ const Footer = () =>{
         </div>
 
         <div className={styles.nav_div}>
-          <h1 className={styles.nav_title}> And so on </h1>
+          <h1 className={styles.nav_title}> More ✨ </h1>
 
           <ul className={styles.nav_table}>
             <li> Help </li>

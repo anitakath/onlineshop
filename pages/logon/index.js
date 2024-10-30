@@ -1,6 +1,5 @@
 
 //COMPONENTS
-import Layout from "@/components/Layout";
 import Login from "@/components/logon/Login";
 import Register from "@/components/logon/Register";
 import Newsletter from "@/components/logon/Newsletter";
@@ -105,7 +104,7 @@ const Logon = ({userss}) =>{
 
 
   return (
-    <Layout>
+    <div>
       <div className={styles.logonField}>
         <div className={styles.wrapper}>
           <video autoPlay loop muted className={styles.background_video}>
@@ -146,7 +145,7 @@ const Logon = ({userss}) =>{
           />
         </div>
       </div>
-    </Layout>
+    </div>
   );
 }
 
